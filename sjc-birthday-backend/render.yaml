@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: sjc-birthday-backend
+    runtime: docker
+    plan: standard
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: HOST
+        value: 0.0.0.0
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: META_WHATSAPP_PHONE_NUMBER_ID
+        sync: false
+      - key: META_WHATSAPP_ACCESS_TOKEN
+        sync: false
+      - key: TEST_MODE
+        value: "false"
+      - key: TEST_PHONE_NUMBER
+        sync: false
+      - key: CRON_SCHEDULE
+        value: "0 0 8 * * *"
+      - key: CRON_TIMEZONE
+        value: "Asia/Kolkata"
+      - key: SERVER_BASE_URL
+        sync: false
+    disk:
+      name: sjc-uploads-disk
+      mountPath: /app/uploads
+      sizeGB: 5

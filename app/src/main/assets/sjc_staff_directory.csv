@@ -1,0 +1,511 @@
+Staff ID,Name,Department,Designation,DOB,Mobile,Category
+16NTM02,Mr. A. Arockia Irudayasamy,AC,Staff Member,03-04-1979,7502478002,Non-Teaching
+17NTA12,Mr. Y. Vincent Sagayaraj,AC,Staff Member,01-01-1983,9865486528,Non-Teaching
+25CAI51,Dr. J. HIRUDHAYA MARY ASHA,AI,Assistant Professor,20-07-1984,7502364030,Teaching
+26CAI51,Dr. S. JOSEPHINE THERESA,AI,Assistant Professor,04-03-1981,7598602829,Teaching
+26SAI51,Dr. S. LAKSHMANAN,AI,Assistant Professor,07-02-1988,9600337354,Teaching
+26CAI53,Dr. T. THILAGAVATHI,AI,Assistant Professor,03-05-1996,9585962710,Teaching
+24CAI51,Mr. A. CHARLES,AI,Assistant Professor,10-06-1963,9443494051,Teaching
+26SAI52,Mr. C. MOHANRAJA,AI,Assistant Professor,22-05-1980,9047670845,Teaching
+26CAI52,Mr. M. JESUDOSS,AI,Assistant Professor,07-06-1977,8667349594,Teaching
+26SAI53,Ms. G. KEERTHANA DARATHI,AI,Assistant Professor,07-04-2002,9361441506,Teaching
+26SAI54,Ms. P. THARA JENNIFER,AI,Assistant Professor,07-09-1999,9489247611,Teaching
+26SAI55,Ms. V. INFINE SINDUJA,AI,Assistant Professor,03-04-1986,9482903038,Teaching
+26SAI54,Rev. Fr. S. SAMUEL JEYASEELAN SJ.,AI,Jesuit Staff,16-06-1962,9443112451,Jesuit Leadership
+10TBI01,Dr. P. G. GEETHA,BI,Assistant Professor,14-04-1973,9487125372,Teaching
+05TBI01,Mr. A. BENNO SUSAI VIJAYAKUMAR,BI,Assistant Professor,21-07-1976,9443447933,Teaching
+01TBI05,Mr. T. ANTONY DIWAKAR CHANDRAN,BI,Assistant Professor,20-06-1976,9443167518,Teaching
+26HBI51,Ms. S. VENKATESHWARI,BI,Assistant Professor,13-04-1994,7708347814,Teaching
+01FPB12,Dr. A. EGBERT SELWIN ROSE,BO,Assistant Professor,24-07-1967,9443115411,Teaching
+12FBO01,Dr. A. JOHNY KUMAR TAGORE,BO,Assistant Professor,05-11-1978,9787393528,Teaching
+14FBO01,Dr. G. CHITRA,BO,Assistant Professor,07-05-1980,9629454536,Teaching
+19FBO02,Dr. H. DAVID RAJA,BO,Assistant Professor,03-06-1979,9443126917,Teaching
+19FBO01,Dr. M. BASTIN CHURCHILL,BO,Assistant Professor,06-07-1972,9443831992,Teaching
+07FPB03,Dr. M. FRANCIS SATHIYASEELAN,BO,Assistant Professor,18-11-1967,9940955619,Teaching
+16FBO03,Dr. P. SIVAKUMAR,BO,Assistant Professor,11-07-1981,9944111222,Teaching
+01FPB09,Dr. S. R. SENTHILKUMAR,BO,Assistant Professor,12-06-1968,8489100777,Teaching
+01FPB10,Dr. S. SAHAYA SATHISH,BO,Assistant Professor,10-06-1968,8124053341,Teaching
+07FPB01,Dr. S. SOOSAIRAJ,BO,Assistant Professor,12-05-1970,9750124125,Teaching
+07FPB02,Dr. T. FRANCIS XAVIER,BO,Assistant Professor,17-04-1972,9865073039,Teaching
+92NTA02,Mr. A. David Raj,BO,Assistant Professor,20-05-1970,9443576890,Teaching
+09NTM02,Mr. M. Sahaya Paulraj,BO,Assistant Professor,27-07-1981,9865308285,Teaching
+04NTM03,Mr. R. Raja,BO,Assistant Professor,22-04-1978,9865619122,Teaching
+17NTA02,Mr. S. Mathiyalagan,BO,Assistant Professor,03-06-1968,9942185215,Teaching
+91NTA01,Mr. S. Selvaraj,BO,Assistant Professor,27-02-1965,9865452242,Teaching
+20FBO01,Rev. Dr. L. JOHN PETER ARULANANDAM SJ,BO,Assistant Professor,28-07-1971,9486329686,Teaching
+23CBT51,Dr. A. ASHA MONICA,BT,Assistant Professor,26-08-1993,8526208969,Teaching
+05TBT03,Dr. A. EDWARD,BT,Assistant Professor,16-04-1978,9003771138,Teaching
+25CBT51,Dr. A. JOSE ANOTH RAJA,BT,Assistant Professor,26-01-1992,9843454342,Teaching
+16TBT01,Dr. AGNES PREETHY H,BT,Assistant Professor,08-10-1991,7402208970,Teaching
+25CBT51,Dr. C. MUTHUSAMY,BT,Assistant Professor,09-06-1982,9442046048,Teaching
+23CBT52,Dr. J. ARUTCHELVI,BT,Assistant Professor,22-04-1979,6301984800,Teaching
+25CBT52,Dr. R. TAMILVANAN,BT,Assistant Professor,13-02-1995,9500274062,Teaching
+21CBT51,Dr. S. PUSHPA,BT,Assistant Professor,25-01-1983,9791338582,Teaching
+26SBU54,Mr. A. JESPER JERIN VINOTH,BU,Assistant Professor,16-06-1994,7010518754,Teaching
+26SBU51,Mr. B. ANANDA RAJ,BU,Assistant Professor,13-06-1988,9942889636,Teaching
+19CBU51,Mr. D. Rinaldo De David,BU,Assistant Professor,14-01-1986,9003687888,Teaching
+22CBU51,Mr. J. REXO PAPU EXPEDITO,BU,Assistant Professor,21-11-1991,9751086133,Teaching
+26SBU53,Mr. K. RADHAKRISHNAN,BU,Assistant Professor,31-01-1986,6380892300,Teaching
+13TBA01,Mr. S. ARPUTHARAJ,BU,Assistant Professor,21-05-1971,9029639864,Teaching
+07TBU01,Ms. C. F. OCTOVIA ANTONY SESSAMMAL,BU,Assistant Professor,01-01-1969,9488017921,Teaching
+26SBU52,Ms. P. SINDHUJA,BU,Assistant Professor,02-01-1993,9578772199,Teaching
+23CCB52,Dr. P. NATHIYA MITHILA,CB,Assistant Professor,10-12-1990,8189884692,Teaching
+26SCB51,Dr. V. BENHAR CHARLES,CB,Assistant Professor,09-09-1983,9592549393,Teaching
+26CCB51,Mr. S. SANTHOSH,CB,Assistant Professor,22-06-2003,9360396188,Teaching
+25CCB51,Ms. H. BELLA JOSEPHA,CB,Assistant Professor,05-10-1996,9025364076,Teaching
+26SCB52,Ms. K. SHALINI DHARSHINI,CB,Assistant Professor,05-09-1993,7507563155,Teaching
+14TCC01,Dr. B. FATHIMAMARY,CC,Assistant Professor,02-10-1988,9629452064,Teaching
+06TCC02,Dr. D. JOHN PRABAKARAN,CC,Assistant Professor,30-06-1978,9894480799,Teaching
+09TCC03,Dr. F. X. VIRGIN FRAGA,CC,Assistant Professor,13-08-1978,8870443611,Teaching
+25CCC51,Dr. H. SHANMUGA PRIYA,CC,Assistant Professor,10-01-1981,8637467819,Teaching
+12TCM06,Dr. J. ARPUTHA SAHAYA RAJ,CC,Assistant Professor,17-04-1982,9942922472,Teaching
+09TCM02,Dr. J. RAJEES,CC,Assistant Professor,21-06-1974,9600454334,Teaching
+11TCC02,Dr. N. MAHESWARI,CC,Assistant Professor,04-03-1970,9894976591,Teaching
+26CCC52,Dr. P. GEORGE STEPHEN,CC,Assistant Professor,12-08-1983,9443319613,Teaching
+15TCC02,Dr. S. IRINE,CC,Assistant Professor,16-03-1980,9360055436,Teaching
+22CCC51,Dr. S. ARUMUGAM,CC,Assistant Professor,16-04-1984,9843975707,Teaching
+26SCC52,Mr. J. RENISH,CC,Assistant Professor,17-07-2001,6369373625,Teaching
+26SCC54,Ms. DIVYA,CC,Assistant Professor,23-11-2003,9600930731,Teaching
+26SCC51,Ms. N. SUMITHRA,CC,Assistant Professor,14-11-1979,9489676746,Teaching
+26SCC55,Ms. RESSMITHA,CC,Assistant Professor,24-06-1999,9952852646,Teaching
+19NTM02,Mr. A. Alwin Leo,CE,Staff Member,01-05-1995,9629708663,Non-Teaching
+16NTM01,Mr. A. Charles,CE,Staff Member,24-05-1982,9444953413,Non-Teaching
+17NTA04,Mr. A. Cruz Thamburaj,CE,Staff Member,05-02-1970,8056904620,Non-Teaching
+07NTM01,Mr. N. Selvaraj,CE,Staff Member,20-03-1974,9442312271,Non-Teaching
+17NTA09,Mr. S. Xavier Rajan,CE,Staff Member,06-07-1977,9003897795,Non-Teaching
+10NTM02,Ms. A. Mercy,CE,Staff Member,07-04-1984,9786755230,Non-Teaching
+16NTM01,Ms. M. Santha Meena,CE,Staff Member,26-04-1983,9385645336,Non-Teaching
+04NTA01,Dr. V. SANGAR PANDIYAN,CF,Assistant Professor,15-03-1969,9159039758,Teaching
+25GCF03,Mr. C. A. P. Kalyana Sundaram,CF,Assistant Professor,06-12-1987,9940795366,Teaching
+25GCF01,Mr. CT. Palaniyappan,CF,Assistant Professor,21-05-1990,9443677362,Teaching
+22CCR51,Ms. A. MARY MAGDALENE,CF,Assistant Professor,05-10-1994,9003993184,Teaching
+26GCF02,Ms. Madavi,CF,Assistant Professor,01-01-1940,8867761147,Teaching
+26FCH02,Dr. A. ARUN JOSEPH ROSARIO,CH,Assistant Professor,01-10-1991,9584622331,Teaching
+19FCH01,Dr. A. ARUN VIVEKE,CH,Assistant Professor,18-07-1985,9894197674,Teaching
+13FCH01,Dr. A. CERIL JEOFFREY,CH,Assistant Professor,17-07-1986,9994567448,Teaching
+07FCH01,Dr. A. EDWIN VASU,CH,Assistant Professor,26-05-1978,9487192997,Teaching
+24FCH14,Dr. A. IRUDAYA JITHA,CH,Assistant Professor,11-12-1978,9567708347,Teaching
+18FCH01,Dr. A. LEOSTANDLY,CH,Assistant Professor,18-07-1976,9524329504,Teaching
+01FCH18,Dr. A. ROSE VENIS,CH,Assistant Professor,21-07-1969,9443115762,Teaching
+12FCH02,Dr. A. S. STELLA SHALINI,CH,Assistant Professor,28-06-1982,8778996675,Teaching
+08FCH01,Dr. A. SIMI,CH,Assistant Professor,27-05-1981,9894525048,Teaching
+19FCH02,Dr. C. RAJARATHINAM,CH,Assistant Professor,17-02-1977,9345337704,Teaching
+19FCH02,Dr. I. AROCKIARAJ,CH,Assistant Professor,15-05-1973,9842687930,Teaching
+26FCH01,Dr. I. AVINASH,CH,Assistant Professor,01-04-1988,9198048280,Teaching
+26SCH01,Dr. J. SALAMON,CH,Assistant Professor,04-08-1990,9597210036,Teaching
+21CCH51,Dr. JH. ALPHONSA JULIET HELINA,CH,Assistant Professor,07-05-1982,9487050077,Teaching
+26SCH02,Dr. K. JANSI RANI,CH,Assistant Professor,29-04-1989,9047674865,Teaching
+16TCH01,Dr. P. AROCKIA DOSS,CH,Assistant Professor,15-05-1984,9786114374,Teaching
+26FCH02,Dr. R. SWINTON DARIOUS,CH,Assistant Professor,21-05-1987,7904137511,Teaching
+07FCH02,Dr. S. ANTONY SAKTHI,CH,Assistant Professor,14-06-1974,9894411352,Teaching
+26SCH03,Dr. S. ANITHA,CH,Assistant Professor,11-01-1986,9894982606,Teaching
+26SCH51,Dr. S. CELESTINA,CH,Assistant Professor,29-12-1992,8760009991,Teaching
+26SCH01,Dr. S. MANGALARAJ,CH,Assistant Professor,10-01-1986,9655993707,Teaching
+01TNM01,Mr. K. Malarmannan,CH,Assistant Professor,31-12-1969,9159996587,Teaching
+93NTM01,Mr. N. Arockiasamy,CH,Assistant Professor,13-07-1971,9443518784,Teaching
+08NTM02,Mr. S. Arockiaraj,CH,Assistant Professor,01-06-1975,9443427217,Teaching
+88NTM01,Mr. S. Joseph Arockiadoss,CH,Assistant Professor,01-09-1969,9943166339,Teaching
+17NTA01,Mr. T. John Xavier,CH,Assistant Professor,04-05-1974,9965935514,Teaching
+19NTM02,Mr. V. Arockiaraja,CH,Assistant Professor,07-07-1982,7868030700,Teaching
+21FCH01,Rev. Dr. A. SEBASTIN THANGADURAI SJ,CH,Assistant Professor,15-06-1981,9489098290,Teaching
+23FCH01,Rev. Fr. A. I. RAJASEKARAN SJ,CH,Jesuit Staff,03-06-1986,9488373772,Jesuit Leadership
+15FCM01,Dr. A. FRANCIS VIJAYAKUMAR,CO,Assistant Professor,21-05-1973,9443782209,Teaching
+23CCC01,Dr. A. IGNATIUS,CO,Assistant Professor,22-04-1973,9444289163,Teaching
+22CCC52,Dr. A. MANICKAM,CO,Assistant Professor,14-05-1979,9789871700,Teaching
+19FCO01,Dr. A. SAHAYARAJ ALEXANDER,CO,Assistant Professor,04-05-1979,7094265860,Teaching
+18FCO02,Dr. AROCKIA RAJASEKAR,CO,Assistant Professor,10-05-1975,9486903455,Teaching
+07TBU03,Dr. B. AUGUSTINE AROCKIARAJ,CO,Assistant Professor,07-06-1978,9943981747,Teaching
+22CCC53,Dr. B. NALINI,CO,Assistant Professor,12-02-1988,8750148539,Teaching
+26FCO02,Dr. DENNIS EDWARD FERNANDO,CO,Assistant Professor,02-07-1992,9600242286,Teaching
+01FCM03,Dr. G. JOHN,CO,Assistant Professor,03-06-1967,9443637465,Teaching
+23CCC52,Dr. J. BERKMANS,CO,Assistant Professor,14-05-1986,8248594693,Teaching
+26FCO03,Dr. J. VINOTH KUMAR,CO,Assistant Professor,03-05-1989,9444404121,Teaching
+21FCO01,Dr. L. GEORGIA,CO,Assistant Professor,08-06-1982,9843658297,Teaching
+26FCO01,Dr. L. YESU MARIYAN,CO,Assistant Professor,10-03-1996,9944080456,Teaching
+12FCM01,Dr. M. ANTONY JESURAJA,CO,Assistant Professor,22-07-1973,9442433766,Teaching
+18FCO01,Dr. M. JULIAS CEASAR,CO,Assistant Professor,31-07-1973,9443110877,Teaching
+21FCO01,Dr. S. DINGLEROY,CO,Assistant Professor,28-06-1975,9489375519,Teaching
+26FCO01,Dr. S. JEROME,CO,Assistant Professor,04-12-1984,7667847733,Teaching
+07FCM12,Dr. V. BASTIN JEROME,CO,Assistant Professor,30-05-1980,9840553408,Teaching
+14NTM02,Mr. A. John Akash,CO,Assistant Professor,07-06-1999,8300833922,Teaching
+07FCM01,Mr. D. MARIA ANTONY,CO,Assistant Professor,15-06-1974,9443181206,Teaching
+08TCM05,Mr. S. KIRUBAHARAN,CO,Assistant Professor,02-04-1985,9940980772,Teaching
+23CCC54,Mr. V. PERUMAL,CO,Assistant Professor,16-06-1985,9600818149,Teaching
+26CCO52,Ms. A. JANET JANCY,CO,Assistant Professor,08-08-1990,8220326814,Teaching
+22CCO52,Ms. C. SOUNDARYA,CO,Assistant Professor,18-09-1986,8778274466,Teaching
+26CCO52,Ms. R. MITHRAVATHI,CO,Assistant Professor,08-04-1996,9080776735,Teaching
+26SCC01,Ms. T. CHITRADEVI,CO,Assistant Professor,13-09-1980,9750536223,Teaching
+26FCO01,REV. DR. I. ANTONY INICO SJ,CO,Staff Member,26-11-1981,9751966477,Non-Teaching
+17NTM01,Mr. A. Leo,CO,Assistant Professor,31-03-1981,9486183820,Teaching
+14NTM01,Dr. A. JOHN BALAIAH,CP,Assistant Professor,12-08-1961,9443495516,Teaching
+24CCP51,Dr. V. SUGANTHI,CP,Assistant Professor,12-05-1989,8940859932,Teaching
+26SCP51,Mr. V.S. SARABESHWARAA,CP,Assistant Professor,01-08-2000,9442152178,Teaching
+24CCP52,Ms. F. M. CHRISTEEBA,CP,Assistant Professor,25-12-1999,6383085092,Teaching
+26CCR52,Dr. B. BHARATHI,CR,Assistant Professor,21-06-1986,8220713046,Teaching
+25CCR52,Dr. C. RAGAVAN,CR,Assistant Professor,24-06-1991,9092443047,Teaching
+26CCR51,Dr. G. UDHAYARAJ,CR,Assistant Professor,05-06-1977,9976090570,Teaching
+25CCR52,Dr. I. JERRY RICHARDS,CR,Assistant Professor,28-10-1983,8971728641,Teaching
+26GCR01,Dr. S. Gnaana Bhragasam,CR,Assistant Professor,10-05-1951,9944954388,Teaching
+22CCR52,Mr. G. PRABHAKARAN,CR,Assistant Professor,02-05-1981,8608880753,Teaching
+26GCR02,Mrs. CA. R. Zahra,CR,Assistant Professor,29-03-1997,8939461020,Teaching
+12FCS02,Dr. A. ALOYSIUS,CS,Assistant Professor,01-07-1972,9443399227,Teaching
+24FCS01,Dr. A. ANGELPREETHI,CS,Assistant Professor,15-08-1989,9578222116,Teaching
+26CSS53,Dr. A. JANET RAJESWARI,CS,Assistant Professor,26-06-1976,9442211462,Teaching
+25FCS01,Dr. A. JENIFER JOYCE MARY,CS,Assistant Professor,25-03-1991,9543454950,Teaching
+23FCS01,Dr. A. VIMAL JERALD,CS,Assistant Professor,04-06-1984,9698111008,Teaching
+24FCS02,Dr. G. AROCKIA SAHAYA SHEELA,CS,Assistant Professor,14-06-1983,9842452595,Teaching
+23FCS02,Dr. GEORGE GABRIEL RICHARD ROY,CS,Assistant Professor,25-05-1985,9942829769,Teaching
+12FCS04,Dr. J. ANTONY JOHN PRABU,CS,Assistant Professor,04-09-1983,9789508027,Teaching
+16TCS03,Dr. K. MAHESWARAN,CS,Assistant Professor,18-05-1987,7402525966,Teaching
+24CCS51,Dr. K. SUBASH,CS,Assistant Professor,27-02-1994,9524118879,Teaching
+25CCS53,Dr. M. VENKATESH SARAVANAKUMAR,CS,Assistant Professor,10-04-1977,9442848574,Teaching
+26FCS01,Dr. P. JOSEPH CHARLES,CS,Assistant Professor,21-02-1974,9443124812,Teaching
+16TCS01,Dr. S. BRITTORAJESH,CS,Assistant Professor,15-05-1987,8973686815,Teaching
+12FCS01,Dr. S. BRITTO RAMESH KUMAR,CS,Assistant Professor,19-03-1975,9894058416,Teaching
+23CSS53,Dr. S. SATHYAPRIYA,CS,Assistant Professor,18-10-1994,9944033751,Teaching
+26CSS52,Dr. S. THULASI BHARATHI,CS,Assistant Professor,24-04-1988,8248400587,Teaching
+16FCS01,Dr. V. JUDE NIRMAL,CS,Assistant Professor,07-03-1975,9842468574,Teaching
+26SCS01,Mr. A SHREENATH,CS,Assistant Professor,30-07-2001,8428442653,Teaching
+26SCS53,Mr. M. RAGUL,CS,Assistant Professor,02-05-1991,9442894527,Teaching
+26SCS52,Ms. A. H. AMALORPAVA AKILA,CS,Assistant Professor,05-09-1972,9994647420,Teaching
+16TCS04,Ms. G. LAVANYA,CS,Assistant Professor,23-10-1986,9003507817,Teaching
+26CCS52,Ms. I. RESHMA MONICA,CS,Assistant Professor,19-07-1997,9500756518,Teaching
+26SCS55,Ms. K. SELVI,CS,Assistant Professor,27-07-1989,8072204842,Teaching
+23CSS54,Ms. M. MERLA AGNES MARY,CS,Assistant Professor,10-09-1997,9789498764,Teaching
+26SCS54,Ms. M. NASREEN,CS,Assistant Professor,21-12-1988,9600840687,Teaching
+22CCS51,Ms. P. SHYAMALA,CS,Assistant Professor,24-10-1989,7598091419,Teaching
+25CSS51,Ms. SHERINE DOMINICK,CS,Assistant Professor,13-12-1990,9698151469,Teaching
+17FCS01,Rev. Dr. S. ARUL OLI SJ,CS,Assistant Professor,29-01-1973,9442396158,Teaching
+21FCS01,Rev. Dr. S. SANTIAGO SJ,CS,Assistant Professor,06-04-1977,9688441591,Teaching
+11TIT01,Dr. A. ANTONY PRAKASH,CY,Assistant Professor,21-03-1984,9444317884,Teaching
+12TIT05,Dr. C. VENISH RAJA,CY,Assistant Professor,30-07-1987,9994717937,Teaching
+16TIT01,Dr. D. RICHARD,CY,Assistant Professor,15-06-1983,9842495048,Teaching
+16TIT02,Dr. I. CAROL,CY,Assistant Professor,09-06-1985,8870078584,Teaching
+26CIT52,Dr. J. JENIFER,CY,Assistant Professor,09-04-1996,9965089880,Teaching
+21CIT01,Dr. K. R. MARTIN,CY,Assistant Professor,03-04-1979,9789468750,Teaching
+12TIT02,Dr. P. BASTIN THIYAGARAJ,CY,Assistant Professor,03-05-1985,8973529210,Teaching
+25SIT56,Dr. R. AKILA,CY,Assistant Professor,19-01-1972,8344724840,Teaching
+10TIT02,Dr. R. MANGAI BEGUM,CY,Assistant Professor,29-05-1974,9003715451,Teaching
+25CIT51,Dr. S. KANAGARAJ,CY,Assistant Professor,22-04-1979,9791484132,Teaching
+23CIT51,Dr. T. NIKIL PRAKASH,CY,Assistant Professor,29-06-1992,9894777901,Teaching
+11TIT04,Dr. V. MARIA ANTONIATE MARTIN,CY,Assistant Professor,14-11-1982,9095579584,Teaching
+26CIT51,Dr. S IRINE AUXILIA MARY,CY,Assistant Professor,28-06-1976,8122257748,Teaching
+26SIT52,Ms. J. JANET ANGEL,CY,Assistant Professor,27-04-1986,9080819364,Teaching
+26SIT53,Ms. L. JINGLYA MARIE,CY,Assistant Professor,08-07-1991,9345154645,Teaching
+26SIT54,Ms. N. VIDHYABHARATHI,CY,Assistant Professor,07-02-2002,9092889653,Teaching
+26SIT51,Ms. SOPHIYA,CY,Assistant Professor,14-10-1987,8072706470,Teaching
+97NTA01,Dr. S. Arockiasamy,DO,Assistant Professor,14-06-1970,9486957029,Teaching
+99NTA01,Mr. A. Francis Xavier Jothi,DO,Staff Member,06-05-1971,9443729909,Non-Teaching
+15NTM02,Mr. A. Jerome,DO,Staff Member,15-11-1989,9500266571,Non-Teaching
+17NTA10,Mr. A. Johnson Selvaraj,DO,Staff Member,25-07-1982,9597395216,Non-Teaching
+05NTM02,Mr. A. Joseph Raj,DO,Staff Member,24-01-1984,9047374743,Non-Teaching
+18NTM02,Mr. A. Joseph Selvaraj,DO,Staff Member,29-02-1980,8903399839,Non-Teaching
+97NTM01,Mr. A. Sahaya Michael,DO,Staff Member,11-06-1974,9443588235,Non-Teaching
+24NTM01,Mr. A. Santhosh,DO,Staff Member,28-10-1997,9965005886,Non-Teaching
+19NTM04,Mr. D. Walter Allen,DO,Staff Member,24-07-2000,8148015343,Non-Teaching
+18NTM02,Mr. F. Kanikai Lourthu Raj,DO,Staff Member,02-02-1991,7373447044,Non-Teaching
+96NTM01,Mr. G. Sagayaraj,DO,Staff Member,04-02-1980,9443193270,Non-Teaching
+19NTM03,Mr. I. Bencigan Gilbert,DO,Staff Member,06-09-1986,9629741170,Non-Teaching
+08NTM03,Mr. J. Manivannan,DO,Staff Member,04-08-1981,8220333960,Non-Teaching
+08NTM03,Mr. K. Sathishkumar,DO,Staff Member,30-05-1988,8838472330,Non-Teaching
+04NTM02,Mr. K. Arockia Durai,DO,Staff Member,05-01-1983,9786420257,Non-Teaching
+19NTM01,Mr. K. Vasanthakumar,DO,Staff Member,25-03-1982,9443066693,Non-Teaching
+17NTA11,Mr. M. Sebastian Antoni Raj,DO,Staff Member,19-04-1982,9842459700,Non-Teaching
+19NTM09,Mr. N. Poorna Viswanathan,DO,Staff Member,29-05-1996,9566399695,Non-Teaching
+19NTM08,Mr. P. Amaleswaran,DO,Staff Member,10-05-1992,7200139340,Non-Teaching
+97NTM02,Mr. P. Ponnambalam,DO,Staff Member,29-07-1972,9789710896,Non-Teaching
+19NTM02,Mr. R. VIGNESH,DO,Staff Member,28-06-2001,9524685281,Non-Teaching
+19NTA07,Mr. R. Venkatesan,DO,Staff Member,30-11-1970,9944888382,Non-Teaching
+17NTA07,Mr. S. A. John Paul,DO,Staff Member,07-07-1978,9994035877,Non-Teaching
+17NTA12,Mr. S. Joseph Sagayaraja,DO,Staff Member,01-11-1983,9842895611,Non-Teaching
+24NTM01,Mr. S. Kenson Raja,DO,Staff Member,20-03-2000,7094627850,Non-Teaching
+25NTM12,Mr. S. Santhosh Kumar,DO,Staff Member,24-05-1998,7094276850,Non-Teaching
+14NTM02,Mr. S. Venkatesh,DO,Staff Member,21-04-1973,9952107561,Non-Teaching
+16NTM04,Mr. S. Vijay,DO,Staff Member,29-04-1994,9489539748,Non-Teaching
+24NTM01,Mr. S. PARTHIBANATHAN,DO,Staff Member,01-08-1983,9790586026,Non-Teaching
+17NTA08,Mr. Y. Kaming Prabhu,DO,Staff Member,10-05-1992,9443118381,Non-Teaching
+26NTM05,Mr.K.John Britto,DO,Staff Member,25-05-1992,9092361748,Non-Teaching
+26NTM04,Mr.M.Boopathi,DO,Staff Member,08-06-1984,9050096211,Non-Teaching
+22NTM01,Mrs. A. Philominal Selvi,DO,Staff Member,07-04-1983,9585644272,Non-Teaching
+21CDS52,Dr. A. BEATRICE DOROTHY,DS,Assistant Professor,26-01-1980,9597481444,Teaching
+21CDS51,Dr. K. LOURA JENCY,DS,Assistant Professor,23-11-1992,8072052308,Teaching
+21CDS51,Dr. M. KRISHNANTH,DS,Assistant Professor,25-02-1987,9789169675,Teaching
+24CDS51,Dr. T. RAJARETNAM,DS,Assistant Professor,14-05-1962,9442465133,Teaching
+22CDS52,Dr. V. ANIS KANIJA,DS,Assistant Professor,09-01-1988,8883666533,Teaching
+27DEC02,Dr. A. JUSTIN THIRAVIAM,EC,Assistant Professor,15-02-1973,9944546973,Teaching
+01FEC01,Dr. G. IRUTHAYARAJ,EC,Assistant Professor,04-06-1966,9788530344,Teaching
+14FEC01,Dr. J. VASANTHA AROCKIASELVI,EC,Assistant Professor,02-10-1973,9865073428,Teaching
+10FEC01,Dr. K. A. MICHAEL,EC,Assistant Professor,15-06-1970,9444109787,Teaching
+18FEC01,Dr. M. SUVAKKIN,EC,Assistant Professor,06-03-1977,9442984394,Teaching
+08FEC01,Dr. P. JAYAKUMAR,EC,Assistant Professor,11-04-1977,9842051810,Teaching
+17FEC02,Dr. R. GANESASUBRAMANIAN,EC,Assistant Professor,27-01-1989,9444392982,Teaching
+12FEC02,Dr. S. P. ROBERT,EC,Assistant Professor,02-06-1966,9443925982,Teaching
+16FEC01,Dr. SUJATHA DEVI,EC,Assistant Professor,21-08-1981,9489224857,Teaching
+19FEC01,Ms. JAYASHREE NAIKEN,EC,Assistant Professor,18-05-1969,9790099248,Teaching
+17FEC01,Ms. P. PRARTHNA,EC,Assistant Professor,02-12-1989,9444338553,Teaching
+92NTA02,Mr. A. Albert Dharmaraj,EH,Assistant Professor,20-02-1967,9095904290,Teaching
+13NTA01,Mr. A. Joseph Raj Kumar,EH,Assistant Professor,12-09-1987,9791873732,Teaching
+23CEL52,Dr. A. ARPUTHARAJ,EL,Assistant Professor,01-09-1982,9944603511,Teaching
+26SEL51,Dr. K. KARUPPASAMY,EL,Assistant Professor,20-05-1986,9444068952,Teaching
+24CEL52,Dr. K. PRIYADHARSHINI,EL,Assistant Professor,22-07-1996,9787740137,Teaching
+24CEL51,Dr. M. SAPPANI MUTHU,EL,Assistant Professor,07-05-1994,8675496522,Teaching
+25CEL51,Dr. P. SUMATHI,EL,Assistant Professor,10-05-1985,9677894988,Teaching
+24CEL51,Dr. S. MARY MARGARET,EL,Assistant Professor,17-04-1994,9176247866,Teaching
+21CEL51,Dr. V. MANICKAM,EL,Assistant Professor,30-07-1979,7200355582,Teaching
+23NTM01,Mr. A Imran Arockia Michael Dass,EL,Assistant Professor,21-12-1992,9566974186,Teaching
+99NTM01,Mr. I. David Rajkumar,EL,Assistant Professor,23-03-1980,9344449888,Teaching
+26SEL52,Mr. R. CHARLES SILVESTER JOE,EL,Assistant Professor,02-07-1974,9942449801,Teaching
+25SEL52,Mr. V. VICTOR REMY,EL,Assistant Professor,11-10-1995,9345128854,Teaching
+25SEL52,Ms. H. J. TRINITY RABECCA,EL,Assistant Professor,28-02-1997,9489806708,Teaching
+16TEN01,Rev. Fr. V. JOHN BAPTIST SJ,EL,Jesuit Staff,12-08-1973,8903310104,Jesuit Leadership
+09TEN03,Dr. A. EZHUGNAIYARU,EN,Assistant Professor,09-08-1984,9176623535,Teaching
+08TEN02,Dr. A. JOHNSON FRANCIS,EN,Assistant Professor,04-01-1981,7418671366,Teaching
+22CEN53,Dr. A. SANGEETH KUMAR,EN,Assistant Professor,10-06-1990,9566444862,Teaching
+10TEN03,Dr. B. SAM JEROME SHARONE,EN,Assistant Professor,31-01-1987,9944548228,Teaching
+12TEN02,Dr. CHERYL DAVIS,EN,Assistant Professor,13-05-1977,9894886522,Teaching
+08TEN03,Dr. D. LOYOLA INNACI,EN,Assistant Professor,06-05-1982,9842406461,Teaching
+22CEN51,Dr. D. PRASANTH AROKIA SAMY,EN,Assistant Professor,01-11-1992,9994494858,Teaching
+22CEN51,Dr. R. D. EDWIN CHRISTY,EN,Assistant Professor,20-05-1979,9841916735,Teaching
+25CEN53,Dr. H. DANIEL RAJ,EN,Assistant Professor,23-05-1994,7507319988,Teaching
+25CEN53,Dr. I. LIDYA,EN,Assistant Professor,31-01-1996,9629844748,Teaching
+13FEN04,Dr. J. AMALAVEENUS,EN,Assistant Professor,07-11-1974,9842711310,Teaching
+08TEN06,Dr. J. CHARLES AROCKIASAMY,EN,Assistant Professor,02-01-1983,8320088100,Teaching
+22CEN54,Dr. J. GILBERT MARY,EN,Assistant Professor,16-08-1990,7373608739,Teaching
+24CEN52,Dr. J. JOHN LOVE JOY,EN,Assistant Professor,20-10-1978,9442959085,Teaching
+12FEN01,Dr. M. AMUTHA,EN,Assistant Professor,07-04-1972,9487448878,Teaching
+07FEN05,Dr. M. JOHN BRITTO,EN,Assistant Professor,22-04-1978,9384710213,Teaching
+16FEN01,Dr. M. S. XAVIER PRADHEEP SINGH,EN,Assistant Professor,25-11-1984,8220777313,Teaching
+24CEN51,Dr. P. CATHARINE BENITA,EN,Assistant Professor,12-03-1986,9444220202,Teaching
+26FEN03,Dr. R. JAYAKANTH,EN,Assistant Professor,14-03-1989,9443064228,Teaching
+26FEN01,Dr. S. AMALRAJ,EN,Assistant Professor,08-04-1975,9629289713,Teaching
+13FEN02,Dr. S. JERALD SAGAYA NATHAN,EN,Assistant Professor,03-11-1981,9629287913,Teaching
+12FEN03,Dr. S. SHARMILA,EN,Assistant Professor,08-06-1985,9843192869,Teaching
+24FEN01,Dr. TWIN ANTONY EDWARD,EN,Assistant Professor,02-02-1988,7373731177,Teaching
+06FEN01,Dr. V. FRANCIS,EN,Assistant Professor,05-05-1972,9442404613,Teaching
+26FEN21,Dr. V. L. JAYAPAUL,EN,Assistant Professor,30-05-1977,9894966269,Teaching
+13FEN01,Dr. W. BERTRAM,EN,Assistant Professor,04-07-1979,9944276810,Teaching
+26FEN04,Dr. XAVIER CYRIL,EN,Assistant Professor,14-02-1982,9443187900,Teaching
+16TEN04,Mr. A. UKKIRAPANDIAN,EN,Assistant Professor,05-04-1985,9655379249,Teaching
+15TEN05,Mr. I. CHRISTHUSHAJANIE,EN,Assistant Professor,30-05-1988,9659354196,Teaching
+25SEN52,Mr. JOHNNY PHILIP ELSTON STURT,EN,Assistant Professor,14-11-1982,9894448822,Teaching
+26SEN53,Mr. M. MANIKANDAN,EN,Assistant Professor,30-05-1991,8675352301,Teaching
+25CEN54,Mr. S. ALFRED PRAVIN,EN,Assistant Professor,17-06-1996,9789218684,Teaching
+26FEN02,Mr. S. IGNATIUS RICHARD,EN,Assistant Professor,21-01-1997,9629133847,Teaching
+16TEN03,Mr. S. THIYAGARAJAN,EN,Assistant Professor,18-07-1983,8778658425,Teaching
+26SEN51,Ms. A. ANNIE LUMINA,EN,Assistant Professor,01-03-2002,7904867151,Teaching
+24CEN51,Ms. B. PREETHA MARY,EN,Assistant Professor,06-03-1995,9791444111,Teaching
+21FEN01,Ms. G. ANNIE ROSE,EN,Assistant Professor,19-09-1996,8110076743,Teaching
+26SEN52,Ms. J. ALDRIS ANGELIN,EN,Assistant Professor,04-05-1999,7538878776,Teaching
+25SEN54,Ms. K. KANIMOZHI,EN,Assistant Professor,26-02-1996,9944454569,Teaching
+26SEN54,Ms. L. SNEHA PRAVEENA,EN,Assistant Professor,21-06-1999,9080011547,Teaching
+25CEN51,Ms. M. JOYCE VINITHA,EN,Assistant Professor,27-01-1995,8970122272,Teaching
+25CEN52,Ms. R. REKKANI,EN,Assistant Professor,16-06-1997,9791749465,Teaching
+07FEN02,Rev. Dr. S. PAUL PRAGASH SJ,EN,Assistant Professor,15-06-1972,9443839571,Teaching
+17NTM03,Mr. A. Rozario,ER,Assistant Professor,25-06-1980,9941918484,Teaching
+05SHE01,Dr. A. GABRIEL,FC,Assistant Professor,08-09-1980,9043918585,Teaching
+25SHE07,Dr. BEBITTOVIMALAN A,FC,Assistant Professor,05-02-1995,9676753393,Teaching
+26SHE03,Mr. A. PHILIP ARUN KENNEDY,FC,Assistant Professor,01-12-1998,9943969674,Teaching
+26SHE05,Mr. J. RAJESH KUMAR,FC,Assistant Professor,08-07-1984,9600574717,Teaching
+25SHE01,Mr. K. ANTHONY RAJ,FC,Assistant Professor,12-04-1991,9655446153,Teaching
+26SHE06,Mr. SUSHIVNTH B,FC,Assistant Professor,01-11-1998,9585736256,Teaching
+25SHE08,Ms. CHITRA C,FC,Assistant Professor,07-12-1996,7373680462,Teaching
+26SHE04,Ms. R. KAVITHA,FC,Assistant Professor,30-07-1986,8344990966,Teaching
+26SHE07,Rev. Fr. K. Maria Annaraj SJ,FC,Jesuit Staff,01-01-1989,6381947260,Jesuit Leadership
+25SHE08,Rev. Fr. R. Jeyaraj SJ,FC,Jesuit Staff,01-01-1989,7708515079,Jesuit Leadership
+18FR01,Ms. M. MOHANALAKSHMI,FR,Assistant Professor,29-01-1986,9600914549,Teaching
+17HN01,Dr. S. SREEDEVI,HI,Assistant Professor,22-05-1979,9495243814,Teaching
+12FH02,Dr. J. MICHAEL RAJ,HI,Assistant Professor,19-10-1972,9442360506,Teaching
+22FHR02,Dr. J. VINCENT XAVIER,HR,Assistant Professor,27-03-1983,9443522199,Teaching
+13FHR01,Dr. J. WILFRED ANGELLO GERALD,HR,Assistant Professor,12-10-1969,9486548444,Teaching
+26CHR51,Dr. V. UDHAYA GEETHA,HR,Assistant Professor,13-08-1985,9865181133,Teaching
+12FHR03,Dr. Y. VIJILA,HR,Assistant Professor,01-06-1979,9500781744,Teaching
+13FHR02,Mr. G. LOUIS VICTOR,HR,Assistant Professor,04-05-1967,9443775442,Teaching
+16THR01,Ms. C. ANNIE JANE,HR,Assistant Professor,14-06-1977,9488310825,Teaching
+12FHR01,Rev. Dr. K. AROCKIAM SJ,HR,Assistant Professor,15-05-1969,8344850470,Teaching
+25SHS52,Dr. J. D. SUJITHRA,HS,Assistant Professor,23-05-1991,9751272044,Teaching
+12FHS03,Dr. J. SANTHOSH KUMAR,HS,Assistant Professor,10-06-1980,9345939688,Teaching
+12FHS04,Dr. K. LINGAMMAL,HS,Assistant Professor,25-05-1972,8941933400,Teaching
+21FHS01,Dr. M. BRITTO STALIN,HS,Assistant Professor,31-05-1979,9443956105,Teaching
+12FHS02,Dr. S. MANIKANDAN,HS,Assistant Professor,08-06-1981,9994479685,Teaching
+26SHS51,Mr. A. AMARNATH,HS,Assistant Professor,11-10-1999,8610230243,Teaching
+25SHS54,Mr. M. ILAYAVENGATESH,HS,Assistant Professor,12-03-2002,8825860196,Teaching
+25SHS51,Mr. VELLAIYAPPAN T M,HS,Assistant Professor,12-07-1995,9042694109,Teaching
+26CHS51,Ms. K. GIMNUS PRIYA,HS,Assistant Professor,07-01-2000,6374838672,Teaching
+26SHS01,Ms. T. BEATINAL AMALORPAVA MARY,HS,Assistant Professor,06-01-1981,8486781270,Teaching
+18FHS01,Rev. Dr. M. AROCKIASAMY XAVIER SJ,HS,Assistant Professor,21-05-1967,9486781500,Teaching
+25NTM01,Mr. Ajay Linson,IQ,Assistant Professor,01-08-1997,7010237610,Teaching
+08NTM01,Mr. A. David Kumar,JC,Staff Member,03-06-1984,8883998398,Non-Teaching
+06NTM01,Mr. K. Pazhani,JC,Staff Member,12-07-1980,9043591142,Non-Teaching
+14NTM01,Mr. V. Mohanraj,JC,Staff Member,03-04-1985,9944616363,Non-Teaching
+23FLB01,Dr. A. MERCY ANGELINE,LB,Assistant Professor,13-05-1986,9894459800,Teaching
+91NTM01,Mr. B. Packiaraj,LB,Staff Member,14-04-1971,8903530006,Non-Teaching
+92NTA01,Mr. N. Sahayam,LB,Staff Member,15-05-1965,9865863445,Non-Teaching
+09NTM01,Mr. P. Christhu Raja,LB,Staff Member,05-06-1979,9865775149,Non-Teaching
+17NTA16,Mr. P. Jeyapaul,LB,Staff Member,20-05-1986,9626090766,Non-Teaching
+95NTM01,Mr. S. Arockiadoss,LB,Staff Member,05-01-1976,9442787892,Non-Teaching
+12NTA01,Mr. S. Jesurajataoke,LB,Staff Member,19-05-1967,8015470436,Non-Teaching
+16NTM03,Ms. D. Priyadharshini,LB,Staff Member,30-03-1979,9790099952,Non-Teaching
+12NTM01,Ms. A. Celin Ruby,LL,Staff Member,15-05-1971,8675154225,Non-Teaching
+13NTM01,Ms. J. Princelin Rani,LL,Staff Member,06-01-1979,9944783307,Non-Teaching
+17NTA03,Mr. G. Christuraj,LL,Staff Member,09-01-1985,9444853037,Non-Teaching
+07FMA02,Dr. A. ANTHONY ELDRED,MA,Assistant Professor,02-12-1977,9884883683,Teaching
+23CMA51,Dr. A. ARUL XAVIER,MA,Assistant Professor,20-05-1977,9865171436,Teaching
+22CMA51,Dr. A. DELMAN,MA,Assistant Professor,14-05-1992,8883080826,Teaching
+07FMA03,Dr. A. PRAVEEN,MA,Assistant Professor,21-03-1982,9994644557,Teaching
+26SMA51,Dr. E. VERONISHA,MA,Assistant Professor,17-05-1995,9710909636,Teaching
+13FMA05,Dr. GEETHA SIVARAMAN,MA,Assistant Professor,26-10-1976,9750663608,Teaching
+18FMA01,Dr. J. AMALORPAVA JERLINE,MA,Assistant Professor,20-12-1984,9786769325,Teaching
+12FMA01,Dr. J. AROCKIA JEYAKUMAR,MA,Assistant Professor,13-05-1981,9994770281,Teaching
+22FMA01,Dr. J. CARMEL PUSHPA RAJ,MA,Assistant Professor,15-07-1987,9791171215,Teaching
+12FMA01,Dr. J. CHRISTY ROJA,MA,Assistant Professor,05-04-1978,9003887415,Teaching
+13FMA01,Dr. J. MARIA JOSEPH,MA,Assistant Professor,26-01-1980,9994063887,Teaching
+02TMA11,Dr. J. MERCY AROKIA RANI,MA,Assistant Professor,10-07-1979,8903441150,Teaching
+21FMA01,Dr. J. UMA MAHESWARI,MA,Assistant Professor,02-07-1987,9994473854,Teaching
+22CMA53,Dr. L. SARAL,MA,Assistant Professor,25-04-1983,7708232248,Teaching
+01FMA15,Dr. M. THIAGARAJAN,MA,Assistant Professor,12-05-1968,9486705696,Teaching
+01TMA01,Dr. P. LAWRENCE ROZARIO RAJ,MA,Assistant Professor,12-11-1973,9443424341,Teaching
+21SMA52,Dr. P. SHIVAKUMARAN,MA,Assistant Professor,10-09-1989,9788091605,Teaching
+18FMA02,Dr. R. LENIN,MA,Assistant Professor,23-04-1989,9442742715,Teaching
+21FMA01,Dr. S. AROKIARATHNAM,MA,Assistant Professor,05-05-1989,9042816194,Teaching
+13FMA03,Dr. S. ITHAYA EZHIL MANNA,MA,Assistant Professor,30-06-1986,9894208243,Teaching
+21CMA52,Dr. S. JEYASEELAN,MA,Assistant Professor,18-04-1983,9865971338,Teaching
+22CMA54,Dr. S. SAHAYA JEROOM,MA,Assistant Professor,23-10-1969,9025300905,Teaching
+13FMA01,Dr. V. VAIRAPERUMAL,MA,Assistant Professor,09-07-1976,9976478060,Teaching
+06FMA17,Dr. Y. DOMINIC,MA,Assistant Professor,18-01-1975,9443590733,Teaching
+19FMA01,Mr. S. ARUL GNANAPRAGASAM,MA,Assistant Professor,01-06-1986,7871047146,Teaching
+25SMA51,Ms. J. JENIFER SWEETHA,MA,Assistant Professor,04-11-1997,7339185641,Teaching
+17NTA17,Mr. J. Arockia Dass,ML,Staff Member,11-09-1990,8012055457,Non-Teaching
+13PE01,Dr. A. PREM EDWIN,PE,Assistant Professor,31-03-1984,9789697373,Teaching
+25CPE52,Dr. P. RAMESH,PE,Assistant Professor,03-02-1984,9444129874,Teaching
+26SPE51,Mr. D. PRAVEEN,PE,Assistant Professor,05-02-1999,8778774061,Teaching
+25CPE01,Mr. S. SRIRAM,PE,Assistant Professor,26-03-1988,9655961001,Teaching
+25FPE01,Dr. A. ALEXANDAR,PH,Assistant Professor,05-04-1988,8610319747,Teaching
+18FPH02,Dr. A. ANTONY RAJKUMAR,PH,Assistant Professor,01-06-1988,9790836611,Teaching
+12FPH02,Dr. A. J. CLEMENT LOURDURAJ,PH,Assistant Professor,02-06-1977,9894113340,Teaching
+07FPH01,Dr. A. MAGDALENE JOYCE,PH,Assistant Professor,27-01-1981,9994033281,Teaching
+19CPH51,Dr. A. SHINITHYA,PH,Assistant Professor,12-10-1978,9486732241,Teaching
+01FPH18,Dr. B. KANICKAIRAJ,PH,Assistant Professor,12-05-1968,9894890433,Teaching
+22CPH52,Dr. G. GENIFER SILVENA,PH,Assistant Professor,23-09-1992,8220334172,Teaching
+21FPH01,Dr. G. SAMUEL,PH,Assistant Professor,22-06-1981,9994348633,Teaching
+22FPH01,Dr. H. JOY PRABU,PH,Assistant Professor,08-06-1989,9677762530,Teaching
+01FPH16,Dr. I. JOHNSON,PH,Assistant Professor,23-04-1967,9442904820,Teaching
+06FPH20,Dr. J. CHARLES,PH,Assistant Professor,05-05-1969,9842459311,Teaching
+15FPH01,Dr. M. ANTONY AROCKIARAJ,PH,Assistant Professor,24-07-1986,8124319821,Teaching
+22CPH51,Dr. M. DINEESH,PH,Assistant Professor,21-04-1992,9943424100,Teaching
+26FPH01,Dr. M. BENDICT LAWRANCE,PH,Assistant Professor,03-03-1984,9942511736,Teaching
+26FPH02,Dr. M. GLADYS JOYSI,PH,Assistant Professor,23-05-1988,8524921167,Teaching
+12FPH01,Dr. M. M. ARMSTRONG ARASU,PH,Assistant Professor,19-01-1972,9842258578,Teaching
+12FPH04,Dr. P. CHRISTURAJ,PH,Assistant Professor,18-05-1977,9994465225,Teaching
+07FPH02,Dr. P. CHRISTURAJ,PH,Assistant Professor,18-12-1972,8940911222,Teaching
+16FPH01,Dr. R. JERALD VIJAY,PH,Assistant Professor,29-07-1982,9894831396,Teaching
+23FPH01,Dr. R. THOMAS,PH,Assistant Professor,12-11-1982,9551333307,Teaching
+19CPH51,Dr. S. ANBARASAN,PH,Assistant Professor,16-04-1992,9080970116,Teaching
+14CPH02,Dr. S. DINAKARAN,PH,Assistant Professor,29-03-1983,9965998129,Teaching
+07TPH01,Dr. S. LOURDURAJ,PH,Assistant Professor,10-04-1982,9444114169,Teaching
+23FPH02,Dr. S. PRATHAP,PH,Assistant Professor,20-09-1985,8122192085,Teaching
+22CPH53,Dr. S. RESHMA,PH,Assistant Professor,23-08-1988,8973720571,Teaching
+19CPH53,Mr. G. NOVIN SENETRA ROY,PH,Assistant Professor,13-01-1993,9043283315,Teaching
+19NTM06,Mr. J. Prakash,PH,Assistant Professor,15-05-1987,9688307035,Teaching
+18NTM03,Mr. J. Stalin Xavier,PH,Assistant Professor,13-08-1992,8760934329,Teaching
+22NTM04,Mr. K. Dhanaivel,PH,Assistant Professor,17-05-1999,8610400460,Teaching
+99NTA02,Mr. K. Marimuthu,PH,Assistant Professor,06-04-1969,7708627461,Teaching
+08NTM02,Mr. S. Sankar Lal,PH,Assistant Professor,15-07-1987,9786847090,Teaching
+88NTA01,Mr. S. Selvam,PH,Assistant Professor,20-08-1967,9443590439,Teaching
+95NTA01,Mr. V. John Britto,PH,Assistant Professor,05-06-1967,9842499784,Teaching
+19CPH52,Ms. B. MARY DAYANA,PH,Assistant Professor,21-06-1981,9003394838,Teaching
+12CPH01,Ms. T. KAVITHA,PH,Assistant Professor,20-12-1986,9080771247,Teaching
+19CPO01,Dr. M. MAHENDRAN,PO,Assistant Professor,30-05-1971,9790014158,Teaching
+19NTM04,Mr. J. Salamon Xaviyer,PO,Assistant Professor,14-12-1969,9171781568,Teaching
+25NTM01,Mr. S. Alwin,S,Assistant Professor,20-10-1991,9750058866,Teaching
+14NTM01,Mr. Lazarus Timothy Boaz MJ,S2,Assistant Professor,21-01-1992,9047926830,Teaching
+20NTM04,Mrs. J. Backiyalakshmi,S2,Assistant Professor,07-06-1981,9865739889,Teaching
+25NTM09,Mrs. R.Kanakavalli,S2,Assistant Professor,03-05-1981,8973805313,Teaching
+13FSA01,Dr. M. S. MADHAVACHARI,SA,Assistant Professor,07-05-1969,9487583913,Teaching
+25CSH01,Mr. D. SUDHAGAR,SH,Assistant Professor,02-05-1990,9898382220,Teaching
+25CSH08,Mr. K. JEYASEELAN,SH,Assistant Professor,14-04-1992,9489730592,Teaching
+25CSH04,Mr. S. Lenin,SH,Assistant Professor,19-12-1971,9994774893,Teaching
+22CSH07,Mr. T. JOSEPH CHRISTU RAJA,SH,Assistant Professor,17-11-1976,8098975631,Teaching
+23CSH01,Mrs.H.YASODAI,SH,Assistant Professor,07-07-1985,9595625646,Teaching
+25CSH01,Ms. NATHANIAL M,SH,Assistant Professor,28-01-1992,9443132642,Teaching
+19NTM01,Mr. A. George Mervin,SO,Assistant Professor,25-12-1987,8526165005,Teaching
+25NTM07,Mr. K. Ganesan,SO,Assistant Professor,14-05-1984,9944568868,Teaching
+17NTA13,Mr. M. Karthikeyan,SO,Assistant Professor,20-06-1978,9994048503,Teaching
+24NTM03,Mr. S. Basil Xavier,SO,Assistant Professor,30-08-1996,7092073013,Teaching
+23NTM02,Mr. S. Prabakaran,SO,Assistant Professor,26-11-1994,9994715188,Teaching
+23NTM03,Mrs. V. Maria Anusha,SO,Assistant Professor,02-06-1996,7867954322,Teaching
+07NTM02,Dr. S. Renilton Breeze,SP,Assistant Professor,04-11-1978,9944351303,Teaching
+26NTM10,Mr. AVINESH. K,SP,Assistant Professor,31-01-2004,8190977997,Teaching
+88NTM02,Mr. M. Manoharan,SP,Assistant Professor,12-02-1972,9487395728,Teaching
+25CSS01,Dr. S. BANUMATHI,SS,Assistant Professor,15-03-1976,8973519946,Teaching
+24CSD01,Dr. V. A. JANE,SS,Assistant Professor,28-05-1994,8148560014,Teaching
+26SSD03,Mr. J JOEL SMITH,SS,Assistant Professor,11-07-2003,9087944990,Teaching
+23CSD51,Ms. B. ESTHER REETA,SS,Assistant Professor,04-04-1997,9940250074,Teaching
+26SSD02,Ms. J. FRANCIS JULEE RAJAM,SS,Assistant Professor,24-12-1988,9566472878,Teaching
+26SSD01,Ms. S. MERLIN SOFIA,SS,Assistant Professor,13-07-1994,9003447244,Teaching
+18FST01,Dr. A. PHILIP AROKIADOSS,ST,Assistant Professor,20-07-1982,9944298134,Teaching
+16FST01,Dr. J. GLORYPERSIAL,ST,Assistant Professor,19-03-1979,9944492500,Teaching
+14FST01,Dr. R. VIJAYAKUMAR,ST,Assistant Professor,19-07-1981,9994231354,Teaching
+16FST02,Dr. T. VENKATESAN,ST,Assistant Professor,28-06-1980,9865186625,Teaching
+26FST01,Mr. M.JOSEPH,ST,Assistant Professor,16-12-1976,9976219789,Teaching
+26SST51,Ms. ANGEL AGNES MARY I,ST,Assistant Professor,15-05-1992,8825772905,Teaching
+21FTA03,Dr. A. ADAIKKALARAJ,TA,Assistant Professor,11-04-1984,9489638722,Teaching
+07FTA01,Dr. A. JOSEPH SAHAYARAJ,TA,Assistant Professor,20-05-1970,9443288368,Teaching
+18FTA01,Dr. A. MARIA DHANABAL,TA,Assistant Professor,09-06-1980,9123562684,Teaching
+14FTA01,Dr. A. RAJATHI,TA,Assistant Professor,06-05-1974,9826368272,Teaching
+20CTA53,Dr. B. JOHNSON,TA,Assistant Professor,25-07-1988,9843160719,Teaching
+12FTA01,Dr. D. WILSON,TA,Assistant Professor,07-06-1972,9842416223,Teaching
+01FTA21,Dr. G. BESCHI,TA,Assistant Professor,27-05-1974,9487852571,Teaching
+26CTA01,Dr. I. ANTO MONICA,TA,Assistant Professor,23-05-1996,8637630502,Teaching
+12FTA04,Dr. J. BENJAMIN ARON TITUS,TA,Assistant Professor,31-03-1973,9894684527,Teaching
+26CTA02,Dr. J. NELSON,TA,Assistant Professor,27-04-1982,9786979744,Teaching
+22CTA01,Dr. J. SALETH,TA,Assistant Professor,20-07-1981,9442964315,Teaching
+24CTA52,Dr. J. STELLA MARY,TA,Assistant Professor,05-12-1985,9751150567,Teaching
+21FTA02,Dr. K. ANTHONY RAJA,TA,Assistant Professor,07-03-1982,9025232595,Teaching
+25CTA53,Dr. K. JOHN KENNEDY,TA,Assistant Professor,04-05-1980,9500881444,Teaching
+26CTA51,Dr. L. ARUL PRAKASH,TA,Assistant Professor,07-02-1994,9791484918,Teaching
+20CTA52,Dr. L. CHARLES,TA,Assistant Professor,19-05-1989,9095099311,Teaching
+25CTA52,Dr. L. RUBA,TA,Assistant Professor,20-01-1984,8608854640,Teaching
+25CTA51,Mr. D. DHANALAKSHMI,TA,Assistant Professor,24-04-1979,9688989489,Teaching
+18FTA04,Dr. M. MUTHALAGU,TA,Assistant Professor,07-04-1983,9486244621,Teaching
+21FTA01,Dr. R. NALLAMUTHU,TA,Assistant Professor,02-06-1970,9442336477,Teaching
+01TTA01,Dr. S. AROCKIA DHANARAJ,TA,Assistant Professor,08-10-1977,98422815015,Teaching
+14FTA02,Dr. S. SHAGILAPENTIL,TA,Assistant Professor,27-04-1979,9500529117,Teaching
+16CTA01,Dr. S. SRINIVASAN,TA,Assistant Professor,16-01-1986,9788031138,Teaching
+26CTA53,Dr.J.VILLANCOURT,TA,Assistant Professor,11-06-1996,9500811904,Teaching
+26CTA52,Mr. B. EZHILSELVAN,TA,Assistant Professor,02-06-1987,8870877559,Teaching
+20CTA51,Mr. I. YOGARAJ,TA,Assistant Professor,10-05-1986,9159497172,Teaching
+16NTA01,Mr. M. Raja,TA,Assistant Professor,28-05-1983,9940733737,Teaching
+08NTA01,Mr. S. S. ARAYARATHI,TA,Assistant Professor,04-07-1987,9629495533,Teaching
+10TTA02,Ms. S. BACKYA SELVA RATHI,TA,Assistant Professor,01-05-1985,9688984006,Teaching
+26NTA01,Mr. A. John Paul,VP,Staff Member,15-08-1987,9487560877,Non-Teaching
+13NTM01,Mr. B. Anto Wellington Prabhu,VP,Staff Member,14-05-1988,9384487165,Non-Teaching
+08NTM02,Mr. D. Jeyakumar,VP,Staff Member,16-04-1977,9486006548,Non-Teaching
+07NTM04,Mr. C. Sathaiya,VP,Staff Member,10-03-1975,9940854158,Non-Teaching
+10NTM03,Mr. D. Jesu Kumar,VP,Staff Member,05-06-1976,9003428453,Non-Teaching
+15NTM01,Mr. J. Antony Raj,VP,Staff Member,21-04-1984,9159479424,Non-Teaching
+18NTM01,Mr. K. Annadurai,VP,Staff Member,13-02-1990,8012321204,Non-Teaching
+11NTM01,Mr. L. Lawrence,VP,Staff Member,15-11-1987,9003036720,Non-Teaching
+17NTM02,Mr. M. Balamurugan,VP,Staff Member,05-06-1985,9943697598,Non-Teaching
+19NTM03,Mr. M. Prabhakar,VP,Staff Member,18-04-1986,9952890554,Non-Teaching
+17NTA15,Mr. P. Thamaraikkannan,VP,Staff Member,13-03-1982,8838596802,Non-Teaching
+07NTM03,Mr. S. P. Arulanandam,VP,Staff Member,13-07-1975,9943037937,Non-Teaching
+19NTM04,Mr. S. Sasikumar,VP,Staff Member,20-11-1986,9965005886,Non-Teaching
+24CVC51,Dr. E. V. PRABHA,VT,Assistant Professor,24-05-1981,7373014511,Teaching
+26TVC51,Dr. J JEFFRIN ALDO,VT,Assistant Professor,06-08-1997,9626021209,Teaching
+14CVC01,Dr. S. TAMILARASI,VT,Assistant Professor,01-09-1985,9655763007,Teaching
+24TVC51,Mr. A. AROCKIARAJ,VT,Assistant Professor,20-08-2000,7200913971,Teaching
+26TVC03,Mr. C. JAWAHAR,VT,Assistant Professor,09-06-2001,9384975003,Teaching
+25SVT04,Mr. C. MURUGAVEL,VT,Assistant Professor,16-12-1998,9047309302,Teaching
+26SVT01,Mr. G. SATHISH,VT,Assistant Professor,22-12-1993,9047472891,Teaching
+22TVC01,Mr. J. Ambrose Gerald Vivian,VT,Assistant Professor,24-04-1989,9444372993,Teaching
+26SVC05,Mr. M. NAVEENKUMAR,VT,Assistant Professor,21-07-1998,7517851348,Teaching
+24NTM07,Mr. S. Antony Diwakar,VT,Assistant Professor,04-02-1991,8940654912,Teaching
+26SVC05,Mr. X. MARIA BASTIN,VT,Assistant Professor,13-04-2001,9080419826,Teaching
+26SVC01,Ms. K. RAMYA,VT,Assistant Professor,04-12-1988,9448119641,Teaching
+22TVC51,Ms. K. SHANTHANAPRIYA,VT,Assistant Professor,01-07-1998,7395981548,Teaching
+26HVC51,Ms. SHRUTHI R,VT,Assistant Professor,10-05-1999,6369618671,Teaching
+26SVC52,Ms. T. DEEPA,VT,Assistant Professor,09-11-1999,8825965462,Teaching
+23CVC01,Rev. Fr. XAVIER ANTONY SJ,VT,Jesuit Staff,01-01-1940,9443997607,Jesuit Leadership
+12NTM01,Mr. A. Jeyulack Sagaya Mary,XE,Staff Member,14-04-1973,9488099248,Non-Teaching
+25NTM06,Mr. A. Edwin Sahayaraj,GEN,Staff Member,20-05-1989,9597009476,Non-Teaching
+25NDS02,Mr. Ronald Joywin RJ,GEN,Staff Member,01-02-2000,8760765768,Non-Teaching

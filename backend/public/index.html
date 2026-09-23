@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SJC Birthday Wishes - Admin Faculty Manager & Photo Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sjc-navy: #001B30;
+      --sjc-blue: #002B49;
+      --sjc-gold: #D4AF37;
+      --sjc-gold-light: #FFDF73;
+      --sjc-crimson: #800000;
+      --bg-dark: #07111D;
+      --card-bg: #0C1E32;
+      --card-border: #1E3756;
+      --text-main: #F1F5F9;
+      --text-muted: #94A3B8;
+      --accent-green: #10B981;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; padding-bottom: 60px; }
+    
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--sjc-navy) 0%, var(--sjc-blue) 100%);
+      border-bottom: 2px solid var(--sjc-gold);
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .brand { display: flex; align-items: center; gap: 18px; }
+    .brand-icon {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--sjc-crimson), #4A0000);
+      border: 2px solid var(--sjc-gold);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cinzel', serif; font-weight: 900; color: var(--sjc-gold); font-size: 20px;
+    }
+    .brand-title h1 { font-family: 'Cinzel', serif; font-size: 22px; color: var(--sjc-gold); letter-spacing: 0.5px; }
+    .brand-title p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+    .header-actions { display: flex; gap: 12px; align-items: center; }
+    .btn {
+      padding: 10px 18px; border-radius: 8px; font-size: 13.5px; font-weight: 600;
+      cursor: pointer; border: none; transition: all 0.2s ease; display: inline-flex;
+      align-items: center; gap: 8px; text-decoration: none;
+    }
+    .btn-gold { background: linear-gradient(135deg, #D4AF37, #B89025); color: #001B30; font-weight: 700; }
+    .btn-gold:hover { background: #FFDF73; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(212,175,55,0.3); }
+    .btn-outline { background: transparent; border: 1px solid var(--sjc-gold); color: var(--sjc-gold-light); }
+    .btn-outline:hover { background: rgba(212,175,55,0.12); }
+    .btn-danger { background: var(--sjc-crimson); color: #fff; }
+
+    /* Dashboard Metrics */
+    .container { max-width: 1360px; margin: 0 auto; padding: 25px 25px; }
+    .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-bottom: 25px; }
+    .metric-card {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 12px; padding: 18px 22px; position: relative; overflow: hidden;
+    }
+    .metric-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--sjc-gold);
+    }
+    .metric-card.birthdays::before { background: var(--accent-green); }
+    .metric-title { font-size: 12px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.8px; font-weight: 600; }
+    .metric-value { font-size: 32px; font-weight: 700; color: #fff; margin: 8px 0 4px; }
+    .metric-sub { font-size: 12px; color: var(--sjc-gold-light); }
+
+    /* Controls Bar */
+    .controls-card {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 12px; padding: 20px; margin-bottom: 22px;
+      display: flex; flex-wrap: wrap; gap: 15px; align-items: center; justify-content: space-between;
+    }
+    .search-box { flex: 1; min-width: 260px; position: relative; }
+    .search-box input {
+      width: 100%; padding: 12px 16px; background: #071321;
+      border: 1px solid var(--card-border); border-radius: 8px; color: #fff;
+      font-size: 14px; outline: none;
+    }
+    .search-box input:focus { border-color: var(--sjc-gold); }
+    .filter-group { display: flex; gap: 10px; flex-wrap: wrap; }
+    select {
+      background: #071321; color: #fff; border: 1px solid var(--card-border);
+      padding: 10px 14px; border-radius: 8px; font-size: 13.5px; outline: none; cursor: pointer;
+    }
+    select:focus { border-color: var(--sjc-gold); }
+
+    /* Faculty Table */
+    .table-container {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 12px; overflow-x: auto;
+    }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th {
+      background: #071424; padding: 14px 18px; font-size: 12px;
+      text-transform: uppercase; letter-spacing: 0.8px; color: var(--sjc-gold);
+      border-bottom: 1px solid var(--card-border);
+    }
+    td {
+      padding: 14px 18px; font-size: 13.5px; border-bottom: 1px solid rgba(255,255,255,0.05);
+      vertical-align: middle;
+    }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .faculty-cell { display: flex; align-items: center; gap: 14px; }
+    .photo-thumb {
+      width: 46px; height: 46px; border-radius: 50%;
+      border: 2px solid var(--sjc-gold); object-fit: cover; background: #152E4D;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: var(--sjc-gold); font-size: 16px; flex-shrink: 0;
+    }
+    .faculty-name { font-weight: 600; color: #fff; font-size: 14.5px; }
+    .faculty-desig { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+    .badge {
+      display: inline-block; padding: 4px 10px; border-radius: 14px;
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+    }
+    .badge-bday { background: rgba(16, 185, 129, 0.2); color: #34D399; border: 1px solid #10B981; }
+    .badge-teaching { background: rgba(212, 175, 55, 0.15); color: #FFDF73; border: 1px solid rgba(212,175,55,0.4); }
+    .badge-non { background: rgba(148, 163, 184, 0.15); color: #CBD5E1; }
+    .badge-jesuit { background: rgba(128, 0, 0, 0.3); color: #FCA5A5; border: 1px solid #DC2626; }
+
+    .action-btns { display: flex; gap: 8px; }
+    .btn-sm { padding: 6px 12px; font-size: 12px; border-radius: 6px; }
+
+    /* Modal */
+    .modal-backdrop {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(5px); z-index: 1000; align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .modal {
+      background: var(--card-bg); border: 2px solid var(--sjc-gold);
+      border-radius: 14px; width: 100%; max-width: 580px; padding: 25px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6); position: relative;
+    }
+    .modal-title { font-family: 'Cinzel', serif; font-size: 19px; color: var(--sjc-gold); margin-bottom: 6px; }
+    .modal-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+    .close-btn {
+      position: absolute; top: 18px; right: 18px; background: none; border: none;
+      color: #94A3B8; font-size: 24px; cursor: pointer;
+    }
+
+    /* Drag & Drop Zone */
+    .dropzone {
+      border: 2px dashed var(--sjc-gold); border-radius: 12px; padding: 30px;
+      text-align: center; background: rgba(0,43,73,0.3); cursor: pointer;
+      transition: all 0.2s ease; margin-bottom: 20px;
+    }
+    .dropzone.dragover { background: rgba(212,175,55,0.15); border-color: #FFDF73; }
+    .dropzone-icon { font-size: 40px; margin-bottom: 10px; }
+    .preview-box { display: flex; align-items: center; gap: 16px; margin: 15px 0; }
+    .preview-img { width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--sjc-gold); object-fit: cover; }
+
+    /* Card Preview Modal */
+    .card-preview-modal { max-width: 900px; text-align: center; }
+    .card-preview-img { width: 100%; border-radius: 8px; border: 2px solid var(--sjc-gold); margin: 15px 0; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <div class="brand-icon">SJ</div>
+      <div class="brand-title">
+        <h1>ST. JOSEPH'S COLLEGE (AUTONOMOUS)</h1>
+        <p>Faculty Birthday Automation & Permanent Photo Storage Hub (MongoDB)</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-outline" onclick="triggerMidnightWorkflow()">
+        ⚡ Run Midnight Workflow Now
+      </button>
+      <button class="btn btn-gold" onclick="openAddFacultyModal()">
+        + Add New Staff
+      </button>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Metrics -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-title">Total Staff Registered</div>
+        <div class="metric-value" id="statTotalStaff">510</div>
+        <div class="metric-sub">Stored permanently in MongoDB</div>
+      </div>
+      <div class="metric-card birthdays">
+        <div class="metric-title">Today's Birthdays</div>
+        <div class="metric-value" id="statTodayBirthdays">--</div>
+        <div class="metric-sub" id="statTodayDate">Active Date: --</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Upcoming (Next 7 Days)</div>
+        <div class="metric-value" id="statUpcomingCount">--</div>
+        <div class="metric-sub">Scheduled for automated dispatch</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Automated Midnight Cron</div>
+        <div class="metric-value" style="font-size: 20px; color: #10B981; margin-top: 14px;">00:01 AM IST</div>
+        <div class="metric-sub">Status: ACTIVE 24/7</div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls-card">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search by professor name, department, staff ID, or phone..." oninput="handleSearch()">
+      </div>
+      <div class="filter-group">
+        <select id="categoryFilter" onchange="handleFilter()">
+          <option value="">All Categories</option>
+          <option value="TEACHING">Teaching Staff</option>
+          <option value="NON_TEACHING">Non-Teaching Staff</option>
+          <option value="JESUIT_LEADERSHIP">Jesuit Leadership</option>
+        </select>
+        <select id="departmentFilter" onchange="handleFilter()">
+          <option value="">All Departments (42)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Staff Member</th>
+            <th>Staff ID</th>
+            <th>Department</th>
+            <th>DOB</th>
+            <th>Mobile</th>
+            <th>Category</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="facultyTableBody">
+          <tr><td colspan="7" style="text-align: center; padding: 40px;">Loading 510 staff members from MongoDB...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Photo Upload Modal -->
+  <div class="modal-backdrop" id="uploadModal">
+    <div class="modal">
+      <button class="close-btn" onclick="closeModal('uploadModal')">&times;</button>
+      <h2 class="modal-title">Upload / Change Faculty Photo</h2>
+      <p class="modal-sub" id="uploadModalStaffName">Faculty: Loading...</p>
+
+      <div class="dropzone" id="dropzone" onclick="document.getElementById('fileInput').click()">
+        <div class="dropzone-icon">📷</div>
+        <p style="font-weight: 600; color: #fff;">Click to select or drag and drop photo here</p>
+        <p style="font-size: 12px; color: #94A3B8; margin-top: 6px;">Supports JPEG, PNG, WebP (Max 5MB)</p>
+        <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFileSelect(event)">
+      </div>
+
+      <div class="preview-box" id="previewBox" style="display: none;">
+        <img id="imagePreview" class="preview-img" src="" alt="Selected Photo">
+        <div>
+          <div id="previewFileName" style="font-weight: 600; font-size: 14px;">filename.jpg</div>
+          <div style="font-size: 12px; color: #10B981; margin-top: 2px;">Ready for permanent storage</div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+        <button class="btn btn-outline" onclick="closeModal('uploadModal')">Cancel</button>
+        <button class="btn btn-gold" id="savePhotoBtn" onclick="savePhotoToServer()" disabled>Save & Update MongoDB</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card Preview Modal -->
+  <div class="modal-backdrop" id="cardModal">
+    <div class="modal card-preview-modal">
+      <button class="close-btn" onclick="closeModal('cardModal')">&times;</button>
+      <h2 class="modal-title" id="cardModalTitle">SJC Birthday Card Preview (1200x675 HD)</h2>
+      <p class="modal-sub">Dynamic Canvas Card with photo, expanded department & leadership blessings</p>
+      
+      <div id="cardImageContainer">
+        <p style="padding: 40px;">Generating dynamic high-resolution card...</p>
+      </div>
+
+      <div style="display: flex; gap: 12px; justify-content: center; margin-top: 15px;">
+        <a id="downloadCardBtn" href="#" download="sjc_birthday_card.png" class="btn btn-gold">
+          ⬇ Download Card PNG
+        </a>
+        <button class="btn btn-outline" id="sendWhatsAppFromModalBtn">
+          💬 Send via WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let allFaculty = [];
+    let currentSelectedFaculty = null;
+    let selectedFile = null;
+
+    const DEPT_NAMES = {
+      'PH': 'Department of Physics',
+      'CS': 'Department of Computer Science',
+      'MA': 'Department of Mathematics',
+      'AI': 'Artificial Intelligence & Data Science',
+      'CH': 'Department of Chemistry',
+      'CO': 'Department of Commerce',
+      'EN': 'Department of English',
+      'BO': 'Department of Botany',
+      'BT': 'Department of Bio-Technology',
+      'BI': 'Department of Bio-Informatics',
+      'TA': 'Department of Tamil',
+      'ZO': 'Department of Zoology',
+      'EC': 'Department of Economics',
+      'HI': 'Department of History',
+      'MS': 'Microbiology Section',
+      'IT': 'Department of Information Technology',
+      'LI': 'Central Library',
+      'GY': 'Physical Education',
+      'CE': 'Office of Controller of Examinations',
+      'AC': 'Accounts & Finance'
+    };
+
+    async function initDashboard() {
+      populateDeptDropdown();
+      await fetchFaculty();
+      await fetchBirthdaysToday();
+      await fetchUpcoming();
+      setupDropzone();
+    }
+
+    function populateDeptDropdown() {
+      const select = document.getElementById('departmentFilter');
+      Object.entries(DEPT_NAMES).forEach(([code, name]) => {
+        const opt = document.createElement('option');
+        opt.value = code;
+        opt.textContent = `${code} - ${name}`;
+        select.appendChild(opt);
+      });
+    }
+
+    async function fetchFaculty() {
+      try {
+        const res = await fetch('/api/faculty');
+        const json = await res.json();
+        if (json.success) {
+          allFaculty = json.data;
+          document.getElementById('statTotalStaff').textContent = json.total || allFaculty.length;
+          renderTable(allFaculty);
+        }
+      } catch (err) {
+        console.error('Fetch faculty failed:', err);
+      }
+    }
+
+    async function fetchBirthdaysToday() {
+      try {
+        const res = await fetch('/api/birthdays/today');
+        const json = await res.json();
+        if (json.success) {
+          document.getElementById('statTodayBirthdays').textContent = json.count;
+          document.getElementById('statTodayDate').textContent = `Today: ${json.date}`;
+        }
+      } catch (err) {}
+    }
+
+    async function fetchUpcoming() {
+      try {
+        const res = await fetch('/api/birthdays/upcoming?days=7');
+        const json = await res.json();
+        if (json.success) {
+          document.getElementById('statUpcomingCount').textContent = json.count;
+        }
+      } catch (err) {}
+    }
+
+    function renderTable(list) {
+      const tbody = document.getElementById('facultyTableBody');
+      if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 30px;">No faculty members matched your criteria.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = list.map(f => {
+        const photoSrc = f.photoUrl && f.photoUrl !== '/default-avatar.png' ? f.photoUrl : null;
+        const initials = getInitials(f.name);
+        const deptName = DEPT_NAMES[f.deptCode] || `Dept of ${f.deptCode}`;
+        
+        let catBadge = `<span class="badge badge-teaching">Teaching</span>`;
+        if (f.category === 'NON_TEACHING') catBadge = `<span class="badge badge-non">Non-Teaching</span>`;
+        if (f.category === 'JESUIT_LEADERSHIP') catBadge = `<span class="badge badge-jesuit">Jesuit Staff</span>`;
+
+        const isToday = isBirthdayToday(f.dob);
+        const bdayBadge = isToday ? `<span class="badge badge-bday">🎂 TODAY!</span>` : '';
+
+        return `
+          <tr>
+            <td>
+              <div class="faculty-cell">
+                ${photoSrc 
+                  ? `<img src="${photoSrc}" class="photo-thumb" alt="${f.name}">`
+                  : `<div class="photo-thumb">${initials}</div>`}
+                <div>
+                  <div class="faculty-name">${f.name} ${bdayBadge}</div>
+                  <div class="faculty-desig">${f.designation || 'Staff Member'}</div>
+                </div>
+              </div>
+            </td>
+            <td><code>${f.facultyId}</code></td>
+            <td><strong>${f.deptCode}</strong> - ${deptName}</td>
+            <td>${f.dob}</td>
+            <td>${f.mobile}</td>
+            <td>${catBadge}</td>
+            <td>
+              <div class="action-btns">
+                <button class="btn btn-sm btn-outline" onclick="openUploadModal('${f.facultyId}')" title="Upload permanent photo">
+                  📷 Photo
+                </button>
+                <button class="btn btn-sm btn-gold" onclick="previewCard('${f.facultyId}')" title="Generate 1200x675 HD Card">
+                  🎨 Card
+                </button>
+                <button class="btn btn-sm btn-outline" onclick="sendGreeting('${f.facultyId}')" title="Send WhatsApp">
+                  💬 Send
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function isBirthdayToday(dob) {
+      if (!dob) return false;
+      const parts = dob.split('-');
+      if (parts.length < 2) return false;
+      const now = new Date();
+      const td = String(now.getDate()).padStart(2, '0');
+      const tm = String(now.getMonth() + 1).padStart(2, '0');
+      return `${parts[0].padStart(2, '0')}-${parts[1].padStart(2, '0')}` === `${td}-${tm}`;
+    }
+
+    function getInitials(name) {
+      if (!name) return 'SJ';
+      const clean = name.replace(/Dr\.|Rev\.|Fr\.|Mr\.|Mrs\.|Ms\.|SJ|\./gi, ' ').trim();
+      const parts = clean.split(/\s+/).filter(Boolean);
+      if (parts.length === 0) return 'SJ';
+      if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+      return (parts[0][0] + parts[1][0]).toUpperCase();
+    }
+
+    function handleSearch() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      const dept = document.getElementById('departmentFilter').value;
+      const cat = document.getElementById('categoryFilter').value;
+
+      const filtered = allFaculty.filter(f => {
+        const matchesQ = !q || f.name.toLowerCase().includes(q) || f.facultyId.toLowerCase().includes(q) || (f.mobile && f.mobile.includes(q)) || f.deptCode.toLowerCase().includes(q);
+        const matchesDept = !dept || f.deptCode === dept;
+        const matchesCat = !cat || f.category === cat;
+        return matchesQ && matchesDept && matchesCat;
+      });
+      renderTable(filtered);
+    }
+
+    function handleFilter() {
+      handleSearch();
+    }
+
+    // Photo Modal Handling
+    function openUploadModal(facultyId) {
+      currentSelectedFaculty = allFaculty.find(f => f.facultyId === facultyId);
+      if (!currentSelectedFaculty) return;
+
+      document.getElementById('uploadModalStaffName').textContent = 
+        `Professor: ${currentSelectedFaculty.name} (${currentSelectedFaculty.deptCode}) • ID: ${currentSelectedFaculty.facultyId}`;
+      document.getElementById('previewBox').style.display = 'none';
+      document.getElementById('savePhotoBtn').disabled = true;
+      selectedFile = null;
+
+      document.getElementById('uploadModal').style.display = 'flex';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    function setupDropzone() {
+      const dz = document.getElementById('dropzone');
+      dz.addEventListener('dragover', (e) => { e.preventDefault(); dz.classList.add('dragover'); });
+      dz.addEventListener('dragleave', () => { dz.classList.remove('dragover'); });
+      dz.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dz.classList.remove('dragover');
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          processFile(e.dataTransfer.files[0]);
+        }
+      });
+    }
+
+    function handleFileSelect(e) {
+      if (e.target.files && e.target.files[0]) {
+        processFile(e.target.files[0]);
+      }
+    }
+
+    function processFile(file) {
+      selectedFile = file;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        document.getElementById('imagePreview').src = e.target.result;
+        document.getElementById('previewFileName').textContent = file.name;
+        document.getElementById('previewBox').style.display = 'flex';
+        document.getElementById('savePhotoBtn').disabled = false;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    async function savePhotoToServer() {
+      if (!selectedFile || !currentSelectedFaculty) return;
+      const btn = document.getElementById('savePhotoBtn');
+      btn.textContent = 'Uploading to MongoDB...';
+      btn.disabled = true;
+
+      const formData = new FormData();
+      formData.append('photo', selectedFile);
+
+      try {
+        const res = await fetch(`/api/faculty/${currentSelectedFaculty.facultyId}/photo`, {
+          method: 'POST',
+          body: formData
+        });
+        const json = await res.json();
+        if (json.success) {
+          alert(`✅ Photo uploaded and saved permanently for ${currentSelectedFaculty.name}!`);
+          closeModal('uploadModal');
+          await fetchFaculty();
+        } else {
+          alert('Upload failed: ' + json.error);
+        }
+      } catch (err) {
+        alert('Server error uploading photo: ' + err.message);
+      } finally {
+        btn.textContent = 'Save & Update MongoDB';
+        btn.disabled = false;
+      }
+    }
+
+    // Card Preview
+    async function previewCard(facultyId) {
+      const f = allFaculty.find(x => x.facultyId === facultyId);
+      if (!f) return;
+
+      document.getElementById('cardModalTitle').textContent = `Birthday Card: ${f.name}`;
+      const container = document.getElementById('cardImageContainer');
+      container.innerHTML = `<p style="padding: 40px;">Generating 1200x675 HD Card PNG...</p>`;
+
+      document.getElementById('cardModal').style.display = 'flex';
+
+      const imgUrl = `/api/birthdays/preview/${facultyId}?t=${Date.now()}`;
+      const img = new Image();
+      img.className = 'card-preview-img';
+      img.onload = () => {
+        container.innerHTML = '';
+        container.appendChild(img);
+        document.getElementById('downloadCardBtn').href = imgUrl;
+      };
+      img.src = imgUrl;
+
+      document.getElementById('sendWhatsAppFromModalBtn').onclick = () => sendGreeting(facultyId);
+    }
+
+    async function sendGreeting(facultyId) {
+      const f = allFaculty.find(x => x.facultyId === facultyId);
+      if (!confirm(`Send official WhatsApp Birthday Greeting and HD Card to ${f.name} (${f.mobile})?`)) return;
+
+      try {
+        const res = await fetch('/api/whatsapp/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ facultyId })
+        });
+        const json = await res.json();
+        if (json.success) {
+          alert(`💐 Birthday Greeting & Card dispatched successfully to ${f.name}!`);
+        } else {
+          alert(`Dispatch failed: ${json.error}`);
+        }
+      } catch (err) {
+        alert(`Error connecting to server: ${err.message}`);
+      }
+    }
+
+    async function triggerMidnightWorkflow() {
+      if (!confirm('Run the automated midnight workflow right now? This queries today\'s birthdays, generates cards, and dispatches WhatsApp messages.')) return;
+      try {
+        const res = await fetch('/api/birthdays/trigger-now', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({})
+        });
+        const json = await res.json();
+        alert(`⚡ Workflow Completed! Processed ${json.processedCount || 0} birthdays.`);
+      } catch (err) {
+        alert('Workflow trigger error: ' + err.message);
+      }
+    }
+
+    function openAddFacultyModal() {
+      const id = prompt('Enter New Staff ID (e.g. 26CS501):');
+      if (!id) return;
+      const name = prompt('Enter Full Name (e.g. Dr. R. RAJKUMAR):');
+      if (!name) return;
+      const dept = prompt('Enter Department Code (e.g. CS, PH, MA):');
+      if (!dept) return;
+      const dob = prompt('Enter DOB (Format: DD-MM-YYYY):');
+      if (!dob) return;
+      const mobile = prompt('Enter 10-digit Mobile:');
+      if (!mobile) return;
+      const desig = prompt('Enter Designation (e.g. Assistant Professor):') || 'Assistant Professor';
+
+      fetch('/api/faculty', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          facultyId: id,
+          name,
+          deptCode: dept,
+          dob,
+          mobile,
+          designation: desig,
+          category: 'TEACHING'
+        })
+      }).then(r => r.json()).then(j => {
+        if (j.success) {
+          alert('Staff added successfully!');
+          fetchFaculty();
+        } else {
+          alert('Error: ' + j.error);
+        }
+      });
+    }
+
+    window.onload = initDashboard;
+  </script>
+</body>
+</html>

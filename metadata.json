@@ -1,0 +1,6 @@
+{
+  "name": "SJC Faculty Directory",
+  "description": "St. Joseph's College (Autonomous) Faculty Birthday & Staff Directory System with HD gift card generator.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
