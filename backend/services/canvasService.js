@@ -1,347 +1,448 @@
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
-const { getDepartmentFullName } = require('../utils/deptMapper');
-
-const CARD_WIDTH = 1200;
-const CARD_HEIGHT = 675;
+const { execFile } = require('child_process');
+const { getDepartmentFullName } = require('./deptMapper');
 
 /**
- * Extracts 2-character uppercase monogram initials from full faculty name.
+ * Extracts initials from staff name for gold/crimson fallback badge.
+ * e.g. "Dr. G. GENIFER SILVENA" -> "GG"
  */
-function getInitials(name) {
+function extractInitials(name) {
   if (!name) return 'SJ';
-  const clean = name
-    .replace(/Dr\./gi, '')
-    .replace(/Rev\./gi, '')
-    .replace(/Fr\./gi, '')
-    .replace(/Mr\./gi, '')
-    .replace(/Mrs\./gi, '')
-    .replace(/Ms\./gi, '')
-    .replace(/Ph\.D\./gi, '')
-    .replace(/SJ/gi, '')
-    .replace(/\./g, ' ')
-    .trim();
-  const words = clean.split(/\s+/).filter(Boolean);
-  if (words.length === 0) return 'SJ';
-  if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
-  return (words[0][0] + words[1][0]).toUpperCase();
+  const clean = name.replace(/Dr\.|Rev\.|Fr\.|Mr\.|Mrs\.|Ms\.|SJ|\./gi, ' ').trim();
+  const parts = clean.split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return 'SJ';
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[1][0]).toUpperCase();
 }
 
 /**
- * Generates the 1200x675 HD Birthday Card PNG.
- * Uses node-canvas if available, or high-performance ImageMagick CLI engine.
+ * Primary Canvas Engine using 'canvas' (Cairo-based native bindings)
  */
-async function generateCard(faculty, outputFilePath) {
-  const expandedDept = getDepartmentFullName(faculty.deptCode);
+async function generateCardWithNodeCanvas(faculty, outputPath) {
+  const { createCanvas, loadImage } = require('canvas');
+
+  const width = 1200;
+  const height = 675;
+  const canvas = createCanvas(width, height);
+  const ctx = canvas.getContext('2d');
+
+  const fullDeptName = getDepartmentFullName(faculty.deptCode);
+  const cleanDeptName = fullDeptName.replace(/^Department of\s+/i, '').trim();
   const designation = faculty.designation || 'Staff Member';
-  const combinedDesigDept = `${designation} of ${expandedDept}`;
-  const initials = getInitials(faculty.name);
+  const combinedTitle = `${designation} Department of ${cleanDeptName}`;
 
-  // Ensure output directory exists
-  const outDir = path.dirname(outputFilePath);
-  if (!fs.existsSync(outDir)) {
-    fs.mkdirSync(outDir, { recursive: true });
-  }
+  // 1. Deep Royal Navy Luxury Gradient Background
+  const bgGrad = ctx.createLinearGradient(0, 0, width, height);
+  bgGrad.addColorStop(0, '#001426');
+  bgGrad.addColorStop(0.5, '#002B49');
+  bgGrad.addColorStop(1, '#001020');
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, width, height);
 
-  // Resolve faculty photo if available
-  let resolvedPhotoPath = null;
+  // Decorative subtle radiant glow
+  const radialGlow = ctx.createRadialGradient(980, 265, 20, 980, 265, 300);
+  radialGlow.addColorStop(0, 'rgba(212, 175, 55, 0.18)');
+  radialGlow.addColorStop(1, 'rgba(0, 43, 73, 0)');
+  ctx.fillStyle = radialGlow;
+  ctx.fillRect(0, 0, width, height);
+
+  // 2. Ornate Double Gold Outer Border
+  ctx.strokeStyle = '#D4AF37';
+  ctx.lineWidth = 5;
+  ctx.strokeRect(18, 18, width - 36, height - 36);
+
+  ctx.strokeStyle = 'rgba(212, 175, 55, 0.45)';
+  ctx.lineWidth = 1.5;
+  ctx.strokeRect(26, 26, width - 52, height - 52);
+
+  // Corner Gold Accents
+  const cornerSize = 25;
+  ctx.fillStyle = '#D4AF37';
+  // Top-left
+  ctx.fillRect(26, 26, cornerSize, 3);
+  ctx.fillRect(26, 26, 3, cornerSize);
+  // Top-right
+  ctx.fillRect(width - 26 - cornerSize, 26, cornerSize, 3);
+  ctx.fillRect(width - 29, 26, 3, cornerSize);
+  // Bottom-left
+  ctx.fillRect(26, height - 29, cornerSize, 3);
+  ctx.fillRect(26, height - 26 - cornerSize, 3, cornerSize);
+  // Bottom-right
+  ctx.fillRect(width - 26 - cornerSize, height - 29, cornerSize, 3);
+  ctx.fillRect(width - 29, height - 26 - cornerSize, 3, cornerSize);
+
+  // 3. TOP HEADER (Centered)
+  // Crest Monogram Badge (X = 600, Y = 62, Radius = 28)
+  const crestX = 600;
+  const crestY = 56;
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(crestX, crestY, 24, 0, Math.PI * 2);
+  ctx.fillStyle = '#800000';
+  ctx.fill();
+  ctx.lineWidth = 2.5;
+  ctx.strokeStyle = '#D4AF37';
+  ctx.stroke();
+
+  ctx.font = 'bold 15px Georgia, serif';
+  ctx.fillStyle = '#FFDF73';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('IHS', crestX, crestY + 1);
+  ctx.restore();
+
+  // College Title
+  ctx.font = 'bold 27px Georgia, serif';
+  ctx.fillStyle = '#D4AF37';
+  ctx.textAlign = 'center';
+  ctx.fillText("ST. JOSEPH'S COLLEGE (AUTONOMOUS)", 600, 102);
+
+  // Subtitle & Accreditations
+  ctx.font = '13px Arial, sans-serif';
+  ctx.fillStyle = '#E2E8F0';
+  ctx.fillText("TIRUCHIRAPPALLI - 620 002 • TAMIL NADU, INDIA", 600, 123);
+
+  // Latin College Motto & Ribbon
+  ctx.font = 'italic bold 12.5px Georgia, serif';
+  ctx.fillStyle = '#FFDF73';
+  ctx.fillText("~ Pro Bono Et Vero ~  (For the Good and the True • Estd. 1844)", 600, 142);
+
+  // Gold Divider Ribbon
+  ctx.strokeStyle = 'rgba(212, 175, 55, 0.6)';
+  ctx.lineWidth = 1.2;
+  ctx.beginPath();
+  ctx.moveTo(140, 154);
+  ctx.lineTo(1060, 154);
+  ctx.stroke();
+
+  // 4. CENTER BODY - BIRTHDAY CELEBRANT DETAILS
+  // A) Birthday Greeting Pill
+  ctx.save();
+  const pillX = 80;
+  const pillY = 186;
+  const pillW = 280;
+  const pillH = 32;
+  const r = 16;
+  ctx.beginPath();
+  ctx.moveTo(pillX + r, pillY);
+  ctx.lineTo(pillX + pillW - r, pillY);
+  ctx.quadraticCurveTo(pillX + pillW, pillY, pillX + pillW, pillY + r);
+  ctx.lineTo(pillX + pillW, pillY + pillH - r);
+  ctx.quadraticCurveTo(pillX + pillW, pillY + pillH, pillX + pillW - r, pillY + pillH);
+  ctx.lineTo(pillX + r, pillY + pillH);
+  ctx.quadraticCurveTo(pillX, pillY + pillH, pillX, pillY + pillH - r);
+  ctx.lineTo(pillX, pillY + r);
+  ctx.quadraticCurveTo(pillX, pillY, pillX + r, pillY);
+  ctx.closePath();
+  ctx.fillStyle = '#800000';
+  ctx.fill();
+  ctx.strokeStyle = '#D4AF37';
+  ctx.lineWidth = 1.8;
+  ctx.stroke();
+
+  ctx.font = 'bold 12.5px Arial, sans-serif';
+  ctx.fillStyle = '#FFDF73';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('★  WARMEST BIRTHDAY GREETINGS  ★', pillX + pillW / 2, pillY + pillH / 2);
+  ctx.restore();
+
+  // B) Faculty Name (Left-Aligned at X = 80px)
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'alphabetic';
+  ctx.font = 'bold 36px Georgia, serif';
+  ctx.fillStyle = '#FFFFFF';
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
+  ctx.shadowBlur = 8;
+  ctx.fillText(faculty.name, 80, 266);
+  ctx.shadowBlur = 0; // reset
+
+  // C) Single Combined Line: "${faculty.designation} of ${fullDeptName}"
+  // NOTE: Staff ID is REMOVED completely as required.
+  ctx.font = '600 20px Arial, sans-serif';
+  ctx.fillStyle = '#FFDF73';
+  ctx.fillText(combinedTitle, 80, 305);
+
+  // Inspirational blessing note
+  ctx.font = 'italic 16px Georgia, serif';
+  ctx.fillStyle = '#CBD5E1';
+  ctx.fillText(
+    '"May the Almighty shower His abundant blessings, vibrant health, enduring peace,',
+    80,
+    352
+  );
+  ctx.fillText(
+    'and divine joy upon you as you continue your noble mission of forming young minds!"',
+    80,
+    378
+  );
+
+  // Thin separator line
+  ctx.strokeStyle = 'rgba(212, 175, 55, 0.35)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(80, 415);
+  ctx.lineTo(1120, 415);
+  ctx.stroke();
+
+  // 5. CENTER BODY - RIGHT SIDE AVATAR (X = 980px, Y = 180px, 170x170 px)
+  const avatarCenterX = 980 + 85; // 1065px
+  const avatarCenterY = 180 + 85; // 265px
+  const avatarRadius = 85; // Diameter = 170px
+
+  let photoRendered = false;
   if (faculty.photoUrl && faculty.photoUrl !== '/default-avatar.png') {
-    let candidate = faculty.photoUrl;
-    if (candidate.startsWith('/uploads')) {
-      candidate = path.join(__dirname, '..', candidate);
-    }
-    if (fs.existsSync(candidate)) {
-      resolvedPhotoPath = candidate;
-    }
-  }
-
-  // Principal photo asset path
-  const principalPhotoAsset = path.resolve(__dirname, '../../app/src/main/res/drawable/ic_principal_photo.png');
-  const hasPrincipalAsset = fs.existsSync(principalPhotoAsset);
-
-  // Try pure node-canvas first
-  try {
-    const { createCanvas, loadImage } = require('canvas');
-    const canvas = createCanvas(CARD_WIDTH, CARD_HEIGHT);
-    const ctx = canvas.getContext('2d');
-
-    // Background Gradient
-    const bgGrad = ctx.createLinearGradient(0, 0, CARD_WIDTH, CARD_HEIGHT);
-    bgGrad.addColorStop(0, '#001B30');
-    bgGrad.addColorStop(0.5, '#002B49');
-    bgGrad.addColorStop(1, '#001628');
-    ctx.fillStyle = bgGrad;
-    ctx.fillRect(0, 0, CARD_WIDTH, CARD_HEIGHT);
-
-    // Outer Gold Border (Double Line)
-    ctx.strokeStyle = '#D4AF37';
-    ctx.lineWidth = 4;
-    ctx.strokeRect(30, 30, CARD_WIDTH - 60, CARD_HEIGHT - 60);
-
-    ctx.strokeStyle = '#FFDF73';
-    ctx.lineWidth = 1.5;
-    ctx.strokeRect(40, 40, CARD_WIDTH - 80, CARD_HEIGHT - 80);
-
-    // College Header
-    ctx.textAlign = 'center';
-    ctx.fillStyle = '#D4AF37';
-    ctx.font = 'bold 22px Georgia, serif';
-    ctx.fillText("ST. JOSEPH'S COLLEGE (AUTONOMOUS)", CARD_WIDTH / 2, 85);
-
-    ctx.fillStyle = '#E2E8F0';
-    ctx.font = '13px sans-serif';
-    ctx.fillText("Special Heritage Status by UGC • Accredited A++ (Cycle IV) by NAAC • Tiruchirappalli - 620 002", CARD_WIDTH / 2, 110);
-
-    ctx.fillStyle = '#FFDF73';
-    ctx.font = 'italic 12px Georgia, serif';
-    ctx.fillText("Motto: Pro Bono Et Vero (For the Good and the True)", CARD_WIDTH / 2, 130);
-
-    // Decorative separator line under header
-    ctx.strokeStyle = 'rgba(212, 175, 55, 0.4)';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(80, 148);
-    ctx.lineTo(CARD_WIDTH - 80, 148);
-    ctx.stroke();
-
-    // =========================================================================
-    // FACULTY PHOTO / AVATAR ON THE RIGHT SIDE (X = 980, Y = 180, D = 170)
-    // =========================================================================
-    const avatarCenterX = 1065;
-    const avatarCenterY = 265;
-    const avatarRadius = 85;
-
-    // Gold Outer Ring
-    ctx.beginPath();
-    ctx.arc(avatarCenterX, avatarCenterY, avatarRadius + 3, 0, Math.PI * 2);
-    ctx.strokeStyle = '#D4AF37';
-    ctx.lineWidth = 6;
-    ctx.stroke();
-
-    let photoDrawn = false;
-    if (resolvedPhotoPath) {
-      try {
+    try {
+      let resolvedPhotoPath = faculty.photoUrl;
+      if (!resolvedPhotoPath.startsWith('http://') && !resolvedPhotoPath.startsWith('https://')) {
+        resolvedPhotoPath = path.resolve(__dirname, '..', faculty.photoUrl.replace(/^\//, ''));
+      }
+      if (fs.existsSync(resolvedPhotoPath) || resolvedPhotoPath.startsWith('http')) {
         const photoImg = await loadImage(resolvedPhotoPath);
         ctx.save();
         ctx.beginPath();
         ctx.arc(avatarCenterX, avatarCenterY, avatarRadius, 0, Math.PI * 2);
         ctx.closePath();
         ctx.clip();
-        ctx.drawImage(photoImg, avatarCenterX - avatarRadius, avatarCenterY - avatarRadius, avatarRadius * 2, avatarRadius * 2);
+        ctx.drawImage(
+          photoImg,
+          avatarCenterX - avatarRadius,
+          avatarCenterY - avatarRadius,
+          avatarRadius * 2,
+          avatarRadius * 2
+        );
         ctx.restore();
-        photoDrawn = true;
-      } catch (err) {
-        console.warn('[Canvas] Photo load failed, using monogram fallback:', err.message);
+        photoRendered = true;
       }
+    } catch (photoErr) {
+      console.warn(`[Canvas] Could not load photo for ${faculty.name}, falling back to initial badge.`);
     }
+  }
 
-    if (!photoDrawn) {
-      // Crimson / Burgundy circle with Initials badge
-      const avatarGrad = ctx.createLinearGradient(
-        avatarCenterX - avatarRadius, avatarCenterY - avatarRadius,
-        avatarCenterX + avatarRadius, avatarCenterY + avatarRadius
-      );
-      avatarGrad.addColorStop(0, '#800000');
-      avatarGrad.addColorStop(1, '#4A0000');
-      ctx.fillStyle = avatarGrad;
-      ctx.beginPath();
-      ctx.arc(avatarCenterX, avatarCenterY, avatarRadius, 0, Math.PI * 2);
-      ctx.fill();
+  // Fallback: Initial Badge ("GG") with Burgundy gradient and Gold Monogram
+  if (!photoRendered) {
+    ctx.save();
+    const avatarGrad = ctx.createLinearGradient(
+      avatarCenterX - avatarRadius,
+      avatarCenterY - avatarRadius,
+      avatarCenterX + avatarRadius,
+      avatarCenterY + avatarRadius
+    );
+    avatarGrad.addColorStop(0, '#990000');
+    avatarGrad.addColorStop(1, '#4A0000');
 
-      ctx.fillStyle = '#D4AF37';
-      ctx.font = 'bold 54px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(initials, avatarCenterX, avatarCenterY);
-      ctx.textBaseline = 'alphabetic'; // reset
-    }
-
-    // =========================================================================
-    // FACULTY DETAILS ON THE LEFT (X = 80px)
-    // =========================================================================
-    const infoStartX = 80;
-
-    // Crimson Pill Badge
-    ctx.fillStyle = '#800000';
     ctx.beginPath();
-    ctx.roundRect(infoStartX, 175, 270, 32, 16);
+    ctx.arc(avatarCenterX, avatarCenterY, avatarRadius, 0, Math.PI * 2);
+    ctx.fillStyle = avatarGrad;
     ctx.fill();
-    ctx.strokeStyle = '#D4AF37';
-    ctx.lineWidth = 1;
-    ctx.stroke();
 
-    ctx.fillStyle = '#FFDF73';
-    ctx.font = 'bold 12.5px sans-serif';
-    ctx.textAlign = 'left';
-    ctx.fillText("★  HAPPY BIRTHDAY PROFESSOR  ★", infoStartX + 18, 196);
-
-    // Faculty Name
-    ctx.fillStyle = '#FFFFFF';
-    ctx.font = 'bold 32px Georgia, serif';
-    ctx.fillText(faculty.name, infoStartX, 250);
-
-    // Single combined line: Designation of Department
+    const initials = extractInitials(faculty.name);
+    ctx.font = 'bold 54px Georgia, serif';
     ctx.fillStyle = '#D4AF37';
-    ctx.font = '19px sans-serif';
-    ctx.fillText(combinedDesigDept, infoStartX, 288);
-
-    // Scripture / Prayer Box
-    ctx.fillStyle = 'rgba(15, 23, 42, 0.7)';
-    ctx.beginPath();
-    ctx.roundRect(infoStartX, 330, CARD_WIDTH - 160, 105, 12);
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(212, 175, 55, 0.35)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-
-    ctx.fillStyle = '#FFDF73';
-    ctx.font = 'bold 14px Georgia, serif';
-    ctx.fillText("✦ INSTITUTIONAL BENEDICTION & PRAYER ✦", infoStartX + 25, 360);
-
-    ctx.fillStyle = '#E2E8F0';
-    ctx.font = 'italic 16px Georgia, serif';
-    ctx.fillText('"May the Lord bless you and keep you; make His face shine upon you and be gracious to you."', infoStartX + 25, 392);
-    ctx.fillStyle = '#94A3B8';
-    ctx.font = '13px sans-serif';
-    ctx.fillText("- Numbers 6:24-25 • St. Joseph's College (Autonomous) Faculty Birthday Commemoration", infoStartX + 25, 418);
-
-    // Divider before footer
-    ctx.strokeStyle = 'rgba(212, 175, 55, 0.35)';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(65, 465);
-    ctx.lineTo(CARD_WIDTH - 65, 465);
-    ctx.stroke();
-
-    // =========================================================================
-    // BOTTOM-LEFT: PRINCIPAL'S PHOTO & STANDING COMMITTEE
-    // =========================================================================
-    const principalX = 80;
-    const principalY = 490;
-    const principalSize = 95;
-
-    ctx.beginPath();
-    ctx.arc(principalX + principalSize / 2, principalY + principalSize / 2, principalSize / 2 + 2, 0, Math.PI * 2);
-    ctx.strokeStyle = '#D4AF37';
-    ctx.lineWidth = 3;
-    ctx.stroke();
-
-    if (hasPrincipalAsset) {
-      try {
-        const principalImg = await loadImage(principalPhotoAsset);
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(principalX + principalSize / 2, principalY + principalSize / 2, principalSize / 2, 0, Math.PI * 2);
-        ctx.clip();
-        ctx.drawImage(principalImg, principalX, principalY, principalSize, principalSize);
-        ctx.restore();
-      } catch (_) {}
-    }
-
-    // Label under photo
-    ctx.fillStyle = '#D4AF37';
-    ctx.font = 'bold 12.5px sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText("Principal & Standing Committee", principalX + principalSize / 2 + 15, 615);
+    ctx.textBaseline = 'middle';
+    ctx.fillText(initials, avatarCenterX, avatarCenterY + 3);
+    ctx.restore();
+  }
 
-    // =========================================================================
-    // BOTTOM-RIGHT: LEADERSHIP GREETINGS (RECTOR -> PRINCIPAL -> SECRETARY)
-    // =========================================================================
-    const leadX = CARD_WIDTH - 500;
-    const leadY = 480;
+  // 170px Avatar Ornate Gold Border & Outer Ring
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(avatarCenterX, avatarCenterY, avatarRadius, 0, Math.PI * 2);
+  ctx.strokeStyle = '#D4AF37';
+  ctx.lineWidth = 4;
+  ctx.stroke();
 
-    ctx.fillStyle = '#152336';
-    ctx.beginPath();
-    ctx.roundRect(leadX, leadY, 435, 145, 10);
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(212, 175, 55, 0.4)';
-    ctx.lineWidth = 1.2;
-    ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(avatarCenterX, avatarCenterY, avatarRadius + 6, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(212, 175, 55, 0.45)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  ctx.restore();
 
-    ctx.textAlign = 'left';
-    ctx.fillStyle = '#FFDF73';
-    ctx.font = 'bold 13.5px sans-serif';
-    ctx.fillText("WITH PRAYERS & BEST WISHES FROM:", leadX + 18, leadY + 26);
+  // 6. BOTTOM-LEFT CORNER (X = 80px, Y = 500px)
+  // Principal Photo Bitmap (100x100) + Bold Gold Text Label
+  const pSize = 100;
+  const pRadius = pSize / 2; // 50px
+  const pCenterX = 80 + pRadius; // 130px
+  const pCenterY = 460 + pRadius; // 510px
 
-    ctx.fillStyle = '#FFFFFF';
-    ctx.font = 'bold 13px Georgia, serif';
-    ctx.fillText("RECTOR, PRINCIPAL & SECRETARY", leadX + 18, leadY + 47);
+  // Draw Principal photo / monogram circle
+  ctx.save();
+  const principalGrad = ctx.createLinearGradient(
+    pCenterX - pRadius,
+    pCenterY - pRadius,
+    pCenterX + pRadius,
+    pCenterY + pRadius
+  );
+  principalGrad.addColorStop(0, '#003366');
+  principalGrad.addColorStop(1, '#001A33');
+  ctx.beginPath();
+  ctx.arc(pCenterX, pCenterY, pRadius, 0, Math.PI * 2);
+  ctx.fillStyle = principalGrad;
+  ctx.fill();
 
-    ctx.fillStyle = '#D4AF37';
-    ctx.font = 'bold 13px sans-serif';
-    ctx.fillText("• Rector:", leadX + 18, leadY + 70);
-    ctx.fillStyle = '#E2E8F0';
-    ctx.font = '13px sans-serif';
-    ctx.fillText("Rev. Dr. Pavulraj Michael SJ", leadX + 85, leadY + 70);
+  ctx.font = 'bold 30px Georgia, serif';
+  ctx.fillStyle = '#D4AF37';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('SJ', pCenterX, pCenterY);
 
-    ctx.fillStyle = '#D4AF37';
-    ctx.font = 'bold 13px sans-serif';
-    ctx.fillText("• Principal:", leadX + 18, leadY + 91);
-    ctx.fillStyle = '#E2E8F0';
-    ctx.font = '13px sans-serif';
-    ctx.fillText("Rev. Dr. K. Arockiam SJ", leadX + 98, leadY + 91);
+  ctx.beginPath();
+  ctx.arc(pCenterX, pCenterY, pRadius, 0, Math.PI * 2);
+  ctx.strokeStyle = '#D4AF37';
+  ctx.lineWidth = 3;
+  ctx.stroke();
+  ctx.restore();
 
-    ctx.fillStyle = '#D4AF37';
-    ctx.font = 'bold 13px sans-serif';
-    ctx.fillText("• Secretary:", leadX + 18, leadY + 112);
-    ctx.fillStyle = '#E2E8F0';
-    ctx.font = '13px sans-serif';
-    ctx.fillText("Rev. Dr. M. Arockiasamy Xavier SJ", leadX + 104, leadY + 112);
+  // Label: "Principal & Standing Committee"
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'alphabetic';
+  ctx.font = 'bold 15px Georgia, serif';
+  ctx.fillStyle = '#D4AF37';
+  ctx.fillText('Principal & Standing Committee', 80 + pSize + 16, 502);
 
-    ctx.fillStyle = '#94A3B8';
-    ctx.font = 'italic 11px sans-serif';
-    ctx.fillText("& the entire St. Joseph's College Fraternity", leadX + 18, leadY + 133);
+  ctx.font = '13px Arial, sans-serif';
+  ctx.fillStyle = '#CBD5E1';
+  ctx.fillText('St. Joseph\'s College (Autonomous)', 80 + pSize + 16, 524);
+  ctx.fillText('Tiruchirappalli, Tamil Nadu', 80 + pSize + 16, 542);
 
-    // Save PNG buffer to disk
-    const buffer = canvas.toBuffer('image/png');
-    fs.writeFileSync(outputFilePath, buffer);
-    console.log(`[Canvas] Card successfully rendered: ${outputFilePath}`);
-    return outputFilePath;
+  // 7. BOTTOM-RIGHT CORNER (Leadership in exact specified order)
+  const rightX = 720;
+  ctx.textAlign = 'left';
+  ctx.font = 'bold 14px Georgia, serif';
+  ctx.fillStyle = '#D4AF37';
+  ctx.fillText('✨ With Prayers & Best Wishes from:', rightX, 452);
 
-  } catch (canvasErr) {
-    // High-performance ImageMagick CLI Fallback Engine
-    console.log('[Canvas] Node-canvas not available or error, falling back to ImageMagick engine:', canvasErr.message);
+  ctx.font = '13.5px Arial, sans-serif';
+  ctx.fillStyle = '#FFFFFF';
+
+  const rector = process.env.RECTOR_NAME || 'Rev. Dr. Pavulraj Michael SJ';
+  const principal = process.env.PRINCIPAL_NAME || 'Rev. Dr. K. Arockiam SJ';
+  const secretary = process.env.SECRETARY_NAME || 'Rev. Dr. M. Arockiasamy Xavier SJ';
+
+  // 1. Rector
+  ctx.fillText(`• Rector: ${rector}`, rightX, 480);
+  // 2. Secretary
+  ctx.fillText(`• Secretary: ${secretary}`, rightX, 506);
+  // 3. Principal
+  ctx.fillText(`• Principal: ${principal}`, rightX, 532);
+
+  ctx.font = 'italic 12px Georgia, serif';
+  ctx.fillStyle = '#FFDF73';
+  ctx.fillText('& the entire St. Joseph\'s College (Autonomous) Fraternity.', rightX, 560);
+
+  // Save to file
+  const outDir = path.dirname(outputPath);
+  if (!fs.existsSync(outDir)) {
+    fs.mkdirSync(outDir, { recursive: true });
+  }
+
+  const buffer = canvas.toBuffer('image/png');
+  fs.writeFileSync(outputPath, buffer);
+  return outputPath;
+}
+
+/**
+ * Fallback Card Generator using ImageMagick CLI if canvas binary compilation fails.
+ * Guarantees zero downtime across cloud providers.
+ */
+function generateCardWithImageMagick(faculty, outputPath) {
+  return new Promise((resolve, reject) => {
+    const fullDeptName = getDepartmentFullName(faculty.deptCode);
+    const cleanDeptName = fullDeptName.replace(/^Department of\s+/i, '').trim();
+    const designation = faculty.designation || 'Staff Member';
+    const combinedTitle = `${designation} Department of ${cleanDeptName}`;
+    const initials = extractInitials(faculty.name);
+
+    const rector = process.env.RECTOR_NAME || 'Rev. Dr. Pavulraj Michael SJ';
+    const secretary = process.env.SECRETARY_NAME || 'Rev. Dr. M. Arockiasamy Xavier SJ';
+    const principal = process.env.PRINCIPAL_NAME || 'Rev. Dr. K. Arockiam SJ';
 
     const safeName = faculty.name.replace(/["\\]/g, '');
-    const safeDesig = combinedDesigDept.replace(/["\\]/g, '');
+    const safeTitle = combinedTitle.replace(/["\\]/g, '');
 
-    const cmd = `convert -size 1200x675 xc:"#002038" \\
-      -fill "#001B30" -draw "rectangle 0,0 1200,675" \\
-      -fill "#002B49" -draw "roundrectangle 30,30 1170,645 15,15" \\
-      -stroke "#D4AF37" -strokewidth 4 -fill none -draw "roundrectangle 30,30 1170,645 15,15" \\
-      -stroke "#FFDF73" -strokewidth 1.5 -fill none -draw "roundrectangle 40,40 1160,635 12,12" \\
-      -stroke none -fill "#D4AF37" -font "DejaVu-Serif-Bold" -pointsize 24 -gravity north -annotate +0+55 "ST. JOSEPH'S COLLEGE (AUTONOMOUS)" \\
-      -fill "#E2E8F0" -font "DejaVu-Sans" -pointsize 13 -gravity north -annotate +0+90 "Special Heritage Status by UGC • Accredited A++ (Cycle IV) by NAAC • Tiruchirappalli - 620 002" \\
-      -fill "#FFDF73" -font "DejaVu-Serif" -pointsize 12 -gravity north -annotate +0+112 "Motto: Pro Bono Et Vero (For the Good and the True)" \\
-      -fill "#800000" -stroke "#D4AF37" -strokewidth 1 -draw "roundrectangle 80,175 350,207 16,16" \\
-      -stroke none -fill "#FFDF73" -font "DejaVu-Sans-Bold" -pointsize 12.5 -gravity northwest -annotate +100+182 "★  HAPPY BIRTHDAY PROFESSOR  ★" \\
-      -fill "#FFFFFF" -font "DejaVu-Serif-Bold" -pointsize 30 -gravity northwest -annotate +80+225 "${safeName}" \\
-      -fill "#D4AF37" -font "DejaVu-Sans-Bold" -pointsize 18 -gravity northwest -annotate +80+268 "${safeDesig}" \\
-      -fill "#800000" -stroke "#D4AF37" -strokewidth 5 -draw "circle 1065,265 1065,350" \\
-      -stroke none -fill "#D4AF37" -font "DejaVu-Sans-Bold" -pointsize 54 -gravity northwest -annotate +1025+235 "${initials}" \\
-      -fill "#0F172A" -stroke "#D4AF37" -strokewidth 1 -draw "roundrectangle 80,330 1120,435 10,10" \\
-      -stroke none -fill "#FFDF73" -font "DejaVu-Serif-Bold" -pointsize 14 -gravity northwest -annotate +105+345 "✦ INSTITUTIONAL BENEDICTION & PRAYER ✦" \\
-      -fill "#E2E8F0" -font "DejaVu-Serif" -pointsize 16 -gravity northwest -annotate +105+375 "\\"May the Lord bless you and keep you; make His face shine upon you and be gracious to you.\\"" \\
-      -fill "#94A3B8" -font "DejaVu-Sans" -pointsize 13 -gravity northwest -annotate +105+402 "- Numbers 6:24-25 • St. Joseph's College (Autonomous)" \\
-      -fill "#152336" -stroke "#D4AF37" -strokewidth 1 -draw "roundrectangle 700,480 1135,625 10,10" \\
-      -stroke none -fill "#FFDF73" -font "DejaVu-Sans-Bold" -pointsize 13 -gravity northwest -annotate +718+496 "WITH PRAYERS & BEST WISHES FROM:" \\
-      -fill "#FFFFFF" -font "DejaVu-Serif-Bold" -pointsize 13 -gravity northwest -annotate +718+516 "RECTOR, PRINCIPAL & SECRETARY" \\
-      -fill "#D4AF37" -font "DejaVu-Sans-Bold" -pointsize 12.5 -gravity northwest -annotate +718+538 "• Rector: Rev. Dr. Pavulraj Michael SJ" \\
-      -fill "#D4AF37" -font "DejaVu-Sans-Bold" -pointsize 12.5 -gravity northwest -annotate +718+558 "• Principal: Rev. Dr. K. Arockiam SJ" \\
-      -fill "#D4AF37" -font "DejaVu-Sans-Bold" -pointsize 12.5 -gravity northwest -annotate +718+578 "• Secretary: Rev. Dr. M. Arockiasamy Xavier SJ" \\
-      -fill "#94A3B8" -font "DejaVu-Sans" -pointsize 11 -gravity northwest -annotate +718+598 "& the entire St. Joseph's College Fraternity" \\
-      -fill "#D4AF37" -stroke "#D4AF37" -strokewidth 3 -draw "circle 130,540 130,585" \\
-      -stroke none -fill "#D4AF37" -font "DejaVu-Sans-Bold" -pointsize 12 -gravity northwest -annotate +40+598 "Principal & Standing Committee" \\
-      "${outputFilePath}"`;
+    const outDir = path.dirname(outputPath);
+    if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 
-    execSync(cmd, { stdio: 'ignore' });
-    console.log(`[ImageMagick] Card generated successfully: ${outputFilePath}`);
-    return outputFilePath;
+    const args = [
+      '-size', '1200x675',
+      'xc:#001B30',
+      '-fill', '#002B49', '-draw', 'rectangle 20,20 1180,655',
+      '-stroke', '#D4AF37', '-strokewidth', '4', '-fill', 'none', '-draw', 'rectangle 18,18 1182,657',
+      '-stroke', '#D4AF37', '-strokewidth', '1', '-fill', 'none', '-draw', 'rectangle 25,25 1175,650',
+      // Header
+      '-stroke', 'none', '-fill', '#800000', '-draw', 'circle 600,56 600,80',
+      '-stroke', '#D4AF37', '-strokewidth', '2', '-fill', 'none', '-draw', 'circle 600,56 600,80',
+      '-stroke', 'none', '-fill', '#FFDF73', '-font', 'DejaVu-Sans-Bold', '-pointsize', '15',
+      '-gravity', 'North', '-annotate', '+0+47', 'IHS',
+      '-fill', '#D4AF37', '-pointsize', '26', '-annotate', '+0+88', "ST. JOSEPH'S COLLEGE (AUTONOMOUS)",
+      '-fill', '#E2E8F0', '-font', 'DejaVu-Sans', '-pointsize', '13', '-annotate', '+0+118', 'TIRUCHIRAPPALLI - 620 002',
+      '-fill', '#FFDF73', '-font', 'DejaVu-Sans', '-pointsize', '12', '-annotate', '+0+138', '~ Pro Bono Et Vero ~',
+      // Divider
+      '-stroke', '#D4AF37', '-strokewidth', '1', '-draw', 'line 140,156 1060,156',
+      // Pill
+      '-stroke', '#D4AF37', '-strokewidth', '2', '-fill', '#800000', '-draw', 'roundrectangle 80,186 360,218 16,16',
+      '-stroke', 'none', '-fill', '#FFDF73', '-font', 'DejaVu-Sans-Bold', '-pointsize', '12',
+      '-gravity', 'NorthWest', '-annotate', '+95+196', '★ WARMEST BIRTHDAY GREETINGS ★',
+      // Name & Title
+      '-fill', '#FFFFFF', '-font', 'DejaVu-Sans-Bold', '-pointsize', '34', '-annotate', '+80+240', safeName,
+      '-fill', '#FFDF73', '-font', 'DejaVu-Sans-Bold', '-pointsize', '20', '-annotate', '+80+288', safeTitle,
+      // Blessing
+      '-fill', '#CBD5E1', '-font', 'DejaVu-Sans', '-pointsize', '15',
+      '-annotate', '+80+340', 'May the Almighty shower His abundant blessings, vibrant health, enduring peace,',
+      '-annotate', '+80+364', 'and divine joy upon you as you continue your noble mission of forming young minds!',
+      // Avatar on Right
+      '-stroke', 'none', '-fill', '#800000', '-draw', 'circle 1065,265 1065,350',
+      '-stroke', '#D4AF37', '-strokewidth', '4', '-fill', 'none', '-draw', 'circle 1065,265 1065,350',
+      '-stroke', 'none', '-fill', '#D4AF37', '-font', 'DejaVu-Sans-Bold', '-pointsize', '52',
+      '-gravity', 'NorthWest', '-annotate', '+1028+244', initials,
+      // Bottom-Left Principal Label
+      '-stroke', 'none', '-fill', '#001A33', '-draw', 'circle 130,510 130,560',
+      '-stroke', '#D4AF37', '-strokewidth', '3', '-fill', 'none', '-draw', 'circle 130,510 130,560',
+      '-stroke', 'none', '-fill', '#D4AF37', '-font', 'DejaVu-Sans-Bold', '-pointsize', '28',
+      '-gravity', 'NorthWest', '-annotate', '+112+498', 'SJ',
+      '-fill', '#D4AF37', '-font', 'DejaVu-Sans-Bold', '-pointsize', '15',
+      '-annotate', '+195+495', 'Principal & Standing Committee',
+      '-fill', '#CBD5E1', '-font', 'DejaVu-Sans', '-pointsize', '13',
+      '-annotate', '+195+520', "St. Joseph's College (Autonomous)",
+      // Bottom-Right Leadership
+      '-fill', '#D4AF37', '-font', 'DejaVu-Sans-Bold', '-pointsize', '14',
+      '-annotate', '+720+445', '✨ With Prayers & Best Wishes from:',
+      '-fill', '#FFFFFF', '-font', 'DejaVu-Sans', '-pointsize', '13.5',
+      '-annotate', '+720+475', `• Rector: ${rector}`,
+      '-annotate', '+720+502', `• Secretary: ${secretary}`,
+      '-annotate', '+720+529', `• Principal: ${principal}`,
+      '-fill', '#FFDF73', '-font', 'DejaVu-Sans', '-pointsize', '12',
+      '-annotate', '+720+558', "& the entire St. Joseph's College Fraternity.",
+      outputPath
+    ];
+
+    execFile('convert', args, (error) => {
+      if (error) {
+        console.error('[ImageMagick Error]', error);
+        return reject(error);
+      }
+      resolve(outputPath);
+    });
+  });
+}
+
+/**
+ * Universal Card Generator facade:
+ * Tries high-fidelity Cairo canvas first; if unavailable, falls back to ImageMagick smoothly.
+ */
+async function generateCard(faculty, outputPath) {
+  try {
+    return await generateCardWithNodeCanvas(faculty, outputPath);
+  } catch (err) {
+    console.warn('[Canvas Engine] Node-canvas fallback to ImageMagick:', err.message);
+    return await generateCardWithImageMagick(faculty, outputPath);
   }
 }
 
 module.exports = {
   generateCard,
-  getInitials
+  extractInitials
 };

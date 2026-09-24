@@ -28,8 +28,9 @@ async function generateCardWithNodeCanvas(faculty, outputPath) {
   const ctx = canvas.getContext('2d');
 
   const fullDeptName = getDepartmentFullName(faculty.deptCode);
+  const cleanDeptName = fullDeptName.replace(/^Department of\s+/i, '').trim();
   const designation = faculty.designation || 'Staff Member';
-  const combinedTitle = `${designation} of ${fullDeptName}`;
+  const combinedTitle = `${designation} Department of ${cleanDeptName}`;
 
   // 1. Deep Royal Navy Luxury Gradient Background
   const bgGrad = ctx.createLinearGradient(0, 0, width, height);
@@ -323,10 +324,10 @@ async function generateCardWithNodeCanvas(faculty, outputPath) {
 
   // 1. Rector
   ctx.fillText(`• Rector: ${rector}`, rightX, 480);
-  // 2. Principal
-  ctx.fillText(`• Principal: ${principal}`, rightX, 506);
-  // 3. Secretary
-  ctx.fillText(`• Secretary: ${secretary}`, rightX, 532);
+  // 2. Secretary
+  ctx.fillText(`• Secretary: ${secretary}`, rightX, 506);
+  // 3. Principal
+  ctx.fillText(`• Principal: ${principal}`, rightX, 532);
 
   ctx.font = 'italic 12px Georgia, serif';
   ctx.fillStyle = '#FFDF73';
@@ -350,13 +351,14 @@ async function generateCardWithNodeCanvas(faculty, outputPath) {
 function generateCardWithImageMagick(faculty, outputPath) {
   return new Promise((resolve, reject) => {
     const fullDeptName = getDepartmentFullName(faculty.deptCode);
+    const cleanDeptName = fullDeptName.replace(/^Department of\s+/i, '').trim();
     const designation = faculty.designation || 'Staff Member';
-    const combinedTitle = `${designation} of ${fullDeptName}`;
+    const combinedTitle = `${designation} Department of ${cleanDeptName}`;
     const initials = extractInitials(faculty.name);
 
     const rector = process.env.RECTOR_NAME || 'Rev. Dr. Pavulraj Michael SJ';
-    const principal = process.env.PRINCIPAL_NAME || 'Rev. Dr. K. Arockiam SJ';
     const secretary = process.env.SECRETARY_NAME || 'Rev. Dr. M. Arockiasamy Xavier SJ';
+    const principal = process.env.PRINCIPAL_NAME || 'Rev. Dr. K. Arockiam SJ';
 
     const safeName = faculty.name.replace(/["\\]/g, '');
     const safeTitle = combinedTitle.replace(/["\\]/g, '');
@@ -410,8 +412,8 @@ function generateCardWithImageMagick(faculty, outputPath) {
       '-annotate', '+720+445', '✨ With Prayers & Best Wishes from:',
       '-fill', '#FFFFFF', '-font', 'DejaVu-Sans', '-pointsize', '13.5',
       '-annotate', '+720+475', `• Rector: ${rector}`,
-      '-annotate', '+720+502', `• Principal: ${principal}`,
-      '-annotate', '+720+529', `• Secretary: ${secretary}`,
+      '-annotate', '+720+502', `• Secretary: ${secretary}`,
+      '-annotate', '+720+529', `• Principal: ${principal}`,
       '-fill', '#FFDF73', '-font', 'DejaVu-Sans', '-pointsize', '12',
       '-annotate', '+720+558', "& the entire St. Joseph's College Fraternity.",
       outputPath

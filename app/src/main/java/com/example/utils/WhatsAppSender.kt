@@ -13,21 +13,29 @@ object WhatsAppSender {
     const val DEFAULT_TEST_NUMBER = "918754254943"
 
     /**
-     * Formats WhatsApp message with strict leadership order: RECTOR -> PRINCIPAL -> SECRETARY.
+     * Formats WhatsApp message according to the exact institutional specification.
      */
     fun formatWhatsAppMessage(staff: FacultyMember, fullDeptName: String): String {
-        return """
-💐 WARMEST BIRTHDAY GREETINGS! 💐
+        val cleanDept = fullDeptName.replace("^Department of\\s+".toRegex(RegexOption.IGNORE_CASE), "").trim()
+        val designationLine = if (staff.designation.isNotBlank()) {
+            "${staff.designation} Department of $cleanDept"
+        } else {
+            "Department of $cleanDept"
+        }
 
+        return """
+🎓 ST. JOSEPH'S COLLEGE (AUTONOMOUS)
+🎂 SJC BIRTHDAY WISHES
+💐 WARMEST GREETINGS! 💐
 Dear ${staff.name},
-${staff.designation} of ${fullDeptName}
+$designationLine
 
 May the Almighty shower His abundant blessings, vibrant health, enduring peace, and divine joy upon you as you continue your noble mission of forming young minds!
 
 ✨ With Prayers & Best Wishes from:
-• Rector: Rev. Dr. Pavulraj Michael SJ
-• Principal: Rev. Dr. K. Arockiam SJ
+   Rector: Rev. Dr. Pavulraj Michael SJ
 • Secretary: Rev. Dr. M. Arockiasamy Xavier SJ
+• Principal: Rev. Dr. K. Arockiam SJ
 and the entire St. Joseph's College (Autonomous) Fraternity.
         """.trimIndent()
     }

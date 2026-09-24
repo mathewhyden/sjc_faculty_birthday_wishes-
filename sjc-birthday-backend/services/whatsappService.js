@@ -14,23 +14,25 @@ try {
  */
 function buildGreetingMessage(staff) {
   const fullDeptName = getDepartmentFullName(staff.deptCode);
+  const cleanDeptName = fullDeptName.replace(/^Department of\s+/i, '').trim();
   const designation = staff.designation || 'Staff Member';
 
   const rector = process.env.RECTOR_NAME || 'Rev. Dr. Pavulraj Michael SJ';
-  const principal = process.env.PRINCIPAL_NAME || 'Rev. Dr. K. Arockiam SJ';
   const secretary = process.env.SECRETARY_NAME || 'Rev. Dr. M. Arockiasamy Xavier SJ';
+  const principal = process.env.PRINCIPAL_NAME || 'Rev. Dr. K. Arockiam SJ';
 
-  return `💐 WARMEST BIRTHDAY GREETINGS! 💐
-
+  return `🎓 ST. JOSEPH'S COLLEGE (AUTONOMOUS)
+🎂 SJC BIRTHDAY WISHES
+💐 WARMEST GREETINGS! 💐
 Dear ${staff.name},
-${designation} of ${fullDeptName}
+${designation} Department of ${cleanDeptName}
 
 May the Almighty shower His abundant blessings, vibrant health, enduring peace, and divine joy upon you as you continue your noble mission of forming young minds!
 
 ✨ With Prayers & Best Wishes from:
-• Rector: ${rector}
-• Principal: ${principal}
+   Rector: ${rector}
 • Secretary: ${secretary}
+• Principal: ${principal}
 and the entire St. Joseph's College (Autonomous) Fraternity.`;
 }
 
