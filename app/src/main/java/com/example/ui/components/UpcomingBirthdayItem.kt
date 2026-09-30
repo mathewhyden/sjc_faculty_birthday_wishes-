@@ -132,8 +132,16 @@ fun UpcomingBirthdayItem(
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
+                    val cleanDept = com.example.utils.CanvasCardDrawer.getDepartmentCleanName(
+                        if (resolvedDept.isNotBlank() && !resolvedDept.equals("Department of ${item.faculty.departmentCode}", ignoreCase = true)) {
+                            resolvedDept
+                        } else {
+                            item.faculty.departmentCode
+                        }
+                    )
+                    val fullDeptDisplay = if (cleanDept.isNotBlank() && cleanDept.length > 2) cleanDept else resolvedDept
                     Text(
-                        text = "${item.faculty.departmentCode} • ${item.faculty.designation.ifBlank { "Faculty" }}",
+                        text = "$fullDeptDisplay • ${item.faculty.designation.ifBlank { "Faculty" }}",
                         style = MaterialTheme.typography.bodySmall,
                         color = Color(0xFF64748B),
                         maxLines = 1,

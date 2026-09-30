@@ -523,12 +523,20 @@ private fun FacultyListItem(
 
                         Spacer(modifier = Modifier.width(6.dp))
 
+                        val cleanDeptBadge = com.example.utils.CanvasCardDrawer.getDepartmentCleanName(
+                            if (resolvedDept.isNotBlank() && !resolvedDept.equals("Department of ${faculty.departmentCode}", ignoreCase = true)) {
+                                resolvedDept
+                            } else {
+                                faculty.departmentCode
+                            }
+                        )
+                        val displayDeptBadge = if (cleanDeptBadge.isNotBlank() && cleanDeptBadge.length > 2) cleanDeptBadge else resolvedDept
                         Surface(
                             color = Color(0xFFEFF6FF),
                             shape = RoundedCornerShape(6.dp)
                         ) {
                             Text(
-                                text = "Dept: ${faculty.departmentCode}",
+                                text = displayDeptBadge,
                                 modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
                                 fontSize = 10.sp,
                                 fontWeight = FontWeight.Bold,

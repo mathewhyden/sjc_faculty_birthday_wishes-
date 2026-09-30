@@ -56,7 +56,18 @@ function formatWhatsAppMessage(staff, fullDeptName) {
     }
   }
 
-  const deptString = `Department of ${cleanDeptName}`;
+  const deptString = (cleanDeptName.toLowerCase().startsWith('department of') ||
+    cleanDeptName.toLowerCase().startsWith('office of') ||
+    cleanDeptName.toLowerCase().includes('office') ||
+    cleanDeptName.toLowerCase().includes('centre') ||
+    cleanDeptName.toLowerCase().includes('center') ||
+    cleanDeptName.toLowerCase().includes('library') ||
+    cleanDeptName.toLowerCase().includes('support') ||
+    cleanDeptName.toLowerCase().includes('staff') ||
+    cleanDeptName.includes('&'))
+    ? cleanDeptName
+    : `Department of ${cleanDeptName}`;
+
   const rawDesig = staff.designation || '';
   const cleanDesig = cleanDesignation(rawDesig, cleanDeptName);
   const designationLine = cleanDesig
@@ -68,8 +79,10 @@ function formatWhatsAppMessage(staff, fullDeptName) {
 💐 WARM  BIRTHDAY WISHES 💐
 Dear ${staff.name},
 ${designationLine}
+
 May the Almighty shower His abundant blessings, vibrant health, enduring peace, and divine joy upon you as you continue your noble mission of forming young minds!
-✨ With Prayers & Best Wishes from:
+
+✨ With Prayers & Best Wishes from:✨
 •  Rector: Rev. Dr. Pavulraj Michael SJ
 •  Secretary: Rev. Dr. M. Arockiasamy Xavier SJ
 •  Principal: Rev. Dr. K. Arockiam SJ

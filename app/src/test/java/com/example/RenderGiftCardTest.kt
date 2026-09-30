@@ -64,8 +64,14 @@ class RenderGiftCardTest {
 
         val whatsappMsg = com.example.utils.WhatsAppSender.formatWhatsAppMessage(stellaFaculty, "CO")
         println("STELLA_WHATSAPP_MSG:\n$whatsappMsg")
-        assert(whatsappMsg.contains("Assistant Professor, Department of Commerce")) {
-            "Expected 'Assistant Professor, Department of Commerce' but got: $whatsappMsg"
+        assert(whatsappMsg.contains("Assistant Professor, Department of Commerce\n\nMay the Almighty shower")) {
+            "Expected blank line between designation and blessing!"
+        }
+        assert(whatsappMsg.contains("forming young minds!\n\n✨ With Prayers & Best Wishes from:✨")) {
+            "Expected blank line before prayers and sparkling stars on both sides!"
+        }
+        assert(whatsappMsg.contains("    & Standing Committee.")) {
+            "Expected 4-space indentation for & Standing Committee.!"
         }
         assert(!whatsappMsg.contains("Department of CO")) {
             "Should not contain 'Department of CO'!"

@@ -362,7 +362,20 @@ object CanvasCardDrawer {
                 faculty.deptCode
             }
         )
-        val deptString = "Department of $cleanDept"
+        val deptString = if (cleanDept.startsWith("Department of", ignoreCase = true) ||
+            cleanDept.startsWith("Office of", ignoreCase = true) ||
+            cleanDept.contains("Office", ignoreCase = true) ||
+            cleanDept.contains("Cell", ignoreCase = true) ||
+            cleanDept.contains("Centre", ignoreCase = true) ||
+            cleanDept.contains("Center", ignoreCase = true) ||
+            cleanDept.contains("Library", ignoreCase = true) ||
+            cleanDept.contains("&", ignoreCase = true) ||
+            cleanDept.contains("Support", ignoreCase = true) ||
+            cleanDept.contains("Staff", ignoreCase = true)) {
+            cleanDept
+        } else {
+            "Department of $cleanDept"
+        }
         val cleanDesig = cleanDesignation(faculty.designation, cleanDept)
         val singleLineTitle = if (cleanDesig.isNotBlank()) {
             "$cleanDesig, $deptString"

@@ -2,6 +2,7 @@ package com.example.utils
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.widget.Toast
 import com.example.data.entity.FacultyEntity
@@ -24,7 +25,20 @@ object WhatsAppSender {
                 staff.departmentCode
             }
         )
-        val deptString = "Department of $cleanDept"
+        val deptString = if (cleanDept.startsWith("Department of", ignoreCase = true) ||
+            cleanDept.startsWith("Office of", ignoreCase = true) ||
+            cleanDept.contains("Office", ignoreCase = true) ||
+            cleanDept.contains("Cell", ignoreCase = true) ||
+            cleanDept.contains("Centre", ignoreCase = true) ||
+            cleanDept.contains("Center", ignoreCase = true) ||
+            cleanDept.contains("Library", ignoreCase = true) ||
+            cleanDept.contains("&", ignoreCase = true) ||
+            cleanDept.contains("Support", ignoreCase = true) ||
+            cleanDept.contains("Staff", ignoreCase = true)) {
+            cleanDept
+        } else {
+            "Department of $cleanDept"
+        }
         val cleanDesig = CanvasCardDrawer.cleanDesignation(staff.designation, cleanDept)
         val designationLine = if (cleanDesig.isNotBlank()) {
             "$cleanDesig, $deptString"
@@ -38,8 +52,10 @@ object WhatsAppSender {
 💐 WARM  BIRTHDAY WISHES 💐
 Dear ${staff.name},
 $designationLine
+
 May the Almighty shower His abundant blessings, vibrant health, enduring peace, and divine joy upon you as you continue your noble mission of forming young minds!
-✨ With Prayers & Best Wishes from:
+
+✨ With Prayers & Best Wishes from:✨
 •  Rector: Rev. Dr. Pavulraj Michael SJ
 •  Secretary: Rev. Dr. M. Arockiasamy Xavier SJ
 •  Principal: Rev. Dr. K. Arockiam SJ
@@ -84,42 +100,65 @@ May the Almighty shower His abundant blessings, vibrant health, enduring peace, 
             sanitizePhoneNumber(faculty.mobile)
         }
 
+        if (!isTestMode && targetPhone.isBlank()) {
+            Toast.makeText(
+                context,
+                "Mobile number for ${faculty.name} is missing. Please edit profile to add valid phone number.",
+                Toast.LENGTH_LONG
+            ).show()
+            return
+        }
+
         val messageText = buildGreetingMessage(faculty, resolvedDept)
+        val targetDesc = if (isTestMode) "Test Number: +$targetPhone" else "${faculty.name} (+${targetPhone})"
+        Toast.makeText(context, "Opening WhatsApp for $targetDesc", Toast.LENGTH_SHORT).show()
 
         try {
             val shareIntent = Intent(Intent.ACTION_SEND).apply {
                 type = "image/png"
                 putExtra(Intent.EXTRA_STREAM, imageUri)
                 putExtra(Intent.EXTRA_TEXT, messageText)
+                if (targetPhone.isNotBlank()) {
+                    putExtra("jid", "$targetPhone@s.whatsapp.net")
+                    putExtra(Intent.EXTRA_PHONE_NUMBER, targetPhone)
+                    putExtra("address", targetPhone)
+                }
                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                // Set WhatsApp package if available
-                setPackage("com.whatsapp")
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
 
-            // Verify if WhatsApp is installed
             val packageManager = context.packageManager
-            if (shareIntent.resolveActivity(packageManager) != null) {
-                // If a phone number is specified, add JID extra for direct chat in WhatsApp
-                if (targetPhone.isNotBlank()) {
-                    shareIntent.putExtra("jid", "$targetPhone@s.whatsapp.net")
-                }
+            val isWhatsAppInstalled = isPackageInstalled("com.whatsapp", packageManager)
+            val isWhatsAppBusinessInstalled = isPackageInstalled("com.whatsapp.w4b", packageManager)
+
+            if (isWhatsAppInstalled) {
+                shareIntent.setPackage("com.whatsapp")
+                context.startActivity(shareIntent)
+            } else if (isWhatsAppBusinessInstalled) {
+                shareIntent.setPackage("com.whatsapp.w4b")
                 context.startActivity(shareIntent)
             } else {
-                // Fallback to general chooser
-                val fallbackIntent = Intent(Intent.ACTION_SEND).apply {
-                    type = "image/png"
-                    putExtra(Intent.EXTRA_STREAM, imageUri)
-                    putExtra(Intent.EXTRA_TEXT, messageText)
-                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                // Direct WhatsApp Web / API fallback or general chooser
+                try {
+                    val encodedMsg = URLEncoder.encode(messageText, "UTF-8")
+                    val webIntent = Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://api.whatsapp.com/send?phone=$targetPhone&text=$encodedMsg")
+                    ).apply {
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    }
+                    context.startActivity(webIntent)
+                } catch (webErr: Exception) {
+                    val fallbackIntent = Intent(Intent.ACTION_SEND).apply {
+                        type = "image/png"
+                        putExtra(Intent.EXTRA_STREAM, imageUri)
+                        putExtra(Intent.EXTRA_TEXT, messageText)
+                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    }
+                    val chooser = Intent.createChooser(fallbackIntent, "Send Greeting to $targetDesc via")
+                    chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    context.startActivity(chooser)
                 }
-                val chooser = Intent.createChooser(fallbackIntent, "Send SJC Birthday Greeting via")
-                chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                context.startActivity(chooser)
-                Toast.makeText(
-                    context,
-                    "WhatsApp not found. Opening general sharing.",
-                    Toast.LENGTH_SHORT
-                ).show()
             }
         } catch (e: Exception) {
             // Direct WhatsApp Web / API fallback
@@ -139,6 +178,15 @@ May the Almighty shower His abundant blessings, vibrant health, enduring peace, 
                     Toast.LENGTH_LONG
                 ).show()
             }
+        }
+    }
+
+    private fun isPackageInstalled(packageName: String, packageManager: PackageManager): Boolean {
+        return try {
+            packageManager.getPackageInfo(packageName, 0)
+            true
+        } catch (e: Exception) {
+            false
         }
     }
 }

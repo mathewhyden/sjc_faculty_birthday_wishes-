@@ -2,67 +2,149 @@
 const DEPARTMENT_MAPPINGS = {
   'AC': 'Accounts & Finance',
   'AI': 'Department of Artificial Intelligence & Data Science',
+  'BC': 'Department of Bio-Chemistry',
   'BI': 'Department of Bio-Informatics',
   'BO': 'Department of Botany',
+  'BOT': 'Department of Botany',
+  'BOTANY': 'Department of Botany',
   'BT': 'Department of Bio-Technology',
+  'BIOTECH': 'Department of Bio-Technology',
   'BU': 'Department of Business Administration (BBA)',
+  'BA': 'Department of Business Administration (BBA)',
+  'BBA': 'Department of Business Administration (BBA)',
   'CB': 'Department of Commerce (B.Com CA)',
   'CC': 'Department of Commerce (Computer Applications)',
   'CE': 'Office of Controller of Examinations',
   'CF': 'Department of Commerce (Corporate Secretaryship & Finance)',
   'CH': 'Department of Chemistry',
+  'CHEM': 'Department of Chemistry',
+  'CHEMISTRY': 'Department of Chemistry',
   'CO': 'Department of Commerce',
-  'COE': 'Controller of Examinations Office',
+  'COM': 'Department of Commerce',
+  'COMM': 'Department of Commerce',
+  'COMMERCE': 'Department of Commerce',
+  'COE': 'Office of Controller of Examinations',
   'CP': 'Counselling Psychology & Campus Ministry',
   'CR': 'Department of Commerce (Shift II)',
   'CS': 'Department of Computer Science',
+  'COMPSCI': 'Department of Computer Science',
+  'COMPUTER SCIENCE': 'Department of Computer Science',
+  'CY': 'Department of Cyber Security & IT',
+  'DO': 'Dean Office & Non-Teaching Staff',
   'DS': 'Department of Data Science',
+  'DATA SCIENCE': 'Department of Data Science',
   'EC': 'Department of Economics',
+  'ECO': 'Department of Economics',
+  'ECONOMICS': 'Department of Economics',
+  'EH': 'Extension & Human Resource',
   'EL': 'Department of Electronics',
+  'ELEC': 'Department of Electronics',
+  'ELECTRONICS': 'Department of Electronics',
   'EN': 'Department of English',
+  'ENG': 'Department of English',
+  'ENGLISH': 'Department of English',
   'ER': 'Office of Examination Records',
   'ES': 'Department of Environmental Sciences',
   'FA': 'Finance & Administrative Office',
+  'FC': 'Foundation Courses & Ethics',
   'FD': 'Department of Food Science & Nutrition',
   'FR': 'Department of French',
+  'FRENCH': 'Department of French',
   'GY': 'Physical Education & Sports Gymnasium',
-  'HI': 'Department of History',
-  'HR': 'Department of Human Resource Management',
-  'HS': 'Higher Secondary Section Support',
+  'HI': 'Department of Hindi',
+  'HIN': 'Department of Hindi',
+  'HINDI': 'Department of Hindi',
+  'HR': 'Department of Human Resource Management (HRM)',
+  'HRM': 'Department of Human Resource Management (HRM)',
+  'HS': 'Department of History',
+  'HIS': 'Department of History',
+  'HISTORY': 'Department of History',
   'IC': 'Information & Communication Centre',
+  'IQ': 'Internal Quality Assurance Cell (IQAC)',
+  'IQAC': 'Internal Quality Assurance Cell (IQAC)',
   'IT': 'Department of Information Technology',
+  'JC': 'Jesuit Residence & Management Office',
   'LA': 'Language Laboratories',
+  'LB': 'Arrupe Central Library & Information Center',
   'LI': 'Arrupe Central Library & Information Center',
+  'LIB': 'Arrupe Central Library & Information Center',
+  'LIBRARY': 'Arrupe Central Library & Information Center',
+  'LL': 'Language Laboratory',
   'MA': 'Department of Mathematics',
+  'MAT': 'Department of Mathematics',
+  'MATH': 'Department of Mathematics',
+  'MATHS': 'Department of Mathematics',
+  'MATHEMATICS': 'Department of Mathematics',
   'MC': 'Media & Communication Centre',
   'ME': 'Maintenance & Estate Office',
-  'ML': 'Modern Language Section',
+  'ML': 'Media Lab & Modern Language Section',
   'MS': 'Microbiology Section',
   'ND': 'Non-Departmental & Foundation Courses',
   'OFFICE': 'College General Administrative Office',
+  'PE': 'Department of Physical Education',
   'PH': 'Department of Physics',
-  'PO': 'Post Graduate & Research Centre',
+  'PHY': 'Department of Physics',
+  'PHYSICS': 'Department of Physics',
+  'PO': 'Department of Political Science',
+  'POL': 'Department of Political Science',
   'PR': 'Office of the Principal',
   'PS': 'Physical Science Laboratories',
   'RC': 'Rectorate & Jesuit Residence',
   'RE': 'Religious Studies & Ethics',
+  'S': 'College Administration Support',
+  'S1': 'College Administration Support (Shift I)',
+  'S2': 'College Administration Support (Shift II)',
+  'SA': 'Department of Sanskrit',
+  'SAN': 'Department of Sanskrit',
+  'SANSKRIT': 'Department of Sanskrit',
   'SC': 'Secretary & Campus Management Office',
-  'SH': 'Shepherd Extension Programme',
+  'SH': 'SHEPHERD Extension Department',
   'SO': 'Department of Social Work',
+  'SP': 'Sports & Physical Education',
+  'SS': 'Department of Software Systems & Soft Skills',
   'ST': 'Department of Statistics',
+  'STAT': 'Department of Statistics',
+  'STATISTICS': 'Department of Statistics',
+  'SW': 'Department of Social Work',
   'TA': 'Department of Tamil',
+  'TAM': 'Department of Tamil',
+  'TAMIL': 'Department of Tamil',
   'TE': 'Teaching Excellence & IQAC',
-  'VI': 'Visual Communication',
-  'ZO': 'Department of Zoology'
+  'VI': 'Department of Visual Communication (Viscom)',
+  'VIS': 'Department of Visual Communication (Viscom)',
+  'VISCOM': 'Department of Visual Communication (Viscom)',
+  'VP': 'Office of the Vice Principal',
+  'VT': 'Department of Visual Communication (Viscom)',
+  'VC': 'Department of Visual Communication (Viscom)',
+  'XE': 'General Maintenance Staff',
+  'XX': 'General Support Staff',
+  'ZO': 'Department of Zoology',
+  'ZOO': 'Department of Zoology',
+  'ZOOLOGY': 'Department of Zoology'
 };
 
 function getDepartmentFullName(code) {
   if (!code) return 'St. Joseph\'s College';
-  const cleanCode = code.trim().toUpperCase();
-  return DEPARTMENT_MAPPINGS[cleanCode] || `Department of ${cleanCode}`;
+  const cleanCode = code.trim().toUpperCase()
+    .replace(/^DEPARTMENT OF\s+/i, '')
+    .trim();
+  const mapped = DEPARTMENT_MAPPINGS[cleanCode] || DEPARTMENT_MAPPINGS[code.trim().toUpperCase()];
+  if (mapped) return mapped;
+  if (cleanCode.length > 4 && !cleanCode.startsWith('DEPT')) {
+    return cleanCode.toLowerCase().startsWith('department of') || cleanCode.includes(' ')
+      ? code
+      : `Department of ${code}`;
+  }
+  return `Department of ${cleanCode}`;
+}
+
+function getDepartmentCleanName(code) {
+  const full = getDepartmentFullName(code);
+  return full.replace(/^Department of\s+/i, '').trim();
 }
 
 module.exports = {
   DEPARTMENT_MAPPINGS,
-  getDepartmentFullName
+  getDepartmentFullName,
+  getDepartmentCleanName
 };

@@ -709,7 +709,7 @@ fun DashboardScreen(
                     )
                     Spacer(modifier = Modifier.height(12.dp))
                     Text(
-                        text = "You can dispatch this card now via WhatsApp (${if (isTestMode) "Routed to Test Mobile: $testPhoneNumber" else "Direct to Faculty"}).",
+                        text = "You can dispatch this card now via WhatsApp (${if (isTestMode) "Routed to Test Mobile: $testPhoneNumber" else "Direct to ${faculty.name}: +${faculty.mobile}"}).",
                         fontSize = 11.sp,
                         color = Color(0xFF334155)
                     )
@@ -723,7 +723,7 @@ fun DashboardScreen(
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = RoyalNavyBlue)
                 ) {
-                    Text("Generate & Send Card")
+                    Text(if (isTestMode) "Generate & Send Card (Test)" else "Send Direct to +${faculty.mobile}")
                 }
             },
             dismissButton = {

@@ -289,8 +289,8 @@ fun TodayBirthdayCard(
                             )
                             Spacer(modifier = Modifier.width(6.dp))
                             Text(
-                                text = "Send WhatsApp",
-                                fontSize = 12.sp,
+                                text = if (isTestMode) "Send (Test)" else "Send (+${faculty.mobile})",
+                                fontSize = 11.5.sp,
                                 fontWeight = FontWeight.Bold
                             )
                         }
@@ -332,8 +332,8 @@ fun TodayBirthdayCard(
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "Generate Gift Card & Send WhatsApp",
-                            fontSize = 14.sp,
+                            text = if (isTestMode) "Generate Gift Card & Send (Test Mode)" else "Send Direct to Professor (+${faculty.mobile})",
+                            fontSize = 13.5.sp,
                             fontWeight = FontWeight.Bold
                         )
                     }
