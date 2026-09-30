@@ -34,8 +34,8 @@ May the Almighty shower His abundant blessings, vibrant health, enduring peace, 
 ✨ With Prayers & Best Wishes from:
 •  Rector: Rev. Dr. Pavulraj Michael SJ
 •  Secretary: Rev. Dr. M. Arockiasamy Xavier SJ
-•  Principal: Rev. Dr. K. Arockiam SJ &
-Standing Committee.
+•  Principal: Rev. Dr. K. Arockiam SJ
+& Standing Committee
         """.trimIndent()
     }
 
