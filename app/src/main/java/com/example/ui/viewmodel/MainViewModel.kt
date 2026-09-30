@@ -321,7 +321,16 @@ class MainViewModel(
     }
 
     fun resolveDeptName(code: String): String {
-        return deptMap.value[code.uppercase()] ?: "Department of $code"
+        val clean = code.trim().uppercase()
+        val fromStatic = AppDatabase.DEPARTMENT_MAPPINGS[clean]
+        if (!fromStatic.isNullOrBlank()) {
+            return fromStatic
+        }
+        val fromDb = deptMap.value[clean]
+        if (!fromDb.isNullOrBlank() && !fromDb.equals(code, ignoreCase = true) && !fromDb.equals("Department of $code", ignoreCase = true)) {
+            return fromDb
+        }
+        return CanvasCardDrawer.getDepartmentFullName(clean)
     }
 
     fun saveFaculty(faculty: FacultyEntity, isEdit: Boolean) {

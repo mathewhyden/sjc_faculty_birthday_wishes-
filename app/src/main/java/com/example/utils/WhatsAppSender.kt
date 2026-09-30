@@ -16,7 +16,14 @@ object WhatsAppSender {
      * Formats WhatsApp message according to the exact institutional specification.
      */
     fun formatWhatsAppMessage(staff: FacultyMember, fullDeptName: String): String {
-        val cleanDept = fullDeptName.replace("^Department of\\s+".toRegex(RegexOption.IGNORE_CASE), "").trim()
+        // Guarantee FULL department name resolution (e.g., "CO" -> "Commerce", NEVER "CO")
+        val cleanDept = CanvasCardDrawer.getDepartmentCleanName(
+            if (fullDeptName.isNotBlank() && !fullDeptName.equals("Department of ${staff.departmentCode}", ignoreCase = true)) {
+                fullDeptName
+            } else {
+                staff.departmentCode
+            }
+        )
         val deptString = "Department of $cleanDept"
         val cleanDesig = CanvasCardDrawer.cleanDesignation(staff.designation, cleanDept)
         val designationLine = if (cleanDesig.isNotBlank()) {

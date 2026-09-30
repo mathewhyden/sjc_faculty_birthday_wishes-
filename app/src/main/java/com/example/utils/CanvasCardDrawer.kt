@@ -28,16 +28,32 @@ object CanvasCardDrawer {
      */
     fun getDepartmentFullName(deptCode: String): String {
         val clean = deptCode.trim().uppercase()
-        return AppDatabase.DEPARTMENT_MAPPINGS[clean] ?: "Department of $clean"
+            .replace("^DEPARTMENT OF\\s+".toRegex(RegexOption.IGNORE_CASE), "")
+            .trim()
+        val mapped = AppDatabase.DEPARTMENT_MAPPINGS[clean] 
+            ?: AppDatabase.DEPARTMENT_MAPPINGS[deptCode.trim().uppercase()]
+        return mapped ?: "Department of $clean"
     }
 
     /**
-     * Extracts clean department subject name (stripping leading "Department of " if present).
+     * Extracts clean department subject name (e.g. "CO" -> "Commerce", "Department of Commerce" -> "Commerce").
+     * ALWAYS returns the full department name, NEVER the short abbreviation.
      */
     fun getDepartmentCleanName(deptCode: String): String {
         val clean = deptCode.trim().uppercase()
-        val full = AppDatabase.DEPARTMENT_MAPPINGS[clean] ?: clean
-        return full.replace("^Department of\\s+".toRegex(RegexOption.IGNORE_CASE), "").trim()
+            .replace("^DEPARTMENT OF\\s+".toRegex(RegexOption.IGNORE_CASE), "")
+            .trim()
+        val mapped = AppDatabase.DEPARTMENT_MAPPINGS[clean]
+            ?: AppDatabase.DEPARTMENT_MAPPINGS[deptCode.trim().uppercase()]
+        val full = mapped ?: clean
+        val stripped = full.replace("^Department of\\s+".toRegex(RegexOption.IGNORE_CASE), "").trim()
+        // If stripped is still a short 2-3 char abbreviation, check mappings again
+        val secondMapped = AppDatabase.DEPARTMENT_MAPPINGS[stripped.uppercase()]
+        return if (!secondMapped.isNullOrBlank()) {
+            secondMapped.replace("^Department of\\s+".toRegex(RegexOption.IGNORE_CASE), "").trim()
+        } else {
+            stripped
+        }
     }
 
     /**
@@ -338,11 +354,14 @@ object CanvasCardDrawer {
         canvas.drawText(faculty.name, leftMarginX, 252f, namePaint)
 
         // Title (SINGLE LINE): "${faculty.designation}, Department of ${fullDeptName}"
-        val cleanDept = if (resolvedDeptName.isNotBlank()) {
-            resolvedDeptName.replace("^Department of\\s+".toRegex(RegexOption.IGNORE_CASE), "").trim()
-        } else {
-            getDepartmentCleanName(faculty.deptCode)
-        }
+        // Guarantee FULL department name (e.g. "Commerce", NEVER "CO")
+        val cleanDept = getDepartmentCleanName(
+            if (resolvedDeptName.isNotBlank() && !resolvedDeptName.equals("Department of ${faculty.deptCode}", ignoreCase = true)) {
+                resolvedDeptName
+            } else {
+                faculty.deptCode
+            }
+        )
         val deptString = "Department of $cleanDept"
         val cleanDesig = cleanDesignation(faculty.designation, cleanDept)
         val singleLineTitle = if (cleanDesig.isNotBlank()) {

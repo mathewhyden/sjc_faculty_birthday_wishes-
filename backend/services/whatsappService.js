@@ -42,8 +42,20 @@ function cleanDesignation(rawDesig, cleanDept) {
  * Formats WhatsApp message according to the exact institutional specification.
  */
 function formatWhatsAppMessage(staff, fullDeptName) {
-  const resolvedDept = fullDeptName || getDepartmentFullName(staff.deptCode);
-  const cleanDeptName = resolvedDept.replace(/^Department of\s+/i, '').trim();
+  let resolvedDept = fullDeptName || getDepartmentFullName(staff.deptCode);
+  let cleanDeptName = resolvedDept.replace(/^Department of\s+/i, '').trim();
+
+  // If cleanDeptName is still a short code (e.g. 'CO'), resolve it to full name (e.g. 'Commerce')
+  const mapped = getDepartmentFullName(cleanDeptName) || getDepartmentFullName(staff.deptCode);
+  if (mapped && !mapped.toLowerCase().includes(`department of ${cleanDeptName.toLowerCase()}`)) {
+    cleanDeptName = mapped.replace(/^Department of\s+/i, '').trim();
+  } else if (cleanDeptName.length <= 4) {
+    const fromCode = getDepartmentFullName(staff.deptCode);
+    if (fromCode) {
+      cleanDeptName = fromCode.replace(/^Department of\s+/i, '').trim();
+    }
+  }
+
   const deptString = `Department of ${cleanDeptName}`;
   const rawDesig = staff.designation || '';
   const cleanDesig = cleanDesignation(rawDesig, cleanDeptName);

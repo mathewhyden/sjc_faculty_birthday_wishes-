@@ -94,7 +94,19 @@ abstract class AppDatabase : RoomDatabase() {
             "VP" to "Vice Principal Office",
             "VT" to "Department of Visual Communication (Viscom)",
             "XE" to "General Maintenance Staff",
-            "XX" to "General Support Staff"
+            "XX" to "General Support Staff",
+            "COMMERCE" to "Department of Commerce",
+            "COMM" to "Department of Commerce",
+            "ENGLISH" to "Department of English",
+            "ENG" to "Department of English",
+            "PHYSICS" to "Department of Physics",
+            "PHY" to "Department of Physics",
+            "MATHS" to "Department of Mathematics",
+            "MATH" to "Department of Mathematics",
+            "COMPUTER SCIENCE" to "Department of Computer Science",
+            "COMPSCI" to "Department of Computer Science",
+            "CHEMISTRY" to "Department of Chemistry",
+            "CHEM" to "Department of Chemistry"
         )
 
         fun getInitialStaffDataset(): List<FacultyEntity> {

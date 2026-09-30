@@ -41,6 +41,35 @@ class RenderGiftCardTest {
         FileOutputStream(outFile).use { fos ->
             bitmap.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, fos)
         }
+
+        val stellaFaculty = FacultyEntity(
+            id = 505,
+            staffId = "23FCO09",
+            name = "Mrs. B. MARY STELLA",
+            departmentCode = "CO",
+            dob = "24-09-1988",
+            mobile = "9894455667",
+            category = "TEACHING",
+            designation = "Assistant Professor of Commerce"
+        )
+        val stellaBitmap = CanvasCardDrawer.generateGreetingCardBitmap(
+            context = context,
+            faculty = stellaFaculty,
+            resolvedDeptName = "CO"
+        )
+        val stellaFile = File(outDir, "stella_card.png")
+        FileOutputStream(stellaFile).use { fos ->
+            stellaBitmap.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, fos)
+        }
+
+        val whatsappMsg = com.example.utils.WhatsAppSender.formatWhatsAppMessage(stellaFaculty, "CO")
+        println("STELLA_WHATSAPP_MSG:\n$whatsappMsg")
+        assert(whatsappMsg.contains("Assistant Professor, Department of Commerce")) {
+            "Expected 'Assistant Professor, Department of Commerce' but got: $whatsappMsg"
+        }
+        assert(!whatsappMsg.contains("Department of CO")) {
+            "Should not contain 'Department of CO'!"
+        }
         println("CARD_RENDERED_PATH:" + outFile.absolutePath)
     }
 }
