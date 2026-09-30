@@ -41,6 +41,31 @@ object CanvasCardDrawer {
     }
 
     /**
+     * Sanitizes designation to remove repeated department name (e.g. "Assistant Professor of Commerce" -> "Assistant Professor").
+     */
+    fun cleanDesignation(rawDesig: String, cleanDept: String): String {
+        if (rawDesig.isBlank()) return ""
+        var cleaned = rawDesig.trim()
+        val dept = cleanDept.replace("^Department of\\s+".toRegex(RegexOption.IGNORE_CASE), "").trim()
+        if (dept.isNotBlank()) {
+            // Strip exact " of Commerce", " in Commerce", " for Commerce"
+            cleaned = cleaned.replace("(?i)\\s+(of|in|for)\\s+${Regex.escape(dept)}.*$".toRegex(), "").trim()
+            cleaned = cleaned.replace("(?i)[,\\-\\s]+${Regex.escape(dept)}$".toRegex(), "").trim()
+        }
+        // General cleanup if it has trailing " of <anything>" matching words in cleanDept
+        cleaned = cleaned.replace("(?i)\\s+(of|in)\\s+[A-Za-z\\s.&]+$".toRegex()) { match ->
+            val suffix = match.value.trim()
+            val suffixDept = suffix.replace("(?i)^(of|in)\\s+".toRegex(), "").trim()
+            if (dept.contains(suffixDept, ignoreCase = true) || suffixDept.contains(dept, ignoreCase = true)) {
+                ""
+            } else {
+                match.value
+            }
+        }.trim()
+        return cleaned
+    }
+
+    /**
      * Generates a high-definition 1200 x 675 Bitmap greeting card with exact alignment rules:
      * 1. Top Header: Line 1 "ST. JOSEPH'S COLLEGE TIRUCHIRAPPALLI", Line 2 Motto, Line 3 "★ JOS BIRTHDAY WISHES ★".
      * 2. Faculty Avatar: Locked to far right end (Fixed X = 980px, Y = 180px, Diameter = 150px, Gold border #D4AF37).
@@ -106,7 +131,7 @@ object CanvasCardDrawer {
         // =========================================================================
         // 1 & 2: PROFESSOR DETAILS & LOCKED RIGHT AVATAR
         // =========================================================================
-        drawFacultyProfile(canvas, faculty)
+        drawFacultyProfile(canvas, faculty, resolvedDeptName)
 
         // =========================================================================
         // 3: MIDDLE GREETING QUOTE BOX
@@ -192,7 +217,8 @@ object CanvasCardDrawer {
 
     private fun drawFacultyProfile(
         canvas: Canvas,
-        faculty: FacultyEntity
+        faculty: FacultyEntity,
+        resolvedDeptName: String = ""
     ) {
         // =========================================================================
         // 2. FACULTY AVATAR & DETAILS
@@ -312,10 +338,15 @@ object CanvasCardDrawer {
         canvas.drawText(faculty.name, leftMarginX, 252f, namePaint)
 
         // Title (SINGLE LINE): "${faculty.designation}, Department of ${fullDeptName}"
-        val cleanDept = getDepartmentCleanName(faculty.deptCode)
+        val cleanDept = if (resolvedDeptName.isNotBlank()) {
+            resolvedDeptName.replace("^Department of\\s+".toRegex(RegexOption.IGNORE_CASE), "").trim()
+        } else {
+            getDepartmentCleanName(faculty.deptCode)
+        }
         val deptString = "Department of $cleanDept"
-        val singleLineTitle = if (faculty.designation.isNotBlank()) {
-            "${faculty.designation}, $deptString"
+        val cleanDesig = cleanDesignation(faculty.designation, cleanDept)
+        val singleLineTitle = if (cleanDesig.isNotBlank()) {
+            "$cleanDesig, $deptString"
         } else {
             deptString
         }

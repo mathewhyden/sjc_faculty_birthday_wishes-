@@ -22,6 +22,26 @@ try {
   // Graceful fallback to ImageMagick
 }
 
+function cleanDesignation(rawDesig, cleanDept) {
+  if (!rawDesig) return '';
+  let cleaned = String(rawDesig).trim();
+  const dept = String(cleanDept || '').replace(/^Department of\s+/i, '').trim();
+  if (dept) {
+    const escaped = dept.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    cleaned = cleaned.replace(new RegExp(`\\s+(of|in|for)\\s+${escaped}.*$`, 'i'), '').trim();
+    cleaned = cleaned.replace(new RegExp(`[,\\-\\s]+${escaped}$`, 'i'), '').trim();
+  }
+  cleaned = cleaned.replace(/\s+(of|in)\s+[A-Za-z\s.&]+$/i, (match) => {
+    const suffix = match.trim();
+    const suffixDept = suffix.replace(/^(of|in)\s+/i, '').trim();
+    if (dept.toLowerCase().includes(suffixDept.toLowerCase()) || suffixDept.toLowerCase().includes(dept.toLowerCase())) {
+      return '';
+    }
+    return match;
+  }).trim();
+  return cleaned;
+}
+
 /**
  * 1200 x 675 HD Card Generator using Node-Canvas.
  * Adheres strictly to the executive alignment & layout specifications.
@@ -35,8 +55,9 @@ async function generateCardWithNodeCanvas(faculty, outputPath) {
   const fullDeptName = getDepartmentFullName(faculty.deptCode);
   const cleanDeptName = fullDeptName.replace(/^Department of\s+/i, '').trim();
   const deptString = `Department of ${cleanDeptName}`;
-  const designation = faculty.designation || '';
-  const combinedTitle = designation ? `${designation}, ${deptString}` : deptString;
+  const rawDesignation = faculty.designation || '';
+  const cleanDesig = cleanDesignation(rawDesignation, cleanDeptName);
+  const combinedTitle = cleanDesig ? `${cleanDesig}, ${deptString}` : deptString;
 
   // 1. Deep Royal Navy Luxury Gradient Background
   const bgGrad = ctx.createLinearGradient(0, 0, width, height);
@@ -430,9 +451,9 @@ function generateCardWithImageMagick(faculty, outputPath) {
   return new Promise((resolve, reject) => {
     const fullDeptName = getDepartmentFullName(faculty.deptCode);
     const cleanDeptName = fullDeptName.replace(/^Department of\s+/i, '').trim();
-    const deptString = `Department of ${cleanDeptName}`;
-    const designation = faculty.designation || '';
-    const combinedTitle = designation ? `${designation}, ${deptString}` : deptString;
+    const rawDesignation = faculty.designation || '';
+    const cleanDesig = cleanDesignation(rawDesignation, cleanDeptName);
+    const combinedTitle = cleanDesig ? `${cleanDesig}, ${deptString}` : deptString;
     const initials = extractInitials(faculty.name);
 
     const rector = process.env.RECTOR_NAME || 'Rev. Dr. Pavulraj Michael SJ';

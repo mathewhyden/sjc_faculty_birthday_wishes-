@@ -17,11 +17,12 @@ object WhatsAppSender {
      */
     fun formatWhatsAppMessage(staff: FacultyMember, fullDeptName: String): String {
         val cleanDept = fullDeptName.replace("^Department of\\s+".toRegex(RegexOption.IGNORE_CASE), "").trim()
-        val deptText = "Department of $cleanDept"
-        val designationLine = if (staff.designation.isNotBlank()) {
-            "${staff.designation},$deptText"
+        val deptString = "Department of $cleanDept"
+        val cleanDesig = CanvasCardDrawer.cleanDesignation(staff.designation, cleanDept)
+        val designationLine = if (cleanDesig.isNotBlank()) {
+            "$cleanDesig, $deptString"
         } else {
-            deptText
+            deptString
         }
 
         return """
@@ -31,7 +32,6 @@ object WhatsAppSender {
 Dear ${staff.name},
 $designationLine
 May the Almighty shower His abundant blessings, vibrant health, enduring peace, and divine joy upon you as you continue your noble mission of forming young minds!
-
 ✨ With Prayers & Best Wishes from:
 •  Rector: Rev. Dr. Pavulraj Michael SJ
 •  Secretary: Rev. Dr. M. Arockiasamy Xavier SJ

@@ -18,16 +18,38 @@ try {
   // Axios not yet installed in local container; native fetch will be used
 }
 
+function cleanDesignation(rawDesig, cleanDept) {
+  if (!rawDesig) return '';
+  let cleaned = String(rawDesig).trim();
+  const dept = String(cleanDept || '').replace(/^Department of\s+/i, '').trim();
+  if (dept) {
+    const escaped = dept.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    cleaned = cleaned.replace(new RegExp(`\\s+(of|in|for)\\s+${escaped}.*$`, 'i'), '').trim();
+    cleaned = cleaned.replace(new RegExp(`[,\\-\\s]+${escaped}$`, 'i'), '').trim();
+  }
+  cleaned = cleaned.replace(/\s+(of|in)\s+[A-Za-z\s.&]+$/i, (match) => {
+    const suffix = match.trim();
+    const suffixDept = suffix.replace(/^(of|in)\s+/i, '').trim();
+    if (dept.toLowerCase().includes(suffixDept.toLowerCase()) || suffixDept.toLowerCase().includes(dept.toLowerCase())) {
+      return '';
+    }
+    return match;
+  }).trim();
+  return cleaned;
+}
+
 /**
  * Formats WhatsApp message according to the exact institutional specification.
  */
 function formatWhatsAppMessage(staff, fullDeptName) {
   const resolvedDept = fullDeptName || getDepartmentFullName(staff.deptCode);
   const cleanDeptName = resolvedDept.replace(/^Department of\s+/i, '').trim();
-  const deptText = `Department of ${cleanDeptName}`;
-  const designationLine = staff.designation
-    ? `${staff.designation},${deptText}`
-    : deptText;
+  const deptString = `Department of ${cleanDeptName}`;
+  const rawDesig = staff.designation || '';
+  const cleanDesig = cleanDesignation(rawDesig, cleanDeptName);
+  const designationLine = cleanDesig
+    ? `${cleanDesig}, ${deptString}`
+    : deptString;
 
   return `🎓 ST. JOSEPH'S COLLEGE 🎓
 🎂 JOS GREETINGS 🎂
@@ -35,7 +57,6 @@ function formatWhatsAppMessage(staff, fullDeptName) {
 Dear ${staff.name},
 ${designationLine}
 May the Almighty shower His abundant blessings, vibrant health, enduring peace, and divine joy upon you as you continue your noble mission of forming young minds!
-
 ✨ With Prayers & Best Wishes from:
 •  Rector: Rev. Dr. Pavulraj Michael SJ
 •  Secretary: Rev. Dr. M. Arockiasamy Xavier SJ
