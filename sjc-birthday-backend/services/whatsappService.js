@@ -1,6 +1,15 @@
 const path = require('path');
 const fs = require('fs');
-const { getDepartmentFullName } = require('./deptMapper');
+let getDepartmentFullName;
+try {
+  getDepartmentFullName = require('./deptMapper').getDepartmentFullName;
+} catch (e) {
+  try {
+    getDepartmentFullName = require('../utils/deptMapper').getDepartmentFullName;
+  } catch (e2) {
+    getDepartmentFullName = (c) => `Department of ${c}`;
+  }
+}
 
 let axiosInstance = null;
 try {
@@ -17,7 +26,7 @@ function formatWhatsAppMessage(staff, fullDeptName) {
   const cleanDeptName = resolvedDept.replace(/^Department of\s+/i, '').trim();
   const deptText = `Department of ${cleanDeptName}`;
   const designationLine = staff.designation
-    ? `${staff.designation}, ${deptText}`
+    ? `${staff.designation},${deptText}`
     : deptText;
 
   return `🎓 ST. JOSEPH'S COLLEGE 🎓
@@ -26,11 +35,12 @@ function formatWhatsAppMessage(staff, fullDeptName) {
 Dear ${staff.name},
 ${designationLine}
 May the Almighty shower His abundant blessings, vibrant health, enduring peace, and divine joy upon you as you continue your noble mission of forming young minds!
+
 ✨ With Prayers & Best Wishes from:
 •  Rector: Rev. Dr. Pavulraj Michael SJ
 •  Secretary: Rev. Dr. M. Arockiasamy Xavier SJ
-•  Principal: Rev. Dr. K. Arockiam SJ &
-Standing Committee.`;
+•  Principal: Rev. Dr. K. Arockiam SJ
+    & Standing Committee.`;
 }
 
 /**

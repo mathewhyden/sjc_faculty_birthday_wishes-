@@ -19,7 +19,7 @@ object WhatsAppSender {
         val cleanDept = fullDeptName.replace("^Department of\\s+".toRegex(RegexOption.IGNORE_CASE), "").trim()
         val deptText = "Department of $cleanDept"
         val designationLine = if (staff.designation.isNotBlank()) {
-            "${staff.designation}, $deptText"
+            "${staff.designation},$deptText"
         } else {
             deptText
         }
@@ -31,11 +31,12 @@ object WhatsAppSender {
 Dear ${staff.name},
 $designationLine
 May the Almighty shower His abundant blessings, vibrant health, enduring peace, and divine joy upon you as you continue your noble mission of forming young minds!
+
 ✨ With Prayers & Best Wishes from:
 •  Rector: Rev. Dr. Pavulraj Michael SJ
 •  Secretary: Rev. Dr. M. Arockiasamy Xavier SJ
 •  Principal: Rev. Dr. K. Arockiam SJ
-& Standing Committee
+    & Standing Committee.
         """.trimIndent()
     }
 
