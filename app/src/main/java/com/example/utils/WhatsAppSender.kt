@@ -17,26 +17,25 @@ object WhatsAppSender {
      */
     fun formatWhatsAppMessage(staff: FacultyMember, fullDeptName: String): String {
         val cleanDept = fullDeptName.replace("^Department of\\s+".toRegex(RegexOption.IGNORE_CASE), "").trim()
+        val deptText = "Department of $cleanDept"
         val designationLine = if (staff.designation.isNotBlank()) {
-            "${staff.designation} Department of $cleanDept"
+            "${staff.designation}, $deptText"
         } else {
-            "Department of $cleanDept"
+            deptText
         }
 
         return """
-🎓 ST. JOSEPH'S COLLEGE (AUTONOMOUS)
-🎂 SJC BIRTHDAY WISHES
-💐 WARMEST GREETINGS! 💐
+🎓 ST. JOSEPH'S COLLEGE 🎓
+🎂 JOS GREETINGS 🎂
+💐 WARM  BIRTHDAY WISHES 💐
 Dear ${staff.name},
 $designationLine
-
 May the Almighty shower His abundant blessings, vibrant health, enduring peace, and divine joy upon you as you continue your noble mission of forming young minds!
-
 ✨ With Prayers & Best Wishes from:
-   Rector: Rev. Dr. Pavulraj Michael SJ
-• Secretary: Rev. Dr. M. Arockiasamy Xavier SJ
-• Principal: Rev. Dr. K. Arockiam SJ
-and the entire St. Joseph's College (Autonomous) Fraternity.
+•  Rector: Rev. Dr. Pavulraj Michael SJ
+•  Secretary: Rev. Dr. M. Arockiasamy Xavier SJ
+•  Principal: Rev. Dr. K. Arockiam SJ &
+Standing Committee.
         """.trimIndent()
     }
 

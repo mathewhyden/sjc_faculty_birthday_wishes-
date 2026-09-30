@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>St. Joseph's College (Autonomous) - Birthday Gift Card Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sjc-navy: #001B30;
+      --sjc-blue: #002B49;
+      --sjc-gold: #D4AF37;
+      --sjc-gold-light: #FFDF73;
+      --sjc-crimson: #800000;
+      --bg-dark: #07111D;
+      --card-bg: #0C1E32;
+      --card-border: #1E3756;
+      --text-main: #F1F5F9;
+      --text-muted: #94A3B8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; padding: 24px; display: flex; flex-direction: column; align-items: center; }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+      max-width: 900px;
+    }
+    .header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 26px;
+      color: var(--sjc-gold);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .header p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .badge {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 14px;
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid var(--sjc-gold);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--sjc-gold-light);
+    }
+
+    .card-container {
+      width: 100%;
+      max-width: 1100px;
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      text-align: center;
+    }
+
+    .card-image-wrapper {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      background: #000;
+    }
+    .card-image-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+      text-align: left;
+    }
+    .spec-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .spec-card h3 {
+      font-size: 13px;
+      color: var(--sjc-gold-light);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .spec-card p {
+      font-size: 13px;
+      color: #CBD5E1;
+      line-height: 1.4;
+    }
+
+    .actions-bar {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+    .btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      border: none;
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, #D4AF37, #B89025);
+      color: #001B30;
+      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
+    }
+    .btn-gold:hover {
+      background: #FFDF73;
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--sjc-gold);
+      color: var(--sjc-gold-light);
+    }
+    .btn-outline:hover {
+      background: rgba(212, 175, 55, 0.15);
+      transform: translateY(-2px);
+    }
+    .btn-apk {
+      background: linear-gradient(135deg, #10B981, #059669);
+      color: #FFFFFF;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+    }
+    .btn-apk:hover {
+      background: #34D399;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>ST. JOSEPH'S COLLEGE (AUTONOMOUS)</h1>
+    <p>Official 1200 &times; 675 HD Executive Birthday Gift Card Preview</p>
+    <div class="badge">ESTD. 1844 • TIRUCHIRAPPALLI</div>
+  </div>
+
+  <div class="card-container">
+    <div class="card-image-wrapper">
+      <a href="current_card_preview.png" target="_blank" title="Click to open full 1200x675 image">
+        <img src="current_card_preview.png" alt="St. Joseph's College Birthday Gift Card" id="previewImg">
+      </a>
+    </div>
+
+    <div class="actions-bar">
+      <a href="current_card_preview.png" download="SJC_Birthday_Card_HD.png" class="btn btn-gold">
+        📥 Download HD Card (PNG 1200&times;675)
+      </a>
+      <a href="current_card_preview.png" target="_blank" class="btn btn-outline">
+        🔍 View Full HD PNG in New Tab
+      </a>
+      <a href="StJosephsCollege_BirthdayWishes.apk" download="StJosephsCollege_BirthdayWishes.apk" class="btn btn-apk">
+        📱 Download Android APK
+      </a>
+    </div>
+
+    <div class="specs-grid">
+      <div class="spec-card">
+        <h3>📍 Top Header Section</h3>
+        <p>Line 1: ST. JOSEPH'S COLLEGE TIRUCHIRAPPALLI, Line 2: Motto: "Pro Bono Et Vero" (For the Good and the True), Line 3: ★ JOS BIRTHDAY WISHES ★.</p>
+      </div>
+      <div class="spec-card">
+        <h3>📍 Avatar Alignment</h3>
+        <p>Fixed Far Right (X: 980px, Y: 180px, Diameter: 150px) with 4px Metallic Gold border.</p>
+      </div>
+      <div class="spec-card">
+        <h3>📍 Faculty Profile</h3>
+        <p>Left Margin 80px: "★ HAPPY BIRTHDAY PROFESSOR ★" badge, Bold Serif Name, and Single-Line Title: "${faculty.designation}, Department of ${fullDeptName}".</p>
+      </div>
+      <div class="spec-card">
+        <h3>📍 Bottom-Left Principal</h3>
+        <p>Photo Circle (Radius: 40px) with Line 1: "Rev. Dr. K. Arockiam SJ" (Gold) and Line 2: "Principal, Academic Head, SJC" (White).</p>
+      </div>
+      <div class="spec-card">
+        <h3>📍 Leadership & Footer</h3>
+        <p>With Prayers & Best Wishes From: Rector, Secretary, Principal &amp; Standing Committee.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

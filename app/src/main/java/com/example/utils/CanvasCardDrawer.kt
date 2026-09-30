@@ -33,7 +33,6 @@ object CanvasCardDrawer {
 
     /**
      * Extracts clean department subject name (stripping leading "Department of " if present).
-     * e.g. "Department of Physics" -> "Physics", so combined title is "Assistant Professor Department of Physics".
      */
     fun getDepartmentCleanName(deptCode: String): String {
         val clean = deptCode.trim().uppercase()
@@ -42,13 +41,13 @@ object CanvasCardDrawer {
     }
 
     /**
-     * Generates a high-definition 1200 x 675 Bitmap greeting card with the updated layout:
-     * - Avatar on the RIGHT side (X = 980px, Y = 180px, Radius = 85px, Gold border #D4AF37)
-     * - Faculty Name & Single-line Title on LEFT side (X = 80px)
-     * - Staff ID REMOVED completely
-     * - Combined Title Format: "${staff.designation} Department of ${fullDeptName}"
-     * - Bottom-Left: Principal Photo Bitmap + bold gold label "Principal & Standing Committee"
-     * - Bottom-Right: Leadership order: Rector -> Secretary -> Principal
+     * Generates a high-definition 1200 x 675 Bitmap greeting card with exact alignment rules:
+     * 1. Top Header: Line 1 "ST. JOSEPH'S COLLEGE TIRUCHIRAPPALLI", Line 2 Motto, Line 3 "★ JOS BIRTHDAY WISHES ★".
+     * 2. Faculty Avatar: Locked to far right end (Fixed X = 980px, Y = 180px, Diameter = 150px, Gold border #D4AF37).
+     * 3. Professor Details: Left Margin X = 80px, Badge Y = 180px, Full Name Y = 245px, Single Line Title Y = 280px ("${faculty.designation}, Department of ${fullDeptName}").
+     * 4. Quote Box: X = 60px, Y = 345px, Width = 1080px, Height = 120px.
+     * 5. Bottom-Left Principal: Photo Circle at Center X = 110px, Y = 555px, Radius = 40px; Labels: Line 1 "Rev. Dr. K. Arockiam SJ" (Gold), Line 2 "Principal, Academic Head, SJC" (White).
+     * 6. Bottom-Right Leadership: With Prayers & Best Wishes from Rector, Secretary & Principal, & Standing Committee.
      */
     fun generateGreetingCardBitmap(
         context: Context,
@@ -58,7 +57,7 @@ object CanvasCardDrawer {
         val bitmap = Bitmap.createBitmap(CARD_WIDTH, CARD_HEIGHT, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
 
-        // 1. Draw Royal Navy Gradient Background
+        // 1. Royal Navy Gradient Background
         val bgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             shader = LinearGradient(
                 0f, 0f, CARD_WIDTH.toFloat(), CARD_HEIGHT.toFloat(),
@@ -73,7 +72,7 @@ object CanvasCardDrawer {
         }
         canvas.drawRect(0f, 0f, CARD_WIDTH.toFloat(), CARD_HEIGHT.toFloat(), bgPaint)
 
-        // 2. Draw Decorative Gold Framing & Border
+        // 2. Decorative Gold Framing & Border
         val goldFramePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.parseColor("#D4AF37") // Metallic Gold
             style = Paint.Style.STROKE
@@ -96,26 +95,26 @@ object CanvasCardDrawer {
             12f, 12f, innerFramePaint
         )
 
-        // Draw Ornamental Corner Flourishes
+        // Corner Flourishes
         drawCornerAccents(canvas, outerMargin)
 
         // =========================================================================
-        // TOP HEADER (Y: 0 - 165)
+        // TOP HEADER
         // =========================================================================
         drawHeader(canvas, context)
 
         // =========================================================================
-        // CENTER BODY (Y: 170 - 450)
-        // A) Faculty Avatar on Right (X = 980px, Y = 180px, Radius = 85px)
-        // B) Faculty Name & Combined Single-Line Title on Left (X = 80px)
+        // 1 & 2: PROFESSOR DETAILS & LOCKED RIGHT AVATAR
         // =========================================================================
         drawFacultyProfile(canvas, faculty)
+
+        // =========================================================================
+        // 3: MIDDLE GREETING QUOTE BOX
+        // =========================================================================
         drawQuoteBox(canvas)
 
         // =========================================================================
-        // FOOTER (Y: 460 - 640)
-        // C) Bottom-Left: Principal Photo + Bold Gold "Principal & Standing Committee"
-        // D) Bottom-Right: Leadership (Rector -> Secretary -> Principal)
+        // 4 & 5: FOOTER (SIDE-BY-SIDE PRINCIPAL + RIGHT LEADERSHIP CONTAINER)
         // =========================================================================
         drawFooter(canvas, context)
 
@@ -127,7 +126,6 @@ object CanvasCardDrawer {
             color = Color.parseColor("#D4AF37")
             style = Paint.Style.FILL
         }
-        // 4 corner dots
         canvas.drawCircle(outer + 20f, outer + 20f, 4f, paint)
         canvas.drawCircle(CARD_WIDTH - outer - 20f, outer + 20f, 4f, paint)
         canvas.drawCircle(outer + 20f, CARD_HEIGHT - outer - 20f, 4f, paint)
@@ -135,7 +133,7 @@ object CanvasCardDrawer {
     }
 
     private fun drawHeader(canvas: Canvas, context: Context) {
-        // Top Left Corner: Official SJC Crest Emblem
+        // Official SJC Crest Emblem
         val emblemSize = 115f
         val emblemLeft = 52f
         val emblemTop = 36f
@@ -153,48 +151,38 @@ object CanvasCardDrawer {
             }
         }
 
-        // Center / Header Text Area
-        val headerCenterX = CARD_WIDTH / 2f + 30f
+        val headerCenterX = CARD_WIDTH / 2f
 
-        // Top Title: ST. JOSEPH'S COLLEGE (AUTONOMOUS)
+        // Line 1 (SINGLE LINE): "ST. JOSEPH'S COLLEGE TIRUCHIRAPPALLI"
         val titlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.WHITE
-            textSize = 31f
+            textSize = 30f
             typeface = Typeface.create(Typeface.SERIF, Typeface.BOLD)
             textAlign = Paint.Align.CENTER
-            letterSpacing = 0.07f
+            letterSpacing = 0.06f
         }
-        canvas.drawText("ST. JOSEPH'S COLLEGE (AUTONOMOUS)", headerCenterX, 74f, titlePaint)
+        canvas.drawText("ST. JOSEPH'S COLLEGE TIRUCHIRAPPALLI", headerCenterX, 72f, titlePaint)
 
-        // Subtitle Header: SJC BIRTHDAY WISHES
+        // Line 2 (Motto): "Motto: \"Pro Bono Et Vero\" (For the Good and the True)"
+        val mottoPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            color = Color.parseColor("#CBD5E1")
+            textSize = 15.5f
+            typeface = Typeface.create(Typeface.SERIF, Typeface.ITALIC)
+            textAlign = Paint.Align.CENTER
+        }
+        canvas.drawText("Motto: \"Pro Bono Et Vero\" (For the Good and the True)", headerCenterX, 104f, mottoPaint)
+
+        // Line 3 (Header Badge): "★ JOS BIRTHDAY WISHES ★"
         val birthdayTitlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = Color.parseColor("#D4AF37") // Metallic Gold
-            textSize = 25f
+            color = Color.parseColor("#D4AF37")
+            textSize = 24f
             typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
             textAlign = Paint.Align.CENTER
             letterSpacing = 0.12f
         }
-        canvas.drawText("★ SJC BIRTHDAY WISHES ★", headerCenterX, 107f, birthdayTitlePaint)
+        canvas.drawText("★ JOS BIRTHDAY WISHES ★", headerCenterX, 140f, birthdayTitlePaint)
 
-        // Institutional Details & Motto
-        val subtitlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = Color.parseColor("#E2E8F0")
-            textSize = 15f
-            typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
-            textAlign = Paint.Align.CENTER
-            letterSpacing = 0.04f
-        }
-        canvas.drawText("TIRUCHIRAPPALLI - 620 002, TAMIL NADU • ESTD. 1844", headerCenterX, 131f, subtitlePaint)
-
-        val mottoPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = Color.parseColor("#CBD5E1")
-            textSize = 13.5f
-            typeface = Typeface.create(Typeface.SERIF, Typeface.ITALIC)
-            textAlign = Paint.Align.CENTER
-        }
-        canvas.drawText("Motto: \"Pro Bono Et Vero\" (For the Good and the True)", headerCenterX, 150f, mottoPaint)
-
-        // Divider Line
+        // Header Divider Line
         val divPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.parseColor("#50D4AF37")
             strokeWidth = 1.8f
@@ -207,32 +195,30 @@ object CanvasCardDrawer {
         faculty: FacultyEntity
     ) {
         // =========================================================================
-        // A) FACULTY AVATAR / PHOTO POSITION:
-        // - MOVE the Birthday Faculty Photo/Avatar from LEFT to the RIGHT side of the card.
-        // - Position: X = 980px, Y = 180px, Circle Radius = 85px with Gold border (#D4AF37).
+        // 2. FACULTY AVATAR & DETAILS
+        // - Avatar Circle: Positioned fixed on the far RIGHT side (X = 980px, Y = 180px, Diameter = 150px with Gold border)
+        //   Top-Left (980, 180), Center (1055, 255), Radius = 75px
         // =========================================================================
         val avatarLeft = 980f
         val avatarTop = 180f
-        val avatarRadius = 85f // Diameter = 170px
-        val avatarDiameter = avatarRadius * 2f // 170px
-        val avatarCenterX = avatarLeft + avatarRadius // 1065px
-        val avatarCenterY = avatarTop + avatarRadius // 265px
+        val avatarDiameter = 150f
+        val avatarRadius = avatarDiameter / 2f // 75px
+        val avatarCenterX = avatarLeft + avatarRadius // 1055px
+        val avatarCenterY = avatarTop + avatarRadius // 255px
 
-        // Outer Gold Ring for Avatar (6px border #D4AF37)
+        // Gold Border (#D4AF37)
         val outerRingPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.parseColor("#D4AF37")
             style = Paint.Style.STROKE
-            strokeWidth = 5f
+            strokeWidth = 4f
         }
-        canvas.drawCircle(avatarCenterX, avatarCenterY, avatarRadius + 3f, outerRingPaint)
+        canvas.drawCircle(avatarCenterX, avatarCenterY, avatarRadius + 2f, outerRingPaint)
 
-        // Try loading faculty photo from photoUrl; Fallback to monogram initials if missing
         val facultyPhotoBitmap = if (faculty.photoUrl.isNotBlank()) {
             loadFacultyPhotoBitmap(faculty.photoUrl)
         } else null
 
         if (facultyPhotoBitmap != null) {
-            // Draw Circular Clipped Faculty Photo
             val photoPath = Path().apply {
                 addCircle(avatarCenterX, avatarCenterY, avatarRadius, Path.Direction.CW)
             }
@@ -243,11 +229,11 @@ object CanvasCardDrawer {
             canvas.drawBitmap(facultyPhotoBitmap, null, destRect, bmpPaint)
             canvas.restore()
         } else {
-            // Fallback: Circular Fill with Crimson / Burgundy gradient & Monogram Initials
+            // Circular Fill with Crimson / Burgundy gradient & Monogram Initials
             val avatarFillPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
                 shader = LinearGradient(
-                    avatarCenterX - avatarRadius, avatarCenterY - avatarRadius,
-                    avatarCenterX + avatarRadius, avatarCenterY + avatarRadius,
+                    avatarLeft, avatarTop,
+                    avatarLeft + avatarDiameter, avatarTop + avatarDiameter,
                     intArrayOf(
                         Color.parseColor("#800000"), // Crimson Red
                         Color.parseColor("#4A0000")  // Deep Burgundy
@@ -261,7 +247,7 @@ object CanvasCardDrawer {
             val initials = getInitials(faculty.name)
             val initialsPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
                 color = Color.parseColor("#D4AF37")
-                textSize = 54f
+                textSize = 50f
                 typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
                 textAlign = Paint.Align.CENTER
             }
@@ -272,110 +258,127 @@ object CanvasCardDrawer {
         }
 
         // =========================================================================
-        // B) REMOVE STAFF ID & SINGLE-LINE TITLE:
-        // - Faculty Name & Title align on the LEFT side (X = 80px).
-        // - REMOVE Staff ID completely (no "Staff ID: SJC-FAC-01").
-        // - COMBINE Designation and Department into ONE SINGLE LINE:
-        //   Format: "${staff.designation} Department of ${fullDeptName}"
-        //   Example Output: "Assistant Professor Department of Physics"
+        // DETAILS (LEFT SIDE AT X = 80px)
+        // * Badge: "★ HAPPY BIRTHDAY PROFESSOR ★"
+        // * Name: Bold Serif Full Name.
+        // * Title (SINGLE LINE): "${faculty.designation}, Department of ${fullDeptName}"
+        //   (e.g., "Assistant Professor, Department of English" - Staff ID is REMOVED).
         // =========================================================================
-        val infoStartX = 80f
+        val leftMarginX = 80f
+        val maxTextWidth = 870f // Leaves clearance before avatar starting at X = 980px
 
-        // "★ HAPPY BIRTHDAY PROFESSOR ★" Pill
-        val pillPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = Color.parseColor("#800000") // Crimson Red Pill
+        // Badge: Y = 180px, Height = 34px, Width = 300px, Pill-shaped
+        val pillTop = 180f
+        val pillHeight = 34f
+        val pillWidth = 300f
+        val pillRect = RectF(leftMarginX, pillTop, leftMarginX + pillWidth, pillTop + pillHeight)
+
+        val pillFillPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            color = Color.parseColor("#800000")
             style = Paint.Style.FILL
         }
-        val pillRect = RectF(infoStartX, 185f, infoStartX + 300f, 215f)
-        canvas.drawRoundRect(pillRect, 8f, 8f, pillPaint)
+        canvas.drawRoundRect(pillRect, pillHeight / 2f, pillHeight / 2f, pillFillPaint)
 
         val pillBorderPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.parseColor("#D4AF37")
             style = Paint.Style.STROKE
             strokeWidth = 1.5f
         }
-        canvas.drawRoundRect(pillRect, 8f, 8f, pillBorderPaint)
+        canvas.drawRoundRect(pillRect, pillHeight / 2f, pillHeight / 2f, pillBorderPaint)
 
         val pillTextPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.parseColor("#FFDF73")
-            textSize = 14f
+            textSize = 12f
             typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
             letterSpacing = 0.08f
             textAlign = Paint.Align.CENTER
         }
-        canvas.drawText("★ HAPPY BIRTHDAY PROFESSOR ★", pillRect.centerX(), 206f, pillTextPaint)
+        val fm = pillTextPaint.fontMetrics
+        val pillTextY = pillRect.centerY() - (fm.ascent + fm.descent) / 2f
+        canvas.drawText("★ HAPPY BIRTHDAY PROFESSOR ★", pillRect.centerX(), pillTextY, pillTextPaint)
 
-        // Faculty Name (Bold white serif, Left aligned at X = 80px)
+        // Name: Bold Serif Full Name at X = 80px, baseline at 252px (breathing space from badge)
         val namePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.WHITE
-            textSize = 34f
+            textSize = 32f
             typeface = Typeface.create(Typeface.SERIF, Typeface.BOLD)
             textAlign = Paint.Align.LEFT
         }
-        var nameTextSize = 34f
-        while (namePaint.measureText(faculty.name) > 870f && nameTextSize > 24f) {
-            nameTextSize -= 1f
-            namePaint.textSize = nameTextSize
+        var nameSize = 32f
+        while (namePaint.measureText(faculty.name) > maxTextWidth && nameSize > 20f) {
+            nameSize -= 1f
+            namePaint.textSize = nameSize
         }
-        canvas.drawText(faculty.name, infoStartX, 255f, namePaint)
+        canvas.drawText(faculty.name, leftMarginX, 252f, namePaint)
 
-        // Single Combined Line: "${staff.designation} Department of ${fullDeptName}"
+        // Title (SINGLE LINE): "${faculty.designation}, Department of ${fullDeptName}"
         val cleanDept = getDepartmentCleanName(faculty.deptCode)
-        val combinedTitle = if (faculty.designation.isNotBlank()) {
-            "${faculty.designation} Department of $cleanDept"
+        val deptString = "Department of $cleanDept"
+        val singleLineTitle = if (faculty.designation.isNotBlank()) {
+            "${faculty.designation}, $deptString"
         } else {
-            "Department of $cleanDept"
+            deptString
         }
 
         val desigPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.parseColor("#D4AF37")
-            textSize = 21f
+            textSize = 20f
             typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
             textAlign = Paint.Align.LEFT
         }
-        var desigTextSize = 21f
-        while (desigPaint.measureText(combinedTitle) > 870f && desigTextSize > 16f) {
-            desigTextSize -= 0.5f
-            desigPaint.textSize = desigTextSize
+        var desigSize = 20f
+        while (desigPaint.measureText(singleLineTitle) > maxTextWidth && desigSize > 14f) {
+            desigSize -= 0.5f
+            desigPaint.textSize = desigSize
         }
-        canvas.drawText(combinedTitle, infoStartX, 295f, desigPaint)
+        canvas.drawText(singleLineTitle, leftMarginX, 285f, desigPaint)
     }
 
     private fun drawQuoteBox(canvas: Canvas) {
-        val quoteBox = RectF(65f, 350f, CARD_WIDTH - 65f, 450f)
+        // =========================================================================
+        // 3. MIDDLE GREETING QUOTE BOX
+        // - Container Box: X = 60px, Y = 345px, Width = 1080px, Height = 120px, Corner Radius = 16px
+        // - Line 1: Y = 385px, Centered
+        // - Line 2: Y = 425px, Centered
+        // =========================================================================
+        val boxX = 60f
+        val boxY = 345f
+        val boxWidth = 1080f
+        val boxHeight = 120f
+        val quoteBox = RectF(boxX, boxY, boxX + boxWidth, boxY + boxHeight)
 
-        // Box background fill with deep royal navy
         val boxFill = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.parseColor("#152C47")
             style = Paint.Style.FILL
         }
-        canvas.drawRoundRect(quoteBox, 14f, 14f, boxFill)
+        canvas.drawRoundRect(quoteBox, 16f, 16f, boxFill)
 
-        // Box border with metallic gold
         val boxStroke = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.parseColor("#99D4AF37")
             style = Paint.Style.STROKE
             strokeWidth = 2f
         }
-        canvas.drawRoundRect(quoteBox, 14f, 14f, boxStroke)
+        canvas.drawRoundRect(quoteBox, 16f, 16f, boxStroke)
 
-        val greetingHeadlinePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        // Line 1: Y = 385px, Centered
+        val headlinePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.parseColor("#FFDF73")
-            textSize = 27f
+            textSize = 26f
             typeface = Typeface.create(Typeface.SERIF, Typeface.BOLD)
             textAlign = Paint.Align.CENTER
-            letterSpacing = 0.05f
+            letterSpacing = 0.04f
         }
         canvas.drawText(
             "💐 WISHING YOU A VERY HAPPY & BLESSED BIRTHDAY! 💐",
             quoteBox.centerX(),
-            388f,
-            greetingHeadlinePaint
+            385f,
+            headlinePaint
         )
 
-        val greetingSubPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        // Line 2: Y = 420px & 442px, Centered
+        val quoteSubPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.WHITE
-            textSize = 21f
+            textSize = 19.5f
             typeface = Typeface.create(Typeface.SERIF, Typeface.ITALIC)
             textAlign = Paint.Align.CENTER
         }
@@ -383,41 +386,42 @@ object CanvasCardDrawer {
             "“May the Almighty bless you with vibrant health, lasting peace, and divine joy",
             quoteBox.centerX(),
             418f,
-            greetingSubPaint
+            quoteSubPaint
         )
         canvas.drawText(
             "as you continue your noble mission of shaping minds at St. Joseph's!”",
             quoteBox.centerX(),
             442f,
-            greetingSubPaint
+            quoteSubPaint
         )
     }
 
     private fun drawFooter(canvas: Canvas, context: Context) {
-        // Divider
+        // Subtle Divider Line above footer
         val divPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = Color.parseColor("#40D4AF37")
-            strokeWidth = 1.2f
+            color = Color.parseColor("#33D4AF37")
+            strokeWidth = 1f
         }
-        canvas.drawLine(65f, 465f, CARD_WIDTH - 65f, 465f, divPaint)
+        canvas.drawLine(60f, 475f, CARD_WIDTH - 60f, 475f, divPaint)
 
         // =========================================================================
-        // C) BOTTOM-LEFT CORNER:
-        // - REMOVE old address text block ("ST. JOSEPH'S COLLEGE (AUTONOMOUS)...").
-        // - PLACE Principal Photo Bitmap + bold gold text label: "Principal & Standing Committee".
+        // 4. BOTTOM-LEFT PRINCIPAL SECTION (SIDE-BY-SIDE FLEX LAYOUT)
+        // - Principal Photo Circle: Center X = 110px, Center Y = 555px, Radius = 40px (Diameter 80px)
+        // - Label Text (Positioned to the RIGHT of photo at X = 170px):
+        //   * Line 1 (Y = 545px): "Principal & Standing Committee" (Bold Gold)
+        //   * Line 2 (Y = 570px): "St. Joseph's College (Autonomous)" (Muted Slate)
         // =========================================================================
-        val principalX = 80f
-        val principalY = 485f
-        val principalDiameter = 96f
-        val principalRadius = principalDiameter / 2f // 48f
-        val principalCenterX = principalX + principalRadius // 128f
-        val principalCenterY = principalY + principalRadius // 533f
-        val principalRect = RectF(principalX, principalY, principalX + principalDiameter, principalY + principalDiameter)
+        val principalCenterX = 110f
+        val principalCenterY = 555f
+        val principalRadius = 40f
+        val principalDiameter = principalRadius * 2f // 80px
+        val principalLeft = principalCenterX - principalRadius
+        val principalTop = principalCenterY - principalRadius
+        val principalRect = RectF(principalLeft, principalTop, principalLeft + principalDiameter, principalTop + principalDiameter)
 
-        // Decode / Retrieve Principal Photo Bitmap
         val principalBmp = getPrincipalBitmap(context)
 
-        // Draw Circular Clipped Photo
+        // Draw Circular Clipped Principal Photo
         val clipPath = Path().apply {
             addCircle(principalCenterX, principalCenterY, principalRadius, Path.Direction.CW)
         }
@@ -427,7 +431,7 @@ object CanvasCardDrawer {
         canvas.drawBitmap(principalBmp, null, principalRect, bmpPaint)
         canvas.restore()
 
-        // Outer Gold Ring around Principal photo (#D4AF37)
+        // 3px Gold Ring around Principal photo (#D4AF37)
         val photoRingPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.parseColor("#D4AF37")
             style = Paint.Style.STROKE
@@ -435,77 +439,98 @@ object CanvasCardDrawer {
         }
         canvas.drawCircle(principalCenterX, principalCenterY, principalRadius, photoRingPaint)
 
-        // Bold gold text label beneath the photo: "Principal & Standing Committee"
-        val labelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = Color.parseColor("#D4AF37")
-            textSize = 13.5f
+        // Side-by-Side Label Text to the RIGHT of photo at X = 170px
+        val textStartX = 170f
+
+        // Line 1: "Rev. Dr. K. Arockiam SJ" (Bold Gold #D4AF37)
+        val principalTitlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            color = Color.parseColor("#D4AF37") // Bold Gold
+            textSize = 17.5f
             typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
-            textAlign = Paint.Align.CENTER
+            textAlign = Paint.Align.LEFT
         }
-        canvas.drawText("Principal & Standing Committee", principalCenterX, principalY + principalDiameter + 24f, labelPaint)
+        canvas.drawText("Rev. Dr. K. Arockiam SJ", textStartX, 545f, principalTitlePaint)
+
+        // Line 2: "Principal, Academic Head, SJC" (White #FFFFFF)
+        val principalSubPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            color = Color.WHITE // White #FFFFFF
+            textSize = 14f
+            typeface = Typeface.create(Typeface.SERIF, Typeface.NORMAL)
+            textAlign = Paint.Align.LEFT
+        }
+        canvas.drawText("Principal, Academic Head, SJC", textStartX, 570f, principalSubPaint)
 
         // =========================================================================
-        // D) BOTTOM-RIGHT LEADERSHIP ORDER (ON CARD):
-        // Display leadership in this EXACT order:
-        // 1. Rector: Rev. Dr. Pavulraj Michael SJ
-        // 2. Secretary: Rev. Dr. M. Arockiasamy Xavier SJ
-        // 3. Principal: Rev. Dr. K. Arockiam SJ
+        // 5. BOTTOM-RIGHT LEADERSHIP CONTAINER
+        // - Container Box: X = 600px, Y = 490px, Width = 540px, Height = 135px, Corner Radius = 12px
+        // - Header (Y = 515px, X = 620px): "WITH PRAYERS & BEST WISHES FROM:"
+        // - Sub-Header (Y = 535px, X = 620px): "RECTOR, SECRETARY & PRINCIPAL"
+        // - Ordered List Items (X = 620px):
+        //   * Y = 560px: "• Rector: Rev. Dr. Pavulraj Michael SJ"
+        //   * Y = 580px: "• Secretary: Rev. Dr. M. Arockiasamy Xavier SJ"
+        //   * Y = 600px: "• Principal: Rev. Dr. K. Arockiam SJ"
+        //   * Y = 618px: "& Standing Committee"
         // =========================================================================
-        val leadershipX = CARD_WIDTH - 500f
-        val leadershipY = 480f
+        val leaderBoxX = 600f
+        val leaderBoxY = 480f
+        val leaderBoxWidth = 540f
+        val leaderBoxHeight = 152f
+        val leaderBox = RectF(leaderBoxX, leaderBoxY, leaderBoxX + leaderBoxWidth, leaderBoxY + leaderBoxHeight)
 
-        // Best Wishes Box
-        val wishBox = RectF(leadershipX, leadershipY, CARD_WIDTH - 65f, 628f)
-        val wishBoxBg = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        val leaderBoxBg = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.parseColor("#152336")
             style = Paint.Style.FILL
         }
-        canvas.drawRoundRect(wishBox, 10f, 10f, wishBoxBg)
+        canvas.drawRoundRect(leaderBox, 12f, 12f, leaderBoxBg)
 
-        val wishBoxBorder = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        val leaderBoxBorder = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.parseColor("#66D4AF37")
             style = Paint.Style.STROKE
             strokeWidth = 1.2f
         }
-        canvas.drawRoundRect(wishBox, 10f, 10f, wishBoxBorder)
+        canvas.drawRoundRect(leaderBox, 12f, 12f, leaderBoxBorder)
 
-        // Section Title: Best Wishes
-        val wishTitlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        val leaderTextX = 624f
+
+        // Header (Y = 504px, X = 624px): "WITH PRAYERS & BEST WISHES FROM:"
+        val wishHeaderPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.parseColor("#FFDF73")
-            textSize = 14.5f
+            textSize = 13f
             typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
             letterSpacing = 0.08f
+            textAlign = Paint.Align.LEFT
         }
-        canvas.drawText("WITH PRAYERS & BEST WISHES FROM:", leadershipX + 18f, leadershipY + 25f, wishTitlePaint)
+        canvas.drawText("WITH PRAYERS & BEST WISHES FROM:", leaderTextX, 504f, wishHeaderPaint)
 
-        val wishSubTitlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        // Sub-Header (Y = 524px, X = 624px): "RECTOR, SECRETARY & PRINCIPAL"
+        val wishSubHeaderPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.WHITE
-            textSize = 13.5f
+            textSize = 12.5f
             typeface = Typeface.create(Typeface.SERIF, Typeface.BOLD)
+            textAlign = Paint.Align.LEFT
         }
-        canvas.drawText("RECTOR, SECRETARY & PRINCIPAL", leadershipX + 18f, leadershipY + 45f, wishSubTitlePaint)
+        canvas.drawText("RECTOR, SECRETARY & PRINCIPAL", leaderTextX, 524f, wishSubHeaderPaint)
 
-        val leaderNamePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        val leaderListPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.parseColor("#E2E8F0")
-            textSize = 13.5f
+            textSize = 12f
             typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
+            textAlign = Paint.Align.LEFT
         }
 
-        // 1. Rector: Rev. Dr. Pavulraj Michael SJ
-        canvas.drawText("• Rector: Rev. Dr. Pavulraj Michael SJ", leadershipX + 18f, leadershipY + 68f, leaderNamePaint)
+        // Ordered List Items:
+        canvas.drawText("•  Rector: Rev. Dr. Pavulraj Michael SJ", leaderTextX, 548f, leaderListPaint)
+        canvas.drawText("•  Secretary: Rev. Dr. M. Arockiasamy Xavier SJ", leaderTextX, 568f, leaderListPaint)
+        canvas.drawText("•  Principal: Rev. Dr. K. Arockiam SJ", leaderTextX, 588f, leaderListPaint)
 
-        // 2. Secretary: Rev. Dr. M. Arockiasamy Xavier SJ
-        canvas.drawText("• Secretary: Rev. Dr. M. Arockiasamy Xavier SJ", leadershipX + 18f, leadershipY + 90f, leaderNamePaint)
-
-        // 3. Principal: Rev. Dr. K. Arockiam SJ
-        canvas.drawText("• Principal: Rev. Dr. K. Arockiam SJ", leadershipX + 18f, leadershipY + 112f, leaderNamePaint)
-
-        val familyPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = Color.parseColor("#94A3B8")
+        // Standing Committee indented cleanly with name text, 22px bottom clearance
+        val fraternityPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            color = Color.parseColor("#FFDF73")
             textSize = 12f
             typeface = Typeface.create(Typeface.SERIF, Typeface.ITALIC)
+            textAlign = Paint.Align.LEFT
         }
-        canvas.drawText("& the entire St. Joseph's College Fraternity", leadershipX + 18f, leadershipY + 132f, familyPaint)
+        canvas.drawText("& Standing Committee", leaderTextX + 14f, 610f, fraternityPaint)
     }
 
     private fun loadFacultyPhotoBitmap(photoUrl: String): Bitmap? {
@@ -532,6 +557,10 @@ object CanvasCardDrawer {
 
     private fun getPrincipalBitmap(context: Context): Bitmap {
         try {
+            val decoded = android.graphics.BitmapFactory.decodeResource(context.resources, com.example.R.drawable.ic_principal_photo)
+            if (decoded != null) return decoded
+        } catch (_: Exception) {}
+        try {
             val resId = context.resources.getIdentifier("ic_principal_photo", "drawable", context.packageName)
             if (resId != 0) {
                 val decoded = android.graphics.BitmapFactory.decodeResource(context.resources, resId)
@@ -539,20 +568,20 @@ object CanvasCardDrawer {
             }
         } catch (_: Exception) {}
 
-        // Fallback programmatic dignified portrait bitmap (100x100)
-        val bmp = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888)
+        // Programmatic dignified portrait bitmap (80x80)
+        val bmp = Bitmap.createBitmap(80, 80, Bitmap.Config.ARGB_8888)
         val c = Canvas(bmp)
         val p = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.parseColor("#0A192F")
         }
-        c.drawCircle(50f, 50f, 50f, p)
+        c.drawCircle(40f, 40f, 40f, p)
         val tp = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.parseColor("#D4AF37")
-            textSize = 30f
+            textSize = 28f
             typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
             textAlign = Paint.Align.CENTER
         }
-        c.drawText("SJ", 50f, 60f, tp)
+        c.drawText("SJ", 40f, 49f, tp)
         return bmp
     }
 

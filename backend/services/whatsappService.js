@@ -10,30 +10,35 @@ try {
 }
 
 /**
+ * Formats WhatsApp message according to the exact institutional specification.
+ */
+function formatWhatsAppMessage(staff, fullDeptName) {
+  const resolvedDept = fullDeptName || getDepartmentFullName(staff.deptCode);
+  const cleanDeptName = resolvedDept.replace(/^Department of\s+/i, '').trim();
+  const deptText = `Department of ${cleanDeptName}`;
+  const designationLine = staff.designation
+    ? `${staff.designation}, ${deptText}`
+    : deptText;
+
+  return `🎓 ST. JOSEPH'S COLLEGE 🎓
+🎂 JOS GREETINGS 🎂
+💐 WARM  BIRTHDAY WISHES 💐
+Dear ${staff.name},
+${designationLine}
+May the Almighty shower His abundant blessings, vibrant health, enduring peace, and divine joy upon you as you continue your noble mission of forming young minds!
+✨ With Prayers & Best Wishes from:
+•  Rector: Rev. Dr. Pavulraj Michael SJ
+•  Secretary: Rev. Dr. M. Arockiasamy Xavier SJ
+•  Principal: Rev. Dr. K. Arockiam SJ &
+Standing Committee.`;
+}
+
+/**
  * Builds the official shortened birthday greeting message string.
  */
 function buildGreetingMessage(staff) {
   const fullDeptName = getDepartmentFullName(staff.deptCode);
-  const cleanDeptName = fullDeptName.replace(/^Department of\s+/i, '').trim();
-  const designation = staff.designation || 'Staff Member';
-
-  const rector = process.env.RECTOR_NAME || 'Rev. Dr. Pavulraj Michael SJ';
-  const secretary = process.env.SECRETARY_NAME || 'Rev. Dr. M. Arockiasamy Xavier SJ';
-  const principal = process.env.PRINCIPAL_NAME || 'Rev. Dr. K. Arockiam SJ';
-
-  return `🎓 ST. JOSEPH'S COLLEGE (AUTONOMOUS)
-🎂 SJC BIRTHDAY WISHES
-💐 WARMEST GREETINGS! 💐
-Dear ${staff.name},
-${designation} Department of ${cleanDeptName}
-
-May the Almighty shower His abundant blessings, vibrant health, enduring peace, and divine joy upon you as you continue your noble mission of forming young minds!
-
-✨ With Prayers & Best Wishes from:
-   Rector: ${rector}
-• Secretary: ${secretary}
-• Principal: ${principal}
-and the entire St. Joseph's College (Autonomous) Fraternity.`;
+  return formatWhatsAppMessage(staff, fullDeptName);
 }
 
 /**
@@ -184,6 +189,7 @@ async function sendBirthdayGreeting(staff, cardFilePath, publicCardUrl = null) {
 }
 
 module.exports = {
+  formatWhatsAppMessage,
   buildGreetingMessage,
   sanitizePhoneNumber,
   sendBirthdayGreeting
